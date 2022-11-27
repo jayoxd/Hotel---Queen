@@ -53,7 +53,49 @@
 			Bienvenido <span sec:authentication="principal.username"></span>
 		</h4>
 
+	
 		<br> <br>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Invitados</th>
+					<th>Precio</th>
+					<th>Descripcion</th>
+					<th>RutaImagen</th>
+					<th>Tipo Habitacion</th>
+					<th>Caracteristicas</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="habitacion : ${habitaciones}" th:object="${habitacion}">
+					<td th:text="${habitacion.id}">ID</td>
+					<td th:text="${habitacion.nombre}">ID</td>
+					<td th:text="${habitacion.invitados}">ID</td>
+					
+					<td style="width:110px"  th:each="img : *{imagenes}">
+					   <a th:href="@{/assets/{filename}(filename=${img.rutaimagenhabi})}" data-fancybox>
+					      <img th:src="@{/assets/{filename}(filename=${img.rutaimagenhabi})}" alt="" class="img-thumbnail w-100">
+					   </a>
+					</td>
+					
+					
+        			<td><a  class="btn btn-danger" th:href="@{listax/delete/{id} (id=${habitacion.id}) }">Eliminar</a> </td>
+        			<td><a  class="btn btn-warning" th:href="@{listax/edit/{id} (id=${habitacion.id}) }">Editar</a> </td>
+					<td th:each="tipo : *{idTipo}" th:text="${tipo.nombre}"></td>
+					<td th:each="cara : *{caracteristica}" th:text="${cara.nombre}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<br>
+	<br>
+
+
+<br> <br>
 
 		<table class="table table-striped table-bordered">
 			<thead class="table-dark">
@@ -78,51 +120,6 @@
 	</div>
 
 	<br> <br>
-	<div class="container">
-		<table class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="caracteristica : ${caracteristicas}"  th:object="${caracteristica}">
-					<td th:text="${caracteristica.id}">ID</td>
-					<td th:text="${caracteristica.nombre}">ID</td>
-					
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-<br> <br>
-
-<br> <br>
-	<div class="container">
-		<table class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Descripcion</th>
-					
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="tipo : ${tipos}"  th:object="${tipo}">
-					<td th:text="${tipo.id_tipo}">ID</td>
-					<td th:text="${tipo.nombre}">ID</td>
-					<td th:text="${tipo.descripcion}">ID</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-<br> <br>
-
-
 	<!-- Latest compiled and minified JavaScript -->
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

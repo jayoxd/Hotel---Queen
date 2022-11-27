@@ -54,80 +54,44 @@
 		</h4>
 
 		<br> <br>
+		<form th:action="@{/caracteristica}">
+			Filter: <input type="text" name="palabra" id="palabra" size="50"
+				th:value="${palabra}" required /> &nbsp; <input type="submit"
+				value="Search" /> &nbsp; <input type="button" value="Clear"
+				id="btnClear" onclick="clearSearch()" />
+		</form>
+		<br> <br> <br> <br>
+		<div class="container">
+			<table class="table table-striped table-bordered">
+				<thead class="table-dark">
+					<tr>
+						<th>ID</th>
+						<th>Nombre</th>
 
-		<table class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
-					<th>Email</th>
-					<th>Rolssxxes</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="usuario : ${usuarios}"  th:object="${usuario}">
-					<td th:text="${usuario.id}">ID</td>
-					<td th:text="${usuario.nombre}">ID</td>
-					<td th:text="${usuario.apellido}">ID</td>
-					<td th:text="${usuario.email}"></td>
-					<td th:each="rol : *{roles}" th:text="${rol.nombre}"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="caracteristica : ${caracteristicas}"
+						th:object="${caracteristica}">
+						<td th:text="${caracteristica.id}">ID</td>
+						<td th:text="${caracteristica.nombre}">ID</td>
 
-	<br> <br>
-	<div class="container">
-		<table class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="caracteristica : ${caracteristicas}"  th:object="${caracteristica}">
-					<td th:text="${caracteristica.id}">ID</td>
-					<td th:text="${caracteristica.nombre}">ID</td>
-					
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-<br> <br>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-<br> <br>
-	<div class="container">
-		<table class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Descripcion</th>
-					
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="tipo : ${tipos}"  th:object="${tipo}">
-					<td th:text="${tipo.id_tipo}">ID</td>
-					<td th:text="${tipo.nombre}">ID</td>
-					<td th:text="${tipo.descripcion}">ID</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-<br> <br>
-
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-		crossorigin="anonymous"></script>
+		<br> <br> <br> <br>
+		<!-- Latest compiled and minified JavaScript -->
+		<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/caracteristica}]]";
+    }
+</script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+			crossorigin="anonymous"></script>
 </body>
 </html>
 

@@ -13,26 +13,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
-
-
 @Entity
-@Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-public class Usuario {
+@Table(name = "clientes", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+public class Cliente {
 
-	
-
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "id_cliente")
+	private Integer id_cliente;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -41,16 +37,16 @@ public class Usuario {
 	private String apellido;
 
 	@Column(name = "telefono")
-	private Integer telefono;
+	private String telefono;
 
 	@Column(name = "fechaNacimiento")
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date fechaNacimiento;
+
 	
 	private String email;
-	
+
 	private String password;
-	
 	
 	private String rutaimagenhabi;
 
@@ -61,35 +57,19 @@ public class Usuario {
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "usuarios_roles",
-			joinColumns = @JoinColumn(name = "usuario_id",referencedColumnName = "id"),
+			joinColumns = @JoinColumn(name = "id_cliente",referencedColumnName = "id_cliente"),
 			inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id")
 			)
 	private Collection<Rol> roles;
-
 	
 	
-	public String getRutaimagenhabi() {
-		return rutaimagenhabi;
+	
+	public Integer getId_cliente() {
+		return id_cliente;
 	}
 
-	public void setRutaimagenhabi(String rutaimagenhabi) {
-		this.rutaimagenhabi = rutaimagenhabi;
-	}
-
-	public MultipartFile getImghabitacion() {
-		return imghabitacion;
-	}
-
-	public void setImghabitacion(MultipartFile imghabitacion) {
-		this.imghabitacion = imghabitacion;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setId_cliente(Integer id_cliente) {
+		this.id_cliente = id_cliente;
 	}
 
 	public String getNombre() {
@@ -116,12 +96,44 @@ public class Usuario {
 		this.email = email;
 	}
 
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRutaimagenhabi() {
+		return rutaimagenhabi;
+	}
+
+	public void setRutaimagenhabi(String rutaimagenhabi) {
+		this.rutaimagenhabi = rutaimagenhabi;
+	}
+
+	public MultipartFile getImghabitacion() {
+		return imghabitacion;
+	}
+
+	public void setImghabitacion(MultipartFile imghabitacion) {
+		this.imghabitacion = imghabitacion;
 	}
 
 	public Collection<Rol> getRoles() {
@@ -134,28 +146,8 @@ public class Usuario {
 
 
 
-	public Integer getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(Integer telefono) {
-		this.telefono = telefono;
-	}
-	
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	public Usuario() {
-		super();
-	}
-
-	public Usuario(String nombre, String apellido, Integer telefono, Date fechaNacimiento, String email,
-			String password, String rutaimagenhabi, MultipartFile imghabitacion, Collection<Rol> roles) {
+	public Cliente(String nombre, String apellido, String telefono, Date fechaNacimiento, String email, String password,
+			String rutaimagenhabi, MultipartFile imghabitacion, Collection<Rol> roles) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -168,10 +160,10 @@ public class Usuario {
 		this.roles = roles;
 	}
 
-	public Usuario(Long id, String nombre, String apellido, Integer telefono, Date fechaNacimiento, String email,
-			String password, String rutaimagenhabi, MultipartFile imghabitacion, Collection<Rol> roles) {
+	public Cliente(Integer id_cliente, String nombre, String apellido, String telefono, Date fechaNacimiento,
+			String email, String password, String rutaimagenhabi, MultipartFile imghabitacion, Collection<Rol> roles) {
 		super();
-		this.id = id;
+		this.id_cliente = id_cliente;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
@@ -183,9 +175,19 @@ public class Usuario {
 		this.roles = roles;
 	}
 
-	
+
+
+
+
 
 	
+	
+	
+	
+	public Cliente() {
+		super();
+	}
+
 	
 	
 }

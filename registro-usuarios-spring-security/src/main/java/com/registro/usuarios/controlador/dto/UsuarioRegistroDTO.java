@@ -1,12 +1,37 @@
 package com.registro.usuarios.controlador.dto;
 
+import java.util.Date;
+
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.registro.usuarios.modelo.Rol;
+
 public class UsuarioRegistroDTO {
+
+	
+
+
 
 	private Long id;
 	private String nombre;
 	private String apellido;
 	private String email;
+	private Integer telefono;
+	private Date fechaNacimiento;
 	private String password;
+	private Rol rol;
+	private String rutaimagenhabi;
+	@Transient
+	private MultipartFile imghabitacion;
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 
 	public Long getId() {
 		return id;
@@ -49,16 +74,80 @@ public class UsuarioRegistroDTO {
 	}
 
 
-	public UsuarioRegistroDTO(String nombre, String apellido, String email, String password) {
+
+
+	public Integer getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(Integer telefono) {
+		this.telefono = telefono;
+	}
+
+
+	
+	
+	
+	
+	public String getRutaimagenhabi() {
+		return rutaimagenhabi;
+	}
+
+	public void setRutaimagenhabi(String rutaimagenhabi) {
+		this.rutaimagenhabi = rutaimagenhabi;
+	}
+
+	public MultipartFile getImghabitacion() {
+		return imghabitacion;
+	}
+
+	public void setImghabitacion(MultipartFile imghabitacion) {
+		this.imghabitacion = imghabitacion;
+	}
+	
+	
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	
+	
+	public UsuarioRegistroDTO() {
+
+	}
+
+
+	public UsuarioRegistroDTO(String nombre, String apellido, String email, Integer telefono, Date fechaNacimiento,
+			String password, Rol rol, String rutaimagenhabi, MultipartFile imghabitacion) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
+		this.telefono = telefono;
+		this.fechaNacimiento = fechaNacimiento;
 		this.password = password;
+		this.rol = rol;
+		this.rutaimagenhabi = rutaimagenhabi;
+		this.imghabitacion = imghabitacion;
 	}
 
-	public UsuarioRegistroDTO() {
-
+	public UsuarioRegistroDTO(Long id, String nombre, String apellido, String email, Integer telefono,
+			Date fechaNacimiento, String password, Rol rol, String rutaimagenhabi, MultipartFile imghabitacion) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.telefono = telefono;
+		this.fechaNacimiento = fechaNacimiento;
+		this.password = password;
+		this.rol = rol;
+		this.rutaimagenhabi = rutaimagenhabi;
+		this.imghabitacion = imghabitacion;
 	}
 
 }
