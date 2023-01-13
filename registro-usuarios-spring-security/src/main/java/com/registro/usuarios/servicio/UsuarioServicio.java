@@ -15,8 +15,12 @@ public interface UsuarioServicio extends UserDetailsService{
 	
 	public List<Usuario> listarUsuarios();
 	
-	public Optional<Usuario> buscarid(Long id);
+	public Optional<Usuario> buscarid(Integer id);
 	
 	public Usuario save(Usuario usuario);
 	
+	public List<Usuario>listarpornom(String nombre);
+	
+	public  void delete(Integer id);
+
 }

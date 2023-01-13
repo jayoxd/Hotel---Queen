@@ -16,5 +16,6 @@ public interface HabitacionServicio  {
 	public void update(Habitacion habitacion);
 	public void delete(Integer id);
 	public List<Habitacion> listar();
+	public List<Habitacion>listarpornom(String nombre);
 	
 }

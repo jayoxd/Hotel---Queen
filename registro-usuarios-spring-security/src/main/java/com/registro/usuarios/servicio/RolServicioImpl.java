@@ -1,10 +1,8 @@
 package com.registro.usuarios.servicio;
 
-import java.util.Arrays;
-import java.util.Collection;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +27,8 @@ public class RolServicioImpl implements RolServicio {
 
 	@Override
 	public Optional<Rol> get(Integer id) {
-		return null;
+  
+		return repositorio.findById(id);
 	}
 
 	@Override
@@ -45,6 +44,14 @@ public class RolServicioImpl implements RolServicio {
 	@Override
 	public List<Rol> listar() {
 		return repositorio.findAll();
+	}
+
+	@Override
+	public List<Rol> listarpornom(String nombre) {
+		if(nombre!=null) {
+			 return	repositorio.buscarcar(nombre);
+			}
+			return repositorio.findAll();
 	}
 
 

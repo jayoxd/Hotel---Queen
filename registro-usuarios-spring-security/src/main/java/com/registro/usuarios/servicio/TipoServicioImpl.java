@@ -49,6 +49,14 @@ public class TipoServicioImpl implements TipoServicio {
 		return tipoRepositorio.findAll();
 	}
 
+	@Override
+	public List<Tipo> listarpornom(String nombre) {
+		if(nombre!=null) {
+			 return	tipoRepositorio.buscarcar(nombre);
+			}
+			return tipoRepositorio.findAll();
+		}
+
 		
 
 

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{listax/parche.html}">
+<head>
+<meta charset="utf-8">
+<title>Administrar Películas</title>
+</head>
+<body>
+
+	<div layout:fragment="content" class="container my-2">
+		<div id="layoutSidenav_content">
+			<main>
+				<form class="needs-validation clearfix was-validated" novalidate=""
+					action="" method="post" th:object="${usuario}"
+					enctype="multipart/form-data">
+
+
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title  fw-bold" id="createprojectlLabel">
+								Editar Usuario</h5>
+							<a type="button" class="btn-close" th:href="@{/usuariox}"></a>
+
+						</div>
+
+						<div class="modal-body">
+							<input type="hidden" class="form-control"
+								placeholder="Ingrese su nombre" required="" th:field="*{id}">
+
+							<div class="form-group">
+								<label class="text-label">Email</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-user"></i>
+										</span>
+									</div>
+									<input placeholder="example@gmail.com" required=""
+										th:field="*{email}" class="form-control" id="email"
+										name="val-username">
+								</div>
+							</div>
+							<div class="form-group is-valid is-invalid">
+								<label class="text-label">Password *</label>
+								<div class="input-group transparent-append">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-lock"></i>
+										</span>
+									</div>
+									<input th:field="*{password}" type="text"
+										class="form-control valid" id="dz-password"
+										name="val-password" placeholder="xxxxxxxxxx"
+										aria-describedby="dz-password-error" required=""
+										aria-invalid="true">
+									
+									<div class="input-group-append show-pass active">
+										<span class="input-group-text "> <i
+											class="fa fa-eye-slash"></i> <i class="fa fa-eye"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+
+
+
+							<div class="mb-3">
+								<label for="validationCustom20">Rol</label> <select
+									class="form-select" id="idRol" required th:field="*{idRol}">
+									<option th:each="img : ${roles}" th:value="${img.id_rol}"
+										th:text="${img.nombre}"></option>
+								</select>
+
+
+							</div>
+
+
+							<div class="mb-3">
+								<label for="validationCustom24" class="form-label">Nombres</label>
+								<div class="input-group">
+									<input type="text" class="form-control"
+										placeholder="Ingrese su nombre" required=""
+										th:field="*{nombre}">
+									
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="exampleFormControlInput977" class="form-label">Apellidos</label>
+								<div class="input-group">
+									<input type="text" class="form-control"
+										placeholder="Ingrese sus apellidos" required=""
+										th:field="*{apellido}">
+									
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="formFileMultipleoneone" class="form-label">Imagen</label>
+								<div class="input-group">
+									<input class="form-control" type="file"
+										th:field="*{imghabitacion}">
+
+								</div>
+							</div>
+							<div class="deadline-form">
+
+
+								<div class="deadline-form">
+
+
+									<div class="row g-3 mb-3">
+										<div class="col">
+											<label for="validationCustom20">Telefono</label>
+											<div class="input-group">
+												<input type="number" class="form-control"
+													placeholder="987654321" required="" maxlength="9"
+													oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+													th:field="*{telefono}">
+												
+											</div>
+										</div>
+
+
+										<div class="col">
+											<label for="validationCustom20">Fecha Nacimiento</label>
+											<div class="input-group">
+												<input type="date" class="form-control" required=""
+													th:field="*{fechaNacimiento}">
+												
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="modal-footer">
+									<input type="reset" value="Borrar" class="btn btn-danger">
+
+									<button class="btn btn-secondary  " type="submit">
+										</i> Guardar
+									</button>
+								</div>
+							</div>
+						</div>
+			
+					<br>
+				</form>
+				<!-- editar cliente -->
+
+				<!-- crear cliente -->
+
+
+
+			</main>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

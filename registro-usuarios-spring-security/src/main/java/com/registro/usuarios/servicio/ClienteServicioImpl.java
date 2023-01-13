@@ -49,6 +49,14 @@ public class ClienteServicioImpl implements ClienteServicio {
 		return clienteRepositorio.findAll();
 	}
 
+	@Override
+	public List<Cliente> listarpornom(String nombre) {
+		if(nombre!=null) {
+			 return	clienteRepositorio.buscarClie(nombre);
+			}
+			return clienteRepositorio.findAll();
+	}
+
 	
 
 		

@@ -1,6 +1,7 @@
 package com.registro.usuarios.servicio;
 import javax.servlet.http.HttpSession;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import com.registro.usuarios.controlador.HabitacionController;
 import com.registro.usuarios.controlador.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.modelo.Rol;
@@ -27,7 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
 
-	
+	@Autowired 
+	private RolServicio rolServicio;
 	private UsuarioRepositorio usuarioRepositorio;
 
 	@Autowired
@@ -42,9 +45,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 	@Override
 	public Usuario guardar(UsuarioRegistroDTO registroDTO) {
+		Rol rol=rolServicio.get(1).get();
+		
 		Usuario usuario = new Usuario(registroDTO.getNombre(),registroDTO.getApellido(),registroDTO.getTelefono(),
 				registroDTO.getFechaNacimiento(),registroDTO.getEmail(),passwordEncoder.encode(registroDTO.getPassword()),
-				registroDTO.getRutaimagenhabi(),registroDTO.getImghabitacion(),Arrays.asList(new Rol("ROLE_ADMIN")));
+				registroDTO.getRutaimagenhabi(),registroDTO.getImghabitacion(),rol);
 
 		return usuarioRepositorio.save(usuario);
 	}
@@ -58,11 +63,18 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		session.setAttribute("idusuario", usuario.getId());
 		log.info("ejecuntado el controlador rest");
 		log.info("Id de la orden {}",usuario.getId().toString());
-		return new User(usuario.getEmail(),usuario.getPassword(), mapearAutoridadesRoles(usuario.getRoles()));
+		
+		GrantedAuthority authority = new SimpleGrantedAuthority(usuario.getIdRol().getNombre());
+
+		
+		return new User(usuario.getEmail(),usuario.getPassword(), Arrays.asList(authority));
+	
+		
+		
 	}
 
-	private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Collection<Rol> roles){
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
+	private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Rol roles){
+		return ((Collection<? extends GrantedAuthority>) roles).stream().map(role -> new SimpleGrantedAuthority(((UsuarioRegistroDTO) role).getNombre())).collect(Collectors.toList());
 	}
 	
 	@Override
@@ -71,14 +83,27 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	}
 
 	@Override
-	public Optional<Usuario> buscarid(Long id) {
+	public Optional<Usuario> buscarid(Integer id) {
 		return usuarioRepositorio.findById(id);
 }
 
 	@Override
 	public Usuario save(Usuario usuario) {
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-		usuario.setRoles(Arrays.asList(new Rol("ROLE_ADMIN")));
 		return usuarioRepositorio.save(usuario);
+	}
+
+	@Override
+	public List<Usuario> listarpornom(String nombre) {
+		if(nombre!=null) {
+			 return	usuarioRepositorio.buscarcar(nombre);
+			}
+			return usuarioRepositorio.findAll();
+	}
+
+	@Override
+	public void delete(Integer id) {
+		usuarioRepositorio.deleteById(id);
+		
 	}
 }

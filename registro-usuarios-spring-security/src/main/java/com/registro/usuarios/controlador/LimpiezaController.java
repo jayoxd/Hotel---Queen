@@ -49,7 +49,7 @@ public class LimpiezaController {
 	
 	@PostMapping("/nuevo")
 	public ModelAndView registrarCuentaDeUsuario( Limpieza limpieza , HttpSession session)throws IOException{
-		Usuario u= usuarioServicio.buscarid(Long.parseLong(session.getAttribute("idusuario").toString() )).get();
+		Usuario u= usuarioServicio.buscarid(Integer.parseInt(session.getAttribute("idusuario").toString() )).get();
 		limpieza.setIdUsuario(u);
 		limpiezaServicio.save(limpieza);
 		return new ModelAndView("redirect:/limpiezas");

@@ -1,5 +1,6 @@
 package com.registro.usuarios.modelo;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -41,7 +42,7 @@ public class Cliente {
 
 	@Column(name = "fechaNacimiento")
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 
 	
 	private String email;
@@ -54,13 +55,8 @@ public class Cliente {
 	private MultipartFile imghabitacion;
 	
 	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "usuarios_roles",
-			joinColumns = @JoinColumn(name = "id_cliente",referencedColumnName = "id_cliente"),
-			inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id")
-			)
-	private Collection<Rol> roles;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Rol idRol;
 	
 	
 	
@@ -104,11 +100,11 @@ public class Cliente {
 		this.telefono = telefono;
 	}
 	
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -136,18 +132,13 @@ public class Cliente {
 		this.imghabitacion = imghabitacion;
 	}
 
-	public Collection<Rol> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Collection<Rol> roles) {
-		this.roles = roles;
-	}
-
-
-
-	public Cliente(String nombre, String apellido, String telefono, Date fechaNacimiento, String email, String password,
-			String rutaimagenhabi, MultipartFile imghabitacion, Collection<Rol> roles) {
+	
+	
+	
+	
+	
+	public Cliente(String nombre, String apellido, String telefono, LocalDate fechaNacimiento, String email,
+			String password, String rutaimagenhabi, MultipartFile imghabitacion, Rol idRol) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -157,11 +148,11 @@ public class Cliente {
 		this.password = password;
 		this.rutaimagenhabi = rutaimagenhabi;
 		this.imghabitacion = imghabitacion;
-		this.roles = roles;
+		this.idRol = idRol;
 	}
 
-	public Cliente(Integer id_cliente, String nombre, String apellido, String telefono, Date fechaNacimiento,
-			String email, String password, String rutaimagenhabi, MultipartFile imghabitacion, Collection<Rol> roles) {
+	public Cliente(Integer id_cliente, String nombre, String apellido, String telefono, LocalDate fechaNacimiento,
+			String email, String password, String rutaimagenhabi, MultipartFile imghabitacion, Rol idRol) {
 		super();
 		this.id_cliente = id_cliente;
 		this.nombre = nombre;
@@ -172,18 +163,17 @@ public class Cliente {
 		this.password = password;
 		this.rutaimagenhabi = rutaimagenhabi;
 		this.imghabitacion = imghabitacion;
-		this.roles = roles;
+		this.idRol = idRol;
 	}
 
+	public Rol getIdRol() {
+		return idRol;
+	}
 
+	public void setIdRol(Rol idRol) {
+		this.idRol = idRol;
+	}
 
-
-
-
-	
-	
-	
-	
 	public Cliente() {
 		super();
 	}

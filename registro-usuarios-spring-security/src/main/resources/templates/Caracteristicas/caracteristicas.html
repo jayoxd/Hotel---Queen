@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layout/Template}">
+<head th:replace="Layout/Template :: head">
+<meta charset="UTF-8">
+
+
+
+<title>Home</title>
+
+</head>
+<body>
+
+
+
+
+	<!-- Page Content -->
+	<div class="container-fluid" layout:fragment="page-content">
+
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4"></div>
+
+				<br>
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-success ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Total Clientes</h6>
+									<p class="ms-card-change">
+										<i class="material-icons">arrow_upward</i> 4567
+									</p>
+									<p class="fs-12">48% From Last 24 Hours</p>
+								</div>
+							</div>
+							<i class="flaticon-statistics"></i>
+						</div>
+					</div>
+
+
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-secondary ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Clientes por Mes</h6>
+									<p class="ms-card-change">$80,950</p>
+									<p class="fs-12">2% Decreased from last budget</p>
+								</div>
+							</div>
+							<i class="flaticon-stats"></i>
+						</div>
+					</div>
+
+
+
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-warning ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Clientes por Semana</h6>
+									<p class="ms-card-change">
+										<i class="material-icons">arrow_upward</i> 4567
+									</p>
+									<p class="fs-12">48% From Last 24 Hours</p>
+								</div>
+							</div>
+							<i class="flaticon-user"></i>
+						</div>
+					</div>
+
+
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-info ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Clientes Nuevos</h6>
+									<p class="ms-card-change">$80,950</p>
+									<p class="fs-12">2% Decreased from last budget</p>
+								</div>
+							</div>
+							<i class="flaticon-reuse"></i>
+						</div>
+					</div>
+
+				</div>
+
+
+
+
+				<div id="mytask-layout" class="theme-indigo">
+
+
+					<!-- main body area -->
+					<div class="main px-lg-4 px-md-4">
+
+						<!-- Body: Header -->
+						<div class="header">
+							<nav class="navbar py-4">
+								<div class="container-xxl">
+
+
+
+
+									<!-- menu toggler -->
+
+
+									<!-- main menu Search-->
+
+
+								</div>
+							</nav>
+						</div>
+
+						<!-- Body: Body -->
+						<div class="body d-flex py-lg-3 py-md-2">
+
+							<div class="card border-0 mb-4 no-bg">
+								<div
+									class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
+									<h3 class=" fw-bold flex-fill mb-0">CARACTERISTICAS</h3>
+									<div class="col-auto d-flex">
+
+										<button type="button" class="btn btn-dark ms-1 "
+											data-bs-toggle="modal" data-bs-target="#depadd">
+											<i class="icofont-plus-circle me-2 fs-6"></i> Caracteristica
+										</button>
+
+									</div>
+								</div>
+
+
+								<br>
+
+								<style>
+.contenedor {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+</style>
+								<script type="text/javascript">
+									function clearSearch() {
+										window.location = "[[@{/caracteristica}]]";
+									}
+								</script>
+								<form th:action="@{/caracteristica}">
+									<div class="contenedor">
+										<label>Search: <input type="text"
+											class="form-control form-control-sm" placeholder=""
+											aria-controls="myProjectTable" name="palabra" id="palabra"
+											th:value="${palabra}" required>
+										</label>&nbsp;
+										<button class="btn btn-dark ms-1 " type="button" id="btnClear"
+											onclick="clearSearch()">
+											<i class="flaticon-reuse"></i> Clear
+										</button>
+									</div>
+
+								</form>
+								<br>
+								<!-- dentro tabla -->
+
+
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-responsive-md">
+											<thead>
+												<tr>
+													<th style="width: 80px;"><strong>#</strong></th>
+													<th><strong>ID</strong></th>
+													<th><strong>NOMBRE</strong></th>
+
+													<th class="text-center"><strong> ACCIONES</strong></th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+
+												<tr th:each="caracteristica : ${caracteristicas}">
+													<td><strong></strong></td>
+
+													<td th:text="${caracteristica.id}">ID</td>
+
+													<td th:text="${caracteristica.nombre}">ID</td>
+													<td class="text-center">
+
+														<div class="btn-group" role="group"
+															aria-label="Basic outlined example">
+
+															<a type="button" class="btn btn-outline-secondary eBtn"
+																th:href="@{caracteristica/findOne/(id=${caracteristica.id})}"
+																data-bs-toggle="modal" data-bs-target="#depedit"><i
+																class="icofont-edit text-success"></i>Edit</a> <a
+																type="button"
+																th:href="@{caracteristica/delete/{id} (id=${caracteristica.id}) }"
+																class="btn btn-outline-secondary deleterow"> <i
+																class="icofont-ui-delete text-danger"></i>Delete
+															</a>
+
+
+															<div class="modal-footer"></div>
+													</td>
+
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+
+								<!-- Add Department-->
+								<div class="modal fade" id="depadd" tabindex="-1"
+									aria-hidden="true" style="display: none;">
+									<div
+										class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title  fw-bold" id="depaddLabel">
+													Caracteristica Nueva</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<form action="" method="post" th:object="${caracteristica}"
+													class="needs-validation clearfix was-validated"
+													novalidate="">
+
+													<div class="mb-3">
+														<label for="exampleFormControlInput977" class="form-label">Nombre</label>
+														<div class="input-group">
+															<input type="text" class="form-control"
+																id="exampleFormControlInput877"
+																placeholder="Ingrese el nombre" required=""
+																th:field="*{nombre}">
+															<div class="invalid-feedback">Por favor ingresar el
+																nombre</div>
+														</div>
+													</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Cancelar</button>
+												<button type="submit" class="btn btn-primary">Agregar</button>
+											</div>
+										</div>
+
+									</div>
+									</form>
+								</div>
+
+							</div>
+
+
+							<!-- dentro tabla -->
+
+
+							<!-- editar -->
+							<div class="myForm">
+								<form action="" method="post" th:object="${caracteristica}"
+								class="needs-validation clearfix was-validated" novalidate="" 
+								>
+									<!-- Edit Department-->
+									<div class="modal fade" id="depedit" tabindex="-1"
+										style="display: none;" aria-hidden="true">
+										<div
+											class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title  fw-bold" id="depeditLabel">
+														Caracteristica Editar</h5>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+
+													<input id="idxd" th:field="*{id}" type="hidden" value=""
+														name="idxd" class="form-control">
+
+
+													<div class="mb-3">
+														<label for="exampleFormControlInput11111"
+															class="form-label">Nombre</label> <input id="name"
+															placeholder="Ingrese el nombre" required="" 
+															th:field="*{nombre}" type="text" value="" name="name"
+															class="form-control">
+															<div class="invalid-feedback">Por favor ingresar el
+										nombre</div>
+													</div>
+
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Cancelar</button>
+													<button type="submit" class="btn btn-primary">Guadar</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<!-- editar -->
+
+
+
+
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+	</div>
+	
+	
+
+</body>
+</html>

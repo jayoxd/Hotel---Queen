@@ -32,12 +32,9 @@ public class RegistroControlador {
 		return "login";
 	}
 	
-	@GetMapping("/lista")
+	@GetMapping("/")
 	public String verPaginaDeInicio(Model modelo) {
-		modelo.addAttribute("usuarios", servicio.listarUsuarios());
-	//	modelo.addAttribute("roles",rolservi.listar());
-		modelo.addAttribute("caracteristicas", caracteristicaServicio.listar());
-		modelo.addAttribute("tipos",tipoServicio.listar());
-		return "index";
+
+		return "Layout/index";
 	}
 }

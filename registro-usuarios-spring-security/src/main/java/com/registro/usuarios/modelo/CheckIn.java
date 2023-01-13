@@ -29,14 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 public class CheckIn {
 
-
-	
-
-
-	
-	
-	
-	
 	
 
 	@Id

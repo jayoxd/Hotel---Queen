@@ -23,6 +23,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 public class Habitacion {
@@ -53,6 +55,7 @@ public class Habitacion {
 	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
 //	private Usuario idUsuario;
 	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name = "id_tipo", referencedColumnName = "id_tipo")
 	@ManyToOne(fetch = FetchType.LAZY)
 	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
@@ -61,7 +64,8 @@ public class Habitacion {
 	
 	@NotEmpty	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "habitacion_imagenx", joinColumns = @JoinColumn(name = "id_habitacion"), inverseJoinColumns = @JoinColumn(name = "id_img"))
+	@JoinTable(name = "habitacion_imagenx", joinColumns = @JoinColumn(name = "id_habitacion"), 
+	inverseJoinColumns = @JoinColumn(name = "id_img"))
 	private List<ImgHabitacion> imagenes;
 	
 	

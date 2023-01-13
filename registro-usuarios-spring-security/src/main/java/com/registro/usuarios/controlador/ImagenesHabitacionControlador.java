@@ -40,7 +40,7 @@ public class ImagenesHabitacionControlador {
 		
 	
 	
-	
+
 	@GetMapping("/nuevo")
 	public ModelAndView mostrarFormularioDeNuevaPelicula(Model modelo) {
 		return new ModelAndView("registroimg")

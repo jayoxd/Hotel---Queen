@@ -16,5 +16,7 @@ public interface ClienteServicio  {
 	public void update(Cliente cliente);
 	public void delete(Integer id);
 	public List<Cliente> listar();
+	public List<Cliente>listarpornom(String nombre);
+
 	
 }

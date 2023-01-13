@@ -49,6 +49,14 @@ public class HabitacionServicioImpl implements HabitacionServicio {
 		return habitacionRepositorio.findAll();
 	}
 
+	@Override
+	public List<Habitacion> listarpornom(String nombre) {
+		if(nombre!=null) {
+			 return	habitacionRepositorio.buscarabita(nombre);
+			}
+			return habitacionRepositorio.findAll();
+	}
+
 
 
 

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layout/Template}">
+<head th:replace="Layout/Template :: head">
+<meta charset="UTF-8">
+
+<title>Home</title>
+
+</head>
+<body>
+
+
+	<!--<div th:include="Layout/Template.html::header></div>"  -->
+
+
+	<!-- Page Content -->
+	<div class="container-fluid" layout:fragment="page-content">
+
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4"></div>
+
+				<br>
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-success ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Total Clientes</h6>
+									<p class="ms-card-change">
+										<i class="material-icons">arrow_upward</i> 4567
+									</p>
+									<p class="fs-12">48% From Last 24 Hours</p>
+								</div>
+							</div>
+							<i class="flaticon-statistics"></i>
+						</div>
+					</div>
+
+
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-secondary ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Clientes por Mes</h6>
+									<p class="ms-card-change">$80,950</p>
+									<p class="fs-12">2% Decreased from last budget</p>
+								</div>
+							</div>
+							<i class="flaticon-stats"></i>
+						</div>
+					</div>
+
+
+
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-warning ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Clientes por Semana</h6>
+									<p class="ms-card-change">
+										<i class="material-icons">arrow_upward</i> 4567
+									</p>
+									<p class="fs-12">48% From Last 24 Hours</p>
+								</div>
+							</div>
+							<i class="flaticon-user"></i>
+						</div>
+					</div>
+
+
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-info ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Clientes Nuevos</h6>
+									<p class="ms-card-change">$80,950</p>
+									<p class="fs-12">2% Decreased from last budget</p>
+								</div>
+							</div>
+							<i class="flaticon-reuse"></i>
+						</div>
+					</div>
+
+				</div>
+
+
+
+
+
+				<!-- CA ------------------------------SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS-->
+
+
+				<!-- Body: Body -->
+
+
+
+				<!-- Row End -->
+
+
+				<!-- Row End -->
+
+				<div id="mytask-layout" class="theme-indigo">
+
+
+					<!-- main body area -->
+					<div class="main px-lg-4 px-md-4">
+
+						<!-- Body: Header -->
+						<div class="header">
+							<nav class="navbar py-4">
+								<div class="container-xxl">
+
+
+
+
+									<!-- menu toggler -->
+
+
+									<!-- main menu Search-->
+
+
+								</div>
+							</nav>
+						</div>
+
+						<!-- Body: Body -->
+						<div class="body d-flex py-lg-3 py-md-2">
+
+							<div class="card border-0 mb-4 no-bg">
+								<div
+									class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
+									<h3 class=" fw-bold flex-fill mb-0">Users</h3>
+									<div class="col-auto d-flex">
+
+										<button type="button" class="btn btn-dark ms-1 "
+											data-bs-toggle="modal" data-bs-target="#createproject">
+											<i class="icofont-plus-circle me-2 fs-6"></i>Add Users
+										</button>
+
+									</div>
+								</div>
+								<br>
+
+								<style>
+.contenedor {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+</style>
+
+
+								<script type="text/javascript">
+									function clearSearch() {
+										window.location = "[[@{/usuariosx}]]";
+									}
+								</script>
+
+								<form th:action="@{/usuariox}">
+									<div class="contenedor">
+										<label>Search: <input type="text"
+											class="form-control form-control-sm" placeholder=""
+											aria-controls="myProjectTable" name="palabra" id="palabra"
+											th:value="${palabra}" required>
+										</label>&nbsp;
+										<button class="btn btn-dark ms-1 " type="button" id="btnClear"
+											onclick="clearSearch()">
+											<i class="flaticon-reuse"></i> Clear
+										</button>
+									</div>
+
+
+								</form>
+								<br>
+								<!-- Row End -->
+
+								<div
+									class="row g-3 row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 row-deck py-1 pb-4">
+									<th:block th:each="usuario:${usuarios}" th:object="${usuario}">
+										<div class="tablausuario">
+											<div class="col">
+												<div class="card teacher-card">
+													<div class="card-body  d-flex">
+
+														<div
+															class="profile-av pe-xl-4 pe-md-2 pe-sm-4 pe-4 text-center w220">
+
+															<img
+																th:src="@{/assets/{filename}(filename=*{rutaimagenhabi})}"
+																alt=""
+																class="avatar xl rounded-circle img-thumbnail shadow-sm">
+															<input type="hidden" th:value="${usuario.id}" /> <input
+																type="hidden" th:value="${usuario.apellido}" /> <input
+																type="hidden" th:value="${usuario.telefono}" /> <input
+																type="hidden" th:value="${usuario.fechaNacimiento}" />
+															<input type="hidden" th:value="${usuario.email}" /> <input
+																type="hidden" th:value="${usuario.imghabitacion}" /> <input
+																type="hidden" th:value="${usuario.idRol}" />
+															<div
+																class="about-info d-flex align-items-center mt-1 justify-content-center flex-column">
+																<h6 class="mb-0 fw-bold d-block fs-6 mt-2"
+																	th:text="${usuario.nombre}"></h6>
+
+																<!-- caa -->
+																<div class="btn-group mt-2" role="group"
+																	aria-label="Basic outlined example">
+
+
+
+																	<a type="button" class="btn btn-outline-secondary "
+																		th:href="@{/usuariox/edit/{id}(id=*{id})}"><i
+																		class="icofont-edit text-success"></i>Edit</a>
+
+
+
+																	<button type="button" class="btn btn-outline-secondary"
+																		th:href="@{usuariox/delete/{id} (id=${usuario.id}) }"
+																		data-bs-toggle="modal" data-bs-target="#deleteproject">
+
+																		<i class="icofont-ui-delete text-danger"></i>
+																	</button>
+																	<!-- esssssssssss el modal -->
+																	<!-- Modal  Delete Folder/ File-->
+																	<div class="modal fade" id="deleteproject"
+																		tabindex="-1" aria-hidden="true">
+																		<div
+																			class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+																			<div class="modal-content">
+																				<div class="modal-header">
+																					<h5 class="modal-title  fw-bold"
+																						id="deleteprojectLabel">Delete item
+																						Permanently?</h5>
+																					<button type="button" class="btn-close"
+																						data-bs-dismiss="modal" aria-label="Close"></button>
+																				</div>
+																				<div
+																					class="modal-body justify-content-center flex-column d-flex">
+																					<i
+																						class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
+																					<p class="mt-4 fs-5 text-center">You can only
+																						delete this item Permanently</p>
+																				</div>
+																				<div class="modal-footer">
+																					<button type="button" class="btn btn-secondary"
+																						data-bs-dismiss="modal">Cancel</button>
+																					<td><a class="btn btn-danger"
+																						th:href="@{usuariox/delete/{id} (id=${usuario.id}) }">Eliminar</a>
+																					</td>
+
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div
+															class="teacher-info border-start ps-xl-4 ps-md-3 ps-sm-4 ps-4 w-100">
+															<h6 class="mb-0 mt-2  fw-bold d-block fs-6"
+																th:text="${usuario.apellido}"></h6>
+															<!-- caa -->
+															<span class="py-1 fw-bold small-11 mb-0 mt-1 text-muted"
+																th:text="${usuario.email}"></span>
+															<!-- caa -->
+															<div class="video-setting-icon mt-3 pt-3 border-top">
+																<p th:text="${usuario.telefono}"></p>
+																<!-- caca -->
+															</div>
+															<div
+																class="d-flex flex-wrap align-items-center ct-btn-set">
+																<a href="profile.html" class="btn btn-dark btn-sm mt-1"><i
+																	class="icofont-invisible me-2 fs-6"></i>Perfil</a>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+											<!-- Row end -->
+										</div>
+								</div>
+								</th:block>
+							</div>
+							<!-- este es -->
+						</div>
+
+						<!-- Modal Members-->
+					</div>
+
+
+
+
+
+					<!-- Row end -->
+
+				</div>
+		</div>
+		<!-- esssssssssssss el modal -->
+
+		<!-- Create Client-->
+
+		<form class="needs-validation clearfix was-validated" novalidate=""
+			action="" method="post" th:object="${usuario}"
+			enctype="multipart/form-data">
+			<div class="modal fade" id="createproject" tabindex="-1"
+				aria-hidden="true">
+				<div
+					class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title  fw-bold" id="createprojectlLabel">
+								Registrar Usuario</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label class="text-label">Email</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-user"></i>
+										</span>
+									</div>
+									<input placeholder="example@gmail.com" required=""
+										th:field="*{email}" class="form-control" id="val-username1"
+										name="val-username">
+									<div class="invalid-feedback">Por favor ingresar su email</div>
+								</div>
+							</div>
+							<div class="form-group is-valid is-invalid">
+								<label class="text-label">Password *</label>
+								<div class="input-group transparent-append">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-lock"></i>
+										</span>
+									</div>
+									<input th:field="*{password}" type="text"
+										class="form-control valid" id="dz-password"
+										name="val-password" placeholder="xxxxxxxxxx"
+										aria-describedby="dz-password-error" required=""
+										aria-invalid="true">
+									<div class="invalid-feedback">Por favor ingresar su
+										Contraseña</div>
+									<div class="input-group-append show-pass active">
+										<span class="input-group-text "> <i
+											class="fa fa-eye-slash"></i> <i class="fa fa-eye"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="mb-3">
+								<label for="validationCustom20">Imagenes</label> <select
+									class="form-select" id="idRol" required th:field="*{idRol}">
+									<option th:each="img : ${roles}" th:value="${img.id_rol}"
+										th:text="${img.nombre}"></option>
+								</select>
+
+
+							</div>
+
+
+
+							<div class="mb-3">
+								<label for="validationCustom24" class="form-label">Nombres</label>
+								<div class="input-group">
+									<input type="text" class="form-control"
+										placeholder="Ingrese su nombre" required=""
+										th:field="*{nombre}">
+									<div class="invalid-feedback">Por favor ingresar su
+										nombre</div>
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="exampleFormControlInput977" class="form-label">Apellidos</label>
+								<div class="input-group">
+									<input type="text" class="form-control"
+										placeholder="Ingrese sus apellidos" required=""
+										th:field="*{apellido}">
+									<div class="invalid-feedback">Por favor ingresar sus
+										apellidos</div>
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="formFileMultipleoneone" class="form-label">Imagen</label>
+								<div class="input-group">
+									<input class="form-control" type="file" required=""
+										th:field="*{imghabitacion}">
+									<div class="invalid-feedback">Por favor ingresar la
+										imagen</div>
+								</div>
+							</div>
+							<div class="deadline-form">
+
+
+
+								<div class="deadline-form">
+
+
+									<div class="row g-3 mb-3">
+										<div class="col">
+											<label for="validationCustom20">Telefono</label>
+											<div class="input-group">
+												<input type="number" class="form-control"
+													placeholder="987654321" required="" maxlength="9"
+													oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+													th:field="*{telefono}">
+												<div class="invalid-feedback">Por favor ingresar su
+													numero</div>
+											</div>
+										</div>
+
+
+										<div class="col">
+											<label for="validationCustom20">Fecha Nacimiento</label>
+											<div class="input-group">
+												<input type="date" class="form-control" required=""
+													th:field="*{fechaNacimiento}">
+												<div class="invalid-feedback">Ingresar su Fecha de
+													Nacimiento</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+
+
+
+
+
+								<div class="modal-footer">
+									<input type="reset" value="Borrar" class="btn btn-danger">
+
+									<button class="btn btn-secondary  " type="submit">
+										</i> Guardar
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+			</div>
+		</form>
+		<!-- crear cliente -->
+
+		<!-- editar cliente -->
+		<div class="myForm">
+			<form class="needs-validation clearfix was-validated" novalidate=""
+				action="" method="post" th:object="${usuario}"
+				enctype="multipart/form-data">
+				<div class="modal fade" id="editproject" tabindex="-1"
+					aria-hidden="true">
+					<div
+						class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+						<div class="modal-content">
+							<div clas s="modal-header">
+								<h5 class="modal-title  fw-bold" id="createprojectlLabel">
+									Editar Cliente</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+
+							<div class="modal-body">
+								<input type="hidden" class="form-control"
+									placeholder="Ingrese su nombre" required="" th:field="*{id}">
+
+
+
+								<div class="form-group row">
+									<label class="col-md-2" for="">Rol:</label> <select
+										class="form-control form-control-sm col-md-6">
+										<option th:each="re:${roles}" th:value="${re.id_rol}"
+											th:text="${re.nombre}" />
+									</select>
+								</div>
+
+
+								<div class="mb-3">
+									<label for="validationCustom20">Imagenes</label> <select
+										class="form-select" id="idRol" required th:field="*{idRol}">
+										<option th:each="img : ${roles}" th:value="${img.id_rol}"
+											th:text="${img.nombre}"></option>
+									</select>
+
+
+								</div>
+								<div class="mb-3">
+									<label for="validationCustom20">Rol</label> <select
+										class="form-select" id="idRol">
+										<option selected disabled value="">Seleccione...</option>
+										<option th:each="tipo : ${roles}" th:value="${tipo.id_rol}"
+											th:text="${tipo.nombre}"></option>
+									</select>
+
+
+								</div>
+								<div class="mb-3">
+									<label for="validationCustom24" class="form-label">Nombres</label>
+									<div class="input-group">
+										<input type="text" class="form-control"
+											placeholder="Ingrese su nombre" required=""
+											th:field="*{idRol.id_rol}">
+										<div class="invalid-feedback">Por favor ingresar su
+											nombre</div>
+									</div>
+								</div>
+								<div class="mb-3">
+									<label for="validationCustom24" class="form-label">Nombres</label>
+									<div class="input-group">
+										<input type="text" class="form-control"
+											placeholder="Ingrese su nombre" required=""
+											th:field="*{nombre}">
+										<div class="invalid-feedback">Por favor ingresar su
+											nombre</div>
+									</div>
+								</div>
+								<div class="mb-3">
+									<label for="exampleFormControlInput977" class="form-label">Apellidos</label>
+									<div class="input-group">
+										<input type="text" class="form-control"
+											placeholder="Ingrese sus apellidos" required=""
+											th:field="*{apellido}">
+										<div class="invalid-feedback">Por favor ingresar sus
+											apellidos</div>
+									</div>
+								</div>
+								<div class="mb-3">
+									<label for="formFileMultipleoneone" class="form-label">Imagen</label>
+									<div class="input-group">
+										<input class="form-control" type="file"
+											th:field="*{imghabitacion}">
+
+									</div>
+								</div>
+								<div class="deadline-form">
+									<form>
+
+										<div class="mb-3">
+											<label for="validationCustom20">Email Address</label>
+											<div class="input-group">
+												<input type="email" class="form-control"
+													placeholder="example@gmail.com" required=""
+													th:field="*{email}">
+												<div class="invalid-feedback">Por favor ingresar su
+													email</div>
+											</div>
+										</div>
+									</form>
+
+
+									<div class="deadline-form">
+
+
+										<div class="row g-3 mb-3">
+											<div class="col">
+												<label for="validationCustom20">Telefono</label>
+												<div class="input-group">
+													<input type="number" class="form-control"
+														placeholder="987654321" required="" maxlength="9"
+														oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+														th:field="*{telefono}">
+													<div class="invalid-feedback">Por favor ingresar su
+														numero</div>
+												</div>
+											</div>
+
+
+											<div class="col">
+												<label for="validationCustom20">Fecha Nacimiento</label>
+												<div class="input-group">
+													<input type="date" class="form-control" required=""
+														th:field="*{fechaNacimiento}">
+													<div class="invalid-feedback">Ingresar su Fecha de
+														Nacimiento</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="modal-footer">
+										<input type="reset" value="Borrar" class="btn btn-danger">
+
+										<button class="btn btn-secondary  " type="submit">
+											</i> Guardar
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+				</div>
+			</form>
+		</div>
+		<!-- editar cliente -->
+
+	</div>
+	<!-- Page Content -->
+
+
+	<script type="text/javascript">
+		function clearSearch() {
+			window.location = "[[@{/usuariox}]]";
+		}
+	</script>
+
+	<!-- Latest compiled and minified JavaScript -->
+
+
+
+
+	</div>
+</body>
+</html>

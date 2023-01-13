@@ -1,142 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8">
-<title>Registro de usuarios</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layout/Template}">
+<head >
+<meta charset="UTF-8">
 
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
+
+
+<title>Home</title>
+
 </head>
 <body>
 
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#" th:href="@{/}">Registro y
-					inicio de sesión</a>
-			</div>
-		</div>
-	</nav>
-
-	<br>
-	<br>
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div th:if=${param.exito}>
-					<div class="alert alert-info">Se ha registrado exitosamente a
-						la aplicación</div>
-				</div>
-
-				<h1>Regístrate</h1>
-
-				<form action="" method="post" th:action="@{/listax/update}"
-					th:object="${habitacion}" enctype="multipart/form-data">
-      			  <input type="hidden" name="id" th:value="${habitacion.id}">    
-					<div class="mb-3">
-						<label for="nombre" class="form-label">nombre : </label> <input
-							type="text" id="nombre" placeholder="Digite el titulo"
-							class="form-control" th:field="*{nombre}">
-						<div class="invalid-feedback"
-							th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
-					</div>
 
 
-					<div class="mb-3">
-						<label for="invitados" class="form-label">invitados : </label> <input
-							type="text" id="invitados" placeholder="Digite el titulo"
-							class="form-control" th:field="*{invitados}">
-						<div class="invalid-feedback"
-							th:if="${#fields.hasErrors('invitados')}"
-							th:errors="*{invitados}"></div>
-					</div>
+	<!-- Page Content -->
+  <div layout:fragment="content">
 
-
-					<div class="mb-3">
-						<label for="precio" class="form-label">precio : </label> <input
-							type="text" id="precio" placeholder="Digite el titulo"
-							class="form-control" th:field="*{precio}">
-						<div class="invalid-feedback"
-							th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
-					</div>
-
-					<div class="mb-3">
-						<label for="descripcion" class="form-label">descripcion :
-						</label> <input type="text" id="invitados" placeholder="Digite el titulo"
-							class="form-control" th:field="*{descripcion}">
-						<div class="invalid-feedback"
-							th:if="${#fields.hasErrors('descripcion')}"
-							th:errors="*{descripcion}"></div>
-					</div>
-
-					<div class="mb-3">
-						<label for="rutaimagenhabi" class="form-label">rutaimagenhabi
-							: </label> <input type="text" id="rutaimagenhabi"
-							placeholder="Digite el titulo" class="form-control"
-							th:field="*{rutaimagenhabi}">
-						<div class="invalid-feedback"
-							th:if="${#fields.hasErrors('rutaimagenhabi')}"
-							th:errors="*{rutaimagenhabi}"></div>
-					</div>
-
-
-
-					<div class="mb-3">
-						<label for="caracteristica" class="form-label">caracteristica
-							: </label> <select id="caracteristica" class="form-control"
-							th:field="*{caracteristica}" multiple>
-							<option th:each="caracteristic : ${caracteristica}"
-								th:value="${caracteristic.id}" th:text="${caracteristic.nombre}"></option>
-						</select>
-
-					</div>
-
-
-					<div class="mb-3">
-						<label for="idTipo" class="form-label">Tipo : </label> <select
-							id="idTipo" class="form-control" th:field="*{idTipo}">
-							<option th:each="tipo : ${idTipo}" th:value="${tipo.id_tipo}"
-								th:text="${tipo.nombre}"></option>
-						</select>
-
-					</div>
-
-
-					<div class="text-end">
-						<button type="submit" class="btn btn-primary">Guardar</button>
-					</div>
-				</form>
-			</div>
-		</div>
+		<div id="layoutSidenav_content">
+			<main>
+			<h1>hola</h1>
+			</main>
+				
+	</div>
 	</div>
 
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-		crossorigin="anonymous"></script>
 </body>
 </html>
-
 
 
 

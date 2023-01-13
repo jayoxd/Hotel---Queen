@@ -1,6 +1,7 @@
 package com.registro.usuarios.modelo;
 
 import java.util.Collection;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -13,14 +14,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -32,7 +37,7 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -45,7 +50,7 @@ public class Usuario {
 
 	@Column(name = "fechaNacimiento")
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	
 	private String email;
 	
@@ -58,13 +63,10 @@ public class Usuario {
 	private MultipartFile imghabitacion;
 	
 	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "usuarios_roles",
-			joinColumns = @JoinColumn(name = "usuario_id",referencedColumnName = "id"),
-			inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id")
-			)
-	private Collection<Rol> roles;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
+	private Rol idRol;
 
 	
 	
@@ -84,11 +86,11 @@ public class Usuario {
 		this.imghabitacion = imghabitacion;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -124,14 +126,7 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public Collection<Rol> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Collection<Rol> roles) {
-		this.roles = roles;
-	}
-
+	
 
 
 	public Integer getTelefono() {
@@ -142,11 +137,11 @@ public class Usuario {
 		this.telefono = telefono;
 	}
 	
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -154,22 +149,8 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(String nombre, String apellido, Integer telefono, Date fechaNacimiento, String email,
-			String password, String rutaimagenhabi, MultipartFile imghabitacion, Collection<Rol> roles) {
-		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.telefono = telefono;
-		this.fechaNacimiento = fechaNacimiento;
-		this.email = email;
-		this.password = password;
-		this.rutaimagenhabi = rutaimagenhabi;
-		this.imghabitacion = imghabitacion;
-		this.roles = roles;
-	}
-
-	public Usuario(Long id, String nombre, String apellido, Integer telefono, Date fechaNacimiento, String email,
-			String password, String rutaimagenhabi, MultipartFile imghabitacion, Collection<Rol> roles) {
+	public Usuario(Integer id, String nombre, String apellido, Integer telefono, LocalDate fechaNacimiento,
+			String email, String password, String rutaimagenhabi, MultipartFile imghabitacion, Rol idRol) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -180,12 +161,34 @@ public class Usuario {
 		this.password = password;
 		this.rutaimagenhabi = rutaimagenhabi;
 		this.imghabitacion = imghabitacion;
-		this.roles = roles;
+		this.idRol = idRol;
+	}
+
+	public Usuario(String nombre, String apellido, Integer telefono, LocalDate fechaNacimiento, String email,
+			String password, String rutaimagenhabi, MultipartFile imghabitacion, Rol idRol) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.fechaNacimiento = fechaNacimiento;
+		this.email = email;
+		this.password = password;
+		this.rutaimagenhabi = rutaimagenhabi;
+		this.imghabitacion = imghabitacion;
+		this.idRol = idRol;
+	}
+
+	public Rol getIdRol() {
+		return idRol;
+	}
+
+	public void setIdRol(Rol idRol) {
+		this.idRol = idRol;
 	}
 
 	
-
 	
 	
 	
 }
+

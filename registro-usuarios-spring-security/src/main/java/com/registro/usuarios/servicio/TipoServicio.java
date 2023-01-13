@@ -15,5 +15,6 @@ public interface TipoServicio  {
 	public void update(Tipo tipo);
 	public void delete(Integer id);
 	public List<Tipo> listar();
-	
+	public List<Tipo>listarpornom(String nombre);
+
 }

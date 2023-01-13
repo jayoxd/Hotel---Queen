@@ -1,5 +1,6 @@
 package com.registro.usuarios.controlador.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Transient;
@@ -14,12 +15,12 @@ public class UsuarioRegistroDTO {
 
 
 
-	private Long id;
+	private Integer id;
 	private String nombre;
 	private String apellido;
 	private String email;
 	private Integer telefono;
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	private String password;
 	private Rol rol;
 	private String rutaimagenhabi;
@@ -33,11 +34,11 @@ public class UsuarioRegistroDTO {
 		this.rol = rol;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -106,11 +107,11 @@ public class UsuarioRegistroDTO {
 	}
 	
 	
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -121,7 +122,7 @@ public class UsuarioRegistroDTO {
 	}
 
 
-	public UsuarioRegistroDTO(String nombre, String apellido, String email, Integer telefono, Date fechaNacimiento,
+	public UsuarioRegistroDTO(String nombre, String apellido, String email, Integer telefono, LocalDate fechaNacimiento,
 			String password, Rol rol, String rutaimagenhabi, MultipartFile imghabitacion) {
 		super();
 		this.nombre = nombre;
@@ -135,8 +136,8 @@ public class UsuarioRegistroDTO {
 		this.imghabitacion = imghabitacion;
 	}
 
-	public UsuarioRegistroDTO(Long id, String nombre, String apellido, String email, Integer telefono,
-			Date fechaNacimiento, String password, Rol rol, String rutaimagenhabi, MultipartFile imghabitacion) {
+	public UsuarioRegistroDTO(Integer id, String nombre, String apellido, String email, Integer telefono,
+			LocalDate fechaNacimiento, String password, Rol rol, String rutaimagenhabi, MultipartFile imghabitacion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

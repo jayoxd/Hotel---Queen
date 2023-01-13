@@ -48,8 +48,8 @@
 
 				<h1>Regístrate</h1>
 				<form th:action="@{/registro}" method="post" th:object="${usuario}"
-				enctype="multipart/form-data">>
-					<input type="hidden" name="id" th:value="${id}">
+				enctype="multipart/form-data">
+				  <input type="hidden" name="id" th:value="${id}"> 
 
 					<div class="form-group">
 						<label class="control-label" for="nombre">Nombre : </label> <input

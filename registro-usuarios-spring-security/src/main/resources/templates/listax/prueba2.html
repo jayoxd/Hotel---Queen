@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{listax/parche.html}">
+<head>
+<meta charset="utf-8">
+<title>Administrar Películas</title>
+</head>
+<body>
+
+		 <div layout:fragment="content" class="container my-5">
+   
+				<div id="layoutSidenav_content">
+			<main>
+		
+		<h2>Peliculas</h2>
+		<div class="text-end">
+				<a type="button" class="btn btn-outline-secondary eBtn"
+																		th:href="@{/prueba/x}"><i
+																		class="icofont-edit text-success"></i>Edit</a>
+
+				Agregar película </a>
+		</div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Pelicula</th>
+					<th>F.Estreno</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+	</main>
+  </div> 
+  
+ </div>
+	
+</body>
+</html>
