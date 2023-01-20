@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layout/Template}">
+<head th:replace="Layout/Template :: head">
+<meta charset="UTF-8">
+
+
+
+<title>Home</title>
+
+</head>
+<body>
+
+
+	<p th:text=${mensaje}></p>
+
+
+	<!-- Page Content -->
+	<div class="container-fluid" layout:fragment="page-content">
+
+		<div id="layoutSidenav_content">
+			<main>
+			<div class="container-fluid px-4"></div>
+
+				<br>
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-success ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6> Roles</h6>
+									<p class="ms-card-change"  th:text=${totalrol}>
+									</p>
+									<p class="fs-12">total de roles</p>
+								</div>
+							</div>
+							<i class="flaticon-user"></i>
+						</div>
+					</div>
+
+
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-secondary ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Usuarios</h6>
+									<p class="ms-card-change" th:text=${totaluser}>$80,950</p>
+									<p class="fs-12">total de usuarios</p>
+								</div>
+							</div>
+							<i class="flaticon-user"></i>
+						</div>
+					</div>
+
+
+
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-warning ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Habitacion</h6>
+									<p class="ms-card-change" th:text=${totalhabi}>
+										<i class="material-icons">arrow_upward</i> 4567
+									</p>
+									<p class="fs-12">total de habitaciones</p>
+								</div>
+							</div>
+							<i class="flaticon-stats"></i>
+						</div>
+					</div>
+
+
+					<div class="col-xl-3 col-md-6">
+						<div
+							class="ms-card card-gradient-info ms-widget ms-infographics-widget">
+							<div class="ms-card-body media">
+								<div class="media-body">
+									<h6>Habitacions Disponibles</h6>
+									<p class="ms-card-change" th:text=${habidispo}>$80,950</p>
+									<p class="fs-12">total de habitaciones dispoibles</p>
+								</div>
+							</div>
+							<i class="flaticon-statistics"></i>
+						</div>
+					</div>
+
+				</div>
+
+
+
+
+				<div id="mytask-layout" class="theme-indigo">
+
+
+					<!-- main body area -->
+					<div class="main px-lg-4 px-md-4">
+
+						<!-- Body: Header -->
+						<div class="header">
+							<nav class="navbar py-4">
+								<div class="container-xxl">
+
+
+
+
+									<!-- menu toggler -->
+
+
+									<!-- main menu Search-->
+
+
+								</div>
+							</nav>
+						</div>
+				<div class="row clearfix">
+					<div class="col-md-12">
+						<div class="card border-0 mb-4 no-bg">
+							<div
+								class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
+								<h3 class=" fw-bold flex-fill mb-0">Perfil del Empleado</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<th:block th:object="${usuario}">
+
+					<div class="card-body  d-flex teacher-fulldeatil">
+						<div
+							class="profile-teacher pe-xl-4 pe-md-2 pe-sm-4 pe-0 text-center w220 mx-sm-0 mx-auto">
+							<a href="#"> <img
+								th:src="@{/assets/{filename}(filename=*{rutaimagenhabi})}"
+								class="avatar xl rounded-circle img-thumbnail shadow-sm" alt="">
+							</a>
+							<div
+								class="about-info d-flex align-items-center mt-3 justify-content-center flex-column">
+								<h6 class="mb-0 fw-bold d-block fs-6"  >
+								<spam  style="font-size: 25px" th:text=${mensaje}>caca</spam>
+
+								</h6>
+								<span class="text-muted small" style="font-size: 15px">DNI:74399560</span>
+							</div>
+						</div>
+						<div
+							class="teacher-info border-start ps-xl-4 ps-md-3 ps-sm-4 ps-4 w-100">
+							<h6 class="mb-0 mt-2  fw-bold d-block fs-6"  
+								>
+								<spam  style="font-size: 35px" th:text="${usuario.idRol.nombre}">caca</spam>
+								 </h6>
+							<span class="py-1 fw-bold small-11 mb-0 mt-1 text-muted" style="font-size: 15px">Rol
+							</span>
+							<p class="mt-2 small">The purpose of lorem ipsum is to create
+								a natural looking block of text (sentence, paragraph, page,
+								etc.) that doesn't distract from the layout. A practice not
+								without controversy</p>
+							<div class="row g-2 pt-2">
+								<div class="col-xl-5">
+									<div class="d-flex align-items-cen	ter">
+										<i class="icofont-ui-touch-phone fa-3x"></i><span style="font-size: 18px"
+											th:text="${usuario.telefono}" class="ms-2 small">202-555-0174
+										</span>
+									</div>
+								</div>
+								<div class="col-xl-5">
+									<div class="d-flex align-items-center">
+										<i class="icofont-email fa-3x"></i> <span class="ms-2 small " style="font-size: 18px"
+											th:text="${usuario.email}"></span>
+									</div>
+								</div>
+								<div class="col-xl-5">
+									<div class="d-flex align-items-center">
+										<i class="icofont-birthday-cake fa-3x"></i> <span style="font-size: 18px"
+											th:text="${usuario.fechaNacimiento}" class="ms-2 small"></span>
+									</div>
+								</div>
+								<div class="col-xl-5">
+									<div class="d-flex align-items-center">
+										<i class="icofont-address-book fa-3x"></i> <span style="font-size: 18px"
+											class="ms-2 small">***************</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</th:block>
+				
+		</div>
+	</div>
+
+
+
+</body>
+</html>

@@ -28,14 +28,13 @@
 							class="ms-card card-gradient-success ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6>Total Clientes</h6>
-									<p class="ms-card-change">
-										<i class="material-icons">arrow_upward</i> 4567
+									<h6> Clientes</h6>
+									<p class="ms-card-change"  th:text=${total}>
 									</p>
-									<p class="fs-12">48% From Last 24 Hours</p>
+									<p class="fs-12">total de clientes</p>
 								</div>
 							</div>
-							<i class="flaticon-statistics"></i>
+							<i class="flaticon-user"></i>
 						</div>
 					</div>
 
@@ -45,12 +44,12 @@
 							class="ms-card card-gradient-secondary ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6>Clientes por Mes</h6>
-									<p class="ms-card-change">$80,950</p>
-									<p class="fs-12">2% Decreased from last budget</p>
+									<h6>Usuarios</h6>
+									<p class="ms-card-change" th:text=${totaluser}>$80,950</p>
+									<p class="fs-12">total de usuarios</p>
 								</div>
 							</div>
-							<i class="flaticon-stats"></i>
+							<i class="flaticon-user"></i>
 						</div>
 					</div>
 
@@ -61,14 +60,14 @@
 							class="ms-card card-gradient-warning ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6>Clientes por Semana</h6>
-									<p class="ms-card-change">
+									<h6>Habitacion</h6>
+									<p class="ms-card-change" th:text=${totalhabi}>
 										<i class="material-icons">arrow_upward</i> 4567
 									</p>
-									<p class="fs-12">48% From Last 24 Hours</p>
+									<p class="fs-12">total de habitaciones</p>
 								</div>
 							</div>
-							<i class="flaticon-user"></i>
+							<i class="flaticon-stats"></i>
 						</div>
 					</div>
 
@@ -78,12 +77,12 @@
 							class="ms-card card-gradient-info ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6>Clientes Nuevos</h6>
-									<p class="ms-card-change">$80,950</p>
-									<p class="fs-12">2% Decreased from last budget</p>
+									<h6>Habitacions Disponibles</h6>
+									<p class="ms-card-change" th:text=${habidispo}>$80,950</p>
+									<p class="fs-12">total de habitaciones dispoibles</p>
 								</div>
 							</div>
-							<i class="flaticon-reuse"></i>
+							<i class="flaticon-statistics"></i>
 						</div>
 					</div>
 
@@ -140,7 +139,7 @@
 
 										<button type="button" class="btn btn-dark ms-1 "
 											data-bs-toggle="modal" data-bs-target="#createproject">
-											<i class="icofont-plus-circle me-2 fs-6"></i>Add Users
+											<i class="icofont-plus-circle me-2 fs-6"></i>Usuario
 										</button>
 
 									</div>
@@ -163,17 +162,18 @@
 								</script>
 
 								<form th:action="@{/usuariox}">
-									<div class="contenedor">
-										<label>Search: <input type="text"
+								<div class="contenedor">
+										<label>Buscar: <input type="text"
 											class="form-control form-control-sm" placeholder=""
 											aria-controls="myProjectTable" name="palabra" id="palabra"
 											th:value="${palabra}" required>
 										</label>&nbsp;
 										<button class="btn btn-dark ms-1 " type="button" id="btnClear"
 											onclick="clearSearch()">
-											<i class="flaticon-reuse"></i> Clear
+											<i class="flaticon-reuse"></i> Limpiar
 										</button>
 									</div>
+
 
 
 								</form>
@@ -216,47 +216,19 @@
 																	<a type="button" class="btn btn-outline-secondary "
 																		th:href="@{/usuariox/edit/{id}(id=*{id})}"><i
 																		class="icofont-edit text-success"></i>Edit</a>
-
-
-
-																	<button type="button" class="btn btn-outline-secondary"
-																		th:href="@{usuariox/delete/{id} (id=${usuario.id}) }"
-																		data-bs-toggle="modal" data-bs-target="#deleteproject">
-
+																		
+																		
+																		 <a
+																		type="button" class="btn btn-outline-secondary delBtn"
+																		data-bs-toggle="modal" data-bs-target="#myModal"
+																		th:href="@{usuariox/delete/{id} (id=${usuario.id}) }">
 																		<i class="icofont-ui-delete text-danger"></i>
-																	</button>
+																	</a>
+
+																	
 																	<!-- esssssssssss el modal -->
 																	<!-- Modal  Delete Folder/ File-->
-																	<div class="modal fade" id="deleteproject"
-																		tabindex="-1" aria-hidden="true">
-																		<div
-																			class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-																			<div class="modal-content">
-																				<div class="modal-header">
-																					<h5 class="modal-title  fw-bold"
-																						id="deleteprojectLabel">Delete item
-																						Permanently?</h5>
-																					<button type="button" class="btn-close"
-																						data-bs-dismiss="modal" aria-label="Close"></button>
-																				</div>
-																				<div
-																					class="modal-body justify-content-center flex-column d-flex">
-																					<i
-																						class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
-																					<p class="mt-4 fs-5 text-center">You can only
-																						delete this item Permanently</p>
-																				</div>
-																				<div class="modal-footer">
-																					<button type="button" class="btn btn-secondary"
-																						data-bs-dismiss="modal">Cancel</button>
-																					<td><a class="btn btn-danger"
-																						th:href="@{usuariox/delete/{id} (id=${usuario.id}) }">Eliminar</a>
-																					</td>
 
-																				</div>
-																			</div>
-																		</div>
-																	</div>
 																</div>
 															</div>
 														</div>
@@ -293,7 +265,35 @@
 						<!-- Modal Members-->
 					</div>
 
+					<div class="modal fade" id="myModal" tabindex="-1"
+						aria-hidden="true">
+						<div
+							class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title  fw-bold" id="deleteprojectLabel">Delete
+										item Permanently?</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div
+									class="modal-body justify-content-center flex-column d-flex">
+									<i
+										class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
+									<p class="mt-4 fs-5 text-center">You can only delete this
+										item Permanently</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">Cancel</button>
+									<td><a class="btn btn-danger" href="" id="delRef">Eliminar</a>
 
+									</td>
+
+								</div>
+							</div>
+						</div>
+					</div>
 
 
 

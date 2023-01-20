@@ -1,105 +1,110 @@
 
-<!DOCTYPE html>
-<html
-   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
- xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Inicio de sesión</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
+    <title>Ventana Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
 </head>
-<body>
+<body style="background: url('https://img.freepik.com/fotos-premium/desenfoque-abstracto-lobby-hotel-lujo-fondo_1339-98418.jpg?w=2000')
+no-repeat; background-size: cover;">
+<img src="img/cohete1.svg" class="image" alt="" id="cohete">
 
+    	<nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="col-sm-9 col-md-9 col-lg-10"></div>
+            <div class="col-sm-3 col-md-3 col-lg-2" >
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#" th:href="@{/}">Registro y
-					inicio de sesión</a>
-			</div>
-		</div>
-	</nav>
-
+                <a class="navbar-brand" th:href="@{/login}">
+                  
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                    </svg>
+                    TE LO DIGO!
+                </a>
+            </div>
+        </div>
+      </nav>
 	<br>
 	<br>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<h1>Inicio de sesión</h1>
-				<form th:action="@{/login}" method="post">
-
-					<div th:if=${param.error}>
-						<div class="alert alert-danger">Usuario o contraseña
-							inválidos</div>
-					</div>
-
-					<div th:if=${param.logout}>
-						<div class="alert alert-info">Ha cerrado sesión exitosamente
-						</div>
-					</div>
-
-
-					<div class="form-group">
-						<label  for="username">Nombre de
-							usuario : </label> <input id="username"  name="username" type="text" class="form-control"
+    <div class="row my-5"></div>
+    <div class="container my-5">
+        <div class="row" >
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <form th:action="@{/login}" method="post">
+                
+                <div th:if=${param.error}>
+					<div class="alert alert-danger">Usuario o contraseña inválidos</div>
+				</div>
+				<div th:if=${param.logout}>
+					<div class="alert alert-info">Ha cerrado sesión exitosamente</div>
+				</div>
+					
+                <div class="card text-center" >
+                    <div class="card-body " >
+                    	<div class="row my-3">
+                            <div class="card-title">INGRESO DE USUARIO</div>
+                        </div>
+                        <div class="mb-3 row">
+                          <div class="text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                            </svg>
+                          </div>
+                          <label  class="text-center" for="username">Nombre de usuario : </label> 
+							
+                            <div class="col-sm">
+                            	<input id="username"  name="username" type="text" class="form-control"
 							required autofocus="autofocus" placeholder="Digite su email ID">
-					</div>
-
-					<div class="form-group">
-						<label  for="password">Password : </label> <input
+                            </div>
+                          </div>
+                          
+                      <div class="mb-3 row p-0">
+                        <div class="text-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                          </svg>
+                        </div>
+                        
+                        <label  class="text-center" for="password">Password : </label> 
+							
+                        <div class="col-sm">
+                          <input
 							id="password" type="password"  name="password" class="form-control" required
 							autofocus="autofocus" placeholder="Digite su password">
-					</div>
-
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3">
+                        </div>
+                      </div>
+                      <div class="form-group">
 								<input type="submit" class="form-control btn btn-primary" name="login-submit" id="login-submit"
 									value="Iniciar sesión" />
-							</div>
-						</div>
 					</div>
-				</form>
-				<div class="form-group">
-					<span>Si eres nuevo usuario <a th:href="@{/registro}">regístrate
-							aqui</a></span>
-				</div>
+                      
+                      
+                    </div>
+                    
+                    <div class="card-footer text-muted">
+                      	<div class="form-group">
+						<span>Si eres nuevo usuario <a th:href="@{/registro}">regístrate aqui</a></span>
+						</div>	
+                    </div>
+                  </div>
 
-			</div>
-		</div>
-	</div>
+                </form>                   
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
 
+    </div>
+    
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-		crossorigin="anonymous"></script>
 </body>
+
 </html>
-
-
-
-
-
 
 
 

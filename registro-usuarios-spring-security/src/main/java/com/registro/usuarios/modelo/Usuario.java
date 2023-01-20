@@ -62,8 +62,7 @@ public class Usuario {
 	@Transient
 	private MultipartFile imghabitacion;
 	
-	
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne()
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
 	private Rol idRol;

@@ -23,20 +23,19 @@
 				<div class="container-fluid px-4"></div>
 
 				<br>
-				<div class="row row-cols-1 row-cols-md-3 g-4">
+					<div class="row row-cols-1 row-cols-md-3 g-4">
 					<div class="col-xl-3 col-md-6">
 						<div
 							class="ms-card card-gradient-success ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6>Total Clientes</h6>
-									<p class="ms-card-change">
-										<i class="material-icons">arrow_upward</i> 4567
+									<h6> Tipos de Habitaciones</h6>
+									<p class="ms-card-change"  th:text=${totaltipo}>
 									</p>
-									<p class="fs-12">48% From Last 24 Hours</p>
+									<p class="fs-12">total de tipos de habitaciones</p>
 								</div>
 							</div>
-							<i class="flaticon-statistics"></i>
+							<i class="flaticon-reuse"></i>
 						</div>
 					</div>
 
@@ -46,12 +45,12 @@
 							class="ms-card card-gradient-secondary ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6>Clientes por Mes</h6>
-									<p class="ms-card-change">$80,950</p>
-									<p class="fs-12">2% Decreased from last budget</p>
+									<h6>Clientes</h6>
+									<p class="ms-card-change" th:text=${total}>$80,950</p>
+									<p class="fs-12">total de clientes</p>
 								</div>
 							</div>
-							<i class="flaticon-stats"></i>
+							<i class="flaticon-user"></i>
 						</div>
 					</div>
 
@@ -62,14 +61,14 @@
 							class="ms-card card-gradient-warning ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6>Clientes por Semana</h6>
-									<p class="ms-card-change">
+									<h6>Habitacion</h6>
+									<p class="ms-card-change" th:text=${totalhabi}>
 										<i class="material-icons">arrow_upward</i> 4567
 									</p>
-									<p class="fs-12">48% From Last 24 Hours</p>
+									<p class="fs-12">total de habitaciones</p>
 								</div>
 							</div>
-							<i class="flaticon-user"></i>
+							<i class="flaticon-stats"></i>
 						</div>
 					</div>
 
@@ -79,12 +78,12 @@
 							class="ms-card card-gradient-info ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6>Clientes Nuevos</h6>
-									<p class="ms-card-change">$80,950</p>
-									<p class="fs-12">2% Decreased from last budget</p>
+									<h6>Habitacions Disponibles</h6>
+									<p class="ms-card-change" th:text=${habidispo}>$80,950</p>
+									<p class="fs-12">total de habitaciones dispoibles</p>
 								</div>
 							</div>
-							<i class="flaticon-reuse"></i>
+							<i class="flaticon-statistics"></i>
 						</div>
 					</div>
 
@@ -123,12 +122,12 @@
 							<div class="card border-0 mb-4 no-bg">
 								<div
 									class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
-									<h3 class=" fw-bold flex-fill mb-0">TIPOS</h3>
+									<h3 class=" fw-bold flex-fill mb-0">TIPOS DE HABITACIONES</h3>
 									<div class="col-auto d-flex">
 
 										<button type="button" class="btn btn-dark ms-1 "
 											data-bs-toggle="modal" data-bs-target="#depadd">
-											<i class="icofont-plus-circle me-2 fs-6"></i> Caracteristica
+											<i class="icofont-plus-circle me-2 fs-6"></i> Tipos de Habitaciones
 										</button>
 
 									</div>
@@ -151,16 +150,17 @@
 								</script>
 								<form th:action="@{/tipo}">
 									<div class="contenedor">
-										<label>Search: <input type="text"
+										<label>Buscar: <input type="text"
 											class="form-control form-control-sm" placeholder=""
 											aria-controls="myProjectTable" name="palabra" id="palabra"
 											th:value="${palabra}" required>
 										</label>&nbsp;
 										<button class="btn btn-dark ms-1 " type="button" id="btnClear"
 											onclick="clearSearch()">
-											<i class="flaticon-reuse"></i> Clear
+											<i class="flaticon-reuse"></i> Limpiar
 										</button>
 									</div>
+
 
 								</form>
 								<br>
@@ -173,7 +173,6 @@
 										<table class="table table-responsive-md">
 											<thead>
 												<tr>
-													<th><strong>ID</strong></th>
 													<th><strong>NOMBRE</strong></th>
 													<th><strong>DESCRIPCION</strong></th>
 
@@ -186,7 +185,6 @@
 												<tr th:each="tipo : ${tipos}">
 
 
-													<td th:text="${tipo.id_tipo}">ID</td>
 
 													<td th:text="${tipo.nombre}">ID</td>
 													<td th:text="${tipo.descripcion}">ID</td>

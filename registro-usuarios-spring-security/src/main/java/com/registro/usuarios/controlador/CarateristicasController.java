@@ -18,10 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.slf4j.*;
 
 import com.registro.usuarios.modelo.Caracteristica;
+import com.registro.usuarios.modelo.Cliente;
 import com.registro.usuarios.modelo.Habitacion;
 import com.registro.usuarios.modelo.Tipo;
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.servicio.CaracteristicaServicio;
+import com.registro.usuarios.servicio.ClienteServicio;
 import com.registro.usuarios.servicio.HabitacionServicio;
 import com.registro.usuarios.servicio.TipoServicio;
 import com.registro.usuarios.servicio.UsuarioServicio;
@@ -45,8 +47,10 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/caracteristica")
 public class CarateristicasController {
 	
-
-	
+	@Autowired
+	private ClienteServicio clienteServicio;
+	@Autowired
+	private HabitacionServicio habitacionServicio;
 	@Autowired 
 	private CaracteristicaServicio caracteristicaServicio;
 	
@@ -58,6 +62,34 @@ public class CarateristicasController {
 		List<Caracteristica>listacaracter=caracteristicaServicio.listarpornom(palabra);
 		modelo.addAttribute("caracteristicas",listacaracter );
 		modelo.addAttribute("palabra", palabra);
+		Integer caracto=listacaracter.size();
+		
+		
+		List<Cliente>clientes=clienteServicio.listar();
+		Integer clientto=clientes.size();
+		
+		List<Habitacion>habitacidispo=habitacionServicio.listarpornom("disponible");
+		Integer habidispo=habitacidispo.size();
+
+		List<Habitacion>habitaciones=habitacionServicio.listar();
+		Integer habi=habitaciones.size();
+		List<Usuario>usuarios=usuarioServicio.listarUsuarios();
+		Integer usua=usuarios.size();
+		
+		
+		
+		
+		modelo.addAttribute("clientes",clientes );
+		modelo.addAttribute("palabra", palabra);
+		modelo.addAttribute("total",clientto );
+		modelo.addAttribute("totaluser",usua );
+		modelo.addAttribute("totalhabi",habi );
+		modelo.addAttribute("habidispo",habidispo );
+		
+		
+		modelo.addAttribute("caractot",caracto );
+
+		
 		modelo.addAttribute("caracteristica",new Caracteristica());
 		return "Caracteristicas/caracteristicas";
 	}

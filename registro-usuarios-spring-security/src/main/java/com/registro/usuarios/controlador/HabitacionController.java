@@ -24,6 +24,7 @@ import com.registro.usuarios.modelo.Tipo;
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.repositorio.HabitacionRepositorio;
 import com.registro.usuarios.servicio.CaracteristicaServicio;
+import com.registro.usuarios.servicio.ClienteServicio;
 import com.registro.usuarios.servicio.HabitacionServicio;
 import com.registro.usuarios.servicio.ImgHabitacionServicio;
 import com.registro.usuarios.servicio.TipoServicio;
@@ -55,6 +56,10 @@ public class HabitacionController {
 	@Autowired
 	private HabitacionServicio habitacionServicio;
 	
+	
+	@Autowired
+	private ClienteServicio clienteServicio;
+
 	@Autowired
 	private UsuarioServicio usuarioServicio;
 	@Autowired 
@@ -71,6 +76,27 @@ public class HabitacionController {
 	public String verPaginaDeInicio(Model modelo,@Param("palabra")String palabra) {
 		List<Habitacion>habitaciones=habitacionServicio.listarpornom(palabra);
 	
+		List<Cliente>clientes=clienteServicio.listar();
+		Integer clientto=clientes.size();
+		
+		List<Habitacion>habitacidispo=habitacionServicio.listarpornom("disponible");
+		Integer habidispo=habitacidispo.size();
+
+		List<Habitacion>habitacionesx=habitacionServicio.listarpornom("Ocupado");
+		Integer habiocupado=habitacionesx.size();
+		
+		List<Habitacion>habitacionesxd=habitacionServicio.listar();
+		Integer habi=habitacionesxd.size();
+		
+		modelo.addAttribute("totalhabi",habi );
+		modelo.addAttribute("habidispo",habidispo );
+		modelo.addAttribute("habiocupado",habiocupado );
+		modelo.addAttribute("clientestotla",clientto );
+
+		modelo.addAttribute("clientes",clientes );
+
+		
+		
 		
 		modelo.addAttribute("palabra", palabra);
 		modelo.addAttribute("usuarios", usuarioServicio.listarUsuarios());

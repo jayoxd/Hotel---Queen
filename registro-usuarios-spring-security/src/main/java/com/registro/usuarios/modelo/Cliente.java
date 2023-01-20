@@ -22,8 +22,10 @@ import javax.persistence.UniqueConstraint;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
-@Table(name = "clientes", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "clientes")
 public class Cliente {
 
 	@Id
@@ -49,17 +51,27 @@ public class Cliente {
 
 	private String password;
 	
-	private String rutaimagenhabi;
+	
+	@Column(name = "dni")
+	private String dni;
 
-	@Transient
-	private MultipartFile imghabitacion;
+
 	
 	
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne()
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Rol idRol;
 	
 	
 	
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
 	public Integer getId_cliente() {
 		return id_cliente;
 	}
@@ -116,56 +128,12 @@ public class Cliente {
 		this.password = password;
 	}
 
-	public String getRutaimagenhabi() {
-		return rutaimagenhabi;
-	}
-
-	public void setRutaimagenhabi(String rutaimagenhabi) {
-		this.rutaimagenhabi = rutaimagenhabi;
-	}
-
-	public MultipartFile getImghabitacion() {
-		return imghabitacion;
-	}
-
-	public void setImghabitacion(MultipartFile imghabitacion) {
-		this.imghabitacion = imghabitacion;
-	}
+	
 
 	
 	
 	
 	
-	
-	public Cliente(String nombre, String apellido, String telefono, LocalDate fechaNacimiento, String email,
-			String password, String rutaimagenhabi, MultipartFile imghabitacion, Rol idRol) {
-		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.telefono = telefono;
-		this.fechaNacimiento = fechaNacimiento;
-		this.email = email;
-		this.password = password;
-		this.rutaimagenhabi = rutaimagenhabi;
-		this.imghabitacion = imghabitacion;
-		this.idRol = idRol;
-	}
-
-	public Cliente(Integer id_cliente, String nombre, String apellido, String telefono, LocalDate fechaNacimiento,
-			String email, String password, String rutaimagenhabi, MultipartFile imghabitacion, Rol idRol) {
-		super();
-		this.id_cliente = id_cliente;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.telefono = telefono;
-		this.fechaNacimiento = fechaNacimiento;
-		this.email = email;
-		this.password = password;
-		this.rutaimagenhabi = rutaimagenhabi;
-		this.imghabitacion = imghabitacion;
-		this.idRol = idRol;
-	}
-
 	public Rol getIdRol() {
 		return idRol;
 	}
@@ -176,6 +144,33 @@ public class Cliente {
 
 	public Cliente() {
 		super();
+	}
+
+	public Cliente(Integer id_cliente, String nombre, String apellido, String telefono, LocalDate fechaNacimiento,
+			String email, String password, String dni, Rol idRol) {
+		super();
+		this.id_cliente = id_cliente;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.fechaNacimiento = fechaNacimiento;
+		this.email = email;
+		this.password = password;
+		this.dni = dni;
+		this.idRol = idRol;
+	}
+
+	public Cliente(String nombre, String apellido, String telefono, LocalDate fechaNacimiento, String email,
+			String password, String dni, Rol idRol) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.fechaNacimiento = fechaNacimiento;
+		this.email = email;
+		this.password = password;
+		this.dni = dni;
+		this.idRol = idRol;
 	}
 
 	

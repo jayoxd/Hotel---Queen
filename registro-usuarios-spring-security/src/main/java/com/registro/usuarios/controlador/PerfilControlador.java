@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.registro.usuarios.modelo.Caracteristica;
-import com.registro.usuarios.modelo.Cliente;
 import com.registro.usuarios.modelo.Habitacion;
 import com.registro.usuarios.modelo.ImgHabitacion;
 import com.registro.usuarios.modelo.Rol;
@@ -30,13 +31,18 @@ import com.registro.usuarios.servicio.RolServicio;
 import com.registro.usuarios.servicio.UsuarioServicio;
 
 @Controller
-@RequestMapping("/usuariox")
-public class UsuarioControlador {
-
-	private UsuarioServicio usuarioServicio;
+@RequestMapping("/perfil")
+public class PerfilControlador {
+	
 	@Autowired
 	private HabitacionServicio habitacionServicio;
-	public UsuarioControlador(UsuarioServicio usuarioServicio) {
+
+	
+	@Autowired
+	private ClienteServicio clienteServicio;
+	private UsuarioServicio usuarioServicio;
+
+	public PerfilControlador(UsuarioServicio usuarioServicio) {
 		super();
 		this.usuarioServicio = usuarioServicio;
 	}
@@ -46,36 +52,43 @@ public class UsuarioControlador {
 	@Autowired
 	RolServicio rolServicio;
 	
-	@Autowired
-	private ClienteServicio clienteServicio;
+	
 
 	
 	
 	@GetMapping("")
-	public String verPaginaDeInicio(Model modelo,@Param("palabra")String palabra,@Param("admin")String admin,@Param("recep")String recep) {
-		List<Usuario>usuarios=usuarioServicio.listarpornom(palabra);
+	public String verPaginaDeInicio(Model modelo,HttpSession session) {
+	
+		Usuario usuario =usuarioServicio.buscarid( Integer.parseInt(session.getAttribute("idusuario").toString())  ).get();
+
+		List<Rol>roless=rolServicio.listar();
+
+		Integer rolex=roless.size();
 		List<Habitacion>habitacidispo=habitacionServicio.listarpornom("disponible");
 		Integer habidispo=habitacidispo.size();
 
 		List<Habitacion>habitaciones=habitacionServicio.listar();
 		Integer habi=habitaciones.size();
 		List<Usuario>usuariosx=usuarioServicio.listarUsuarios();
-		Integer usua=usuarios.size();
-
-		List<Cliente>clientes=clienteServicio.listar();
-		Integer clientto=clientes.size();
+		Integer usua=usuariosx.size();
+		
 		modelo.addAttribute("usuariosx", usuariosx);
-		modelo.addAttribute("palabra", palabra);
-		modelo.addAttribute("usuarios", usuarios);
+		modelo.addAttribute("usuarios", usua);
 		modelo.addAttribute("roles",rolServicio.listar());
-		modelo.addAttribute("total",clientto );
 		modelo.addAttribute("totaluser",usua );
 		modelo.addAttribute("totalhabi",habi );
 		modelo.addAttribute("habidispo",habidispo );
-		modelo.addAttribute("usuario",new Usuario());
+		modelo.addAttribute("totalrol",rolex );
+
 		
 		
-		return "/Usuarios/usuarios";
+		
+		
+		String nombre=usuario.getNombre()+" "+usuario.getApellido();
+	    modelo.addAttribute("mensaje",nombre);
+		modelo.addAttribute("usuario", usuario);
+
+		return "/Perfil/perfil";
 	}
 	
 	

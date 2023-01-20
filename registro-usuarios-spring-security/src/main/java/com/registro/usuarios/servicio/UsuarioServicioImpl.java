@@ -89,7 +89,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 	@Override
 	public Usuario save(Usuario usuario) {
+		Rol rol=rolServicio.get(1).get();
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		//usuario.setIdRol(rol);
 		return usuarioRepositorio.save(usuario);
 	}
 

@@ -10,6 +10,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class ImgHabitacion {
 
@@ -24,6 +26,7 @@ public class ImgHabitacion {
 	private String rutaimagenhabi;
 
 	@Transient
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private MultipartFile imghabitacion;
 
 	public Integer getId() {

@@ -53,6 +53,14 @@ public class ImgHabitacionImpl implements ImgHabitacionServicio {
 		return imgHabitacionRepositorio.findAll();
 	}
 
+	@Override
+	public List<ImgHabitacion> listarpornom(String nombre) {
+		if(nombre!=null) {
+			 return	imgHabitacionRepositorio.buscarcar(nombre);
+			}
+			return imgHabitacionRepositorio.findAll();
+	}
+
 
 
 }

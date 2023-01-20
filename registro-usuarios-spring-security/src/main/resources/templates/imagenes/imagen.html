@@ -23,19 +23,19 @@
 				<div class="container-fluid px-4"></div>
 
 				<br>
-				<div class="row row-cols-1 row-cols-md-3 g-4">
+					<div class="row row-cols-1 row-cols-md-3 g-4">
 					<div class="col-xl-3 col-md-6">
 						<div
 							class="ms-card card-gradient-success ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6> Roles</h6>
-									<p class="ms-card-change"  th:text=${totalrol}>
+									<h6> Imagenes</h6>
+									<p class="ms-card-change"  th:text=${imagentotal}>
 									</p>
-									<p class="fs-12">total de roles</p>
+									<p class="fs-12">total de imagenes</p>
 								</div>
 							</div>
-							<i class="flaticon-user"></i>
+							<i class="flaticon-reuse"></i>
 						</div>
 					</div>
 
@@ -45,9 +45,9 @@
 							class="ms-card card-gradient-secondary ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6>Usuarios</h6>
-									<p class="ms-card-change" th:text=${totaluser}>$80,950</p>
-									<p class="fs-12">total de usuarios</p>
+									<h6>Clientes</h6>
+									<p class="ms-card-change" th:text=${total}>$80,950</p>
+									<p class="fs-12">total de clientes</p>
 								</div>
 							</div>
 							<i class="flaticon-user"></i>
@@ -93,18 +93,6 @@
 
 
 
-				<!-- CA ------------------------------SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS-->
-
-
-				<!-- Body: Body -->
-
-
-
-				<!-- Row End -->
-
-
-				<!-- Row End -->
-
 				<div id="mytask-layout" class="theme-indigo">
 
 
@@ -135,57 +123,14 @@
 							<div class="card border-0 mb-4 no-bg">
 								<div
 									class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
-									<h3 class=" fw-bold flex-fill mb-0">Users</h3>
+									<h3 class=" fw-bold flex-fill mb-0">Imagenes</h3>
 									<div class="col-auto d-flex">
 
 										<button type="button" class="btn btn-dark ms-1 "
 											data-bs-toggle="modal" data-bs-target="#createproject">
-											<i class="icofont-plus-circle me-2 fs-6"></i>Usuario
+											<i class="icofont-plus-circle me-2 fs-6"></i> Imagen
 										</button>
 
-									</div>
-								</div>
-
-
-
-
-				<div id="mytask-layout" class="theme-indigo">
-
-
-					<!-- main body area -->
-					<div class="main px-lg-4 px-md-4">
-
-						<!-- Body: Header -->
-						<div class="header">
-							<nav class="navbar py-4">
-								<div class="container-xxl">
-
-
-
-
-									<!-- menu toggler -->
-
-
-									<!-- main menu Search-->
-
-
-								</div>
-							</nav>
-						</div>
-
-						<!-- Body: Body -->
-						<div class="body d-flex py-lg-3 py-md-2">
-
-							<div class="card border-0 mb-4 no-bg">
-								<div
-									class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
-									<h3 class=" fw-bold flex-fill mb-0">ROLES</h3>
-									<div class="col-auto d-flex">
-
-										<button type="button" class="btn btn-dark ms-1 "
-											data-bs-toggle="modal" data-bs-target="#depadd">
-											<i class="icofont-plus-circle me-2 fs-6"></i> Rol
-										</button>
 
 									</div>
 								</div>
@@ -205,7 +150,7 @@
 										window.location = "[[@{/role}]]";
 									}
 								</script>
-								<form th:action="@{/role}">
+								<form th:action="@{/imgHabitacion}">
 									<div class="contenedor">
 										<label>Buscar: <input type="text"
 											class="form-control form-control-sm" placeholder=""
@@ -218,103 +163,144 @@
 										</button>
 									</div>
 
-
 								</form>
 								<br>
 								<!-- dentro tabla -->
 
 
-								<div class="card-body">
-									<div class="table-responsive">
-									<div class="carroxd">
-									
-									</div>
-										<table class="table table-responsive-md">
-											<thead>
-												<tr>
-													<th style="width: 80px;"><strong>#</strong></th>
-													<th><strong>NOMBRE</strong></th>
+								<div
+									class=" row g-3 row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 row-deck py-1 pb-4">
+									<th:block th:each="imagen:${imageneshabitaciones}"
+										th:object="${imagen}">
+										<div class="imgca">
+											<div class="card">
 
-													<th class="text-center"><strong> ACCIONES</strong></th>
-													<th></th>
-												</tr>
-											</thead>
-											<tbody>
-
-												<tr th:each="caracteristica : ${roles}">
-													<td><strong></strong></td>
-
-
-													<td th:text="${caracteristica.nombre}">ID</td>
-													<td class="text-center">
-
-														<div class="btn-group" role="group"
-															aria-label="Basic outlined example">
-
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrivals-img-contnent">
+															<img class="img-fluid"
+																th:src="@{/assets/{filename}(filename=*{rutaimagenhabi})}"
+																alt="">
+														</div>
+														<div class="new-arrival-content text-center mt-3">
+															<h4>
+																<a th:text="${imagen.nombre}"></a>
+															</h4>
 															<a type="button" class="btn btn-outline-secondary eBtn"
-																th:href="@{role/findOne/(id=${caracteristica.id_rol})}"
+																th:href="@{imgHabitacion/findOne/(id=${imagen.id})}"
 																data-bs-toggle="modal" data-bs-target="#depedit"><i
 																class="icofont-edit text-success"></i>Edit</a> <a
 																type="button"
-																th:href="@{role/delete/{id} (id=${caracteristica.id_rol}) }"
+																th:href="@{imgHabitacion/delete/{id} (id=${imagen.id}) }"
 																class="btn btn-outline-secondary deleterow"> <i
 																class="icofont-ui-delete text-danger"></i>Delete
 															</a>
 
 
-															<div class="modal-footer"></div>
-													</td>
 
-												</tr>
 
-											</tbody>
-										</table>
-										</div>
-									</div>
 
-								</div>
+															<div class="modal fade" id="deleteproject" tabindex="-1"
+																aria-hidden="true">
+																<div
+																	class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title  fw-bold"
+																				id="deleteprojectLabel">Delete item
+																				Permanently?</h5>
+																			<button type="button" class="btn-close"
+																				data-bs-dismiss="modal" aria-label="Close"></button>
+																		</div>
+																		<div
+																			class="modal-body justify-content-center flex-column d-flex">
+																			<i
+																				class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
+																			<p class="mt-4 fs-5 text-center">You can only
+																				delete this item Permanently</p>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary"
+																				data-bs-dismiss="modal">Cancel</button>
+																			<td><a class="btn btn-danger"
+																				th:href="@{imgHabitacion/delete/{id} (id=${imagen.id}) }">Eliminar</a>
+																			</td>
 
-								<!-- Add Department-->
-								<div class="modal fade" id="depadd" tabindex="-1"
-									aria-hidden="true" style="display: none;">
-									<div
-										class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title  fw-bold" id="depaddLabel">
-													Rol Nuevo</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<form action="" method="post" th:object="${rol}"
-													class="needs-validation clearfix was-validated"
-													novalidate="">
-
-													<div class="mb-3">
-														<label for="exampleFormControlInput977" class="form-label">Nombre</label>
-														<div class="input-group">
-															<input type="text" class="form-control"
-																id="exampleFormControlInput877"
-																placeholder="Ingrese el nombre" required=""
-																th:field="*{nombre}">
-															<div class="invalid-feedback">Por favor ingresar el
-																nombre</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</div>
 													</div>
+												</div>
 											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Cancelar</button>
-												<button type="submit" class="btn btn-primary">Agregar</button>
-											</div>
-										</div>
 
-									</div>
-									</form>
+										</div>
 								</div>
+								</th:block>
+
+								<!-- dentro tabla -->
 
 							</div>
+
+							<!-- Add Department-->
+							<form class="needs-validation clearfix was-validated"
+								novalidate="" action="" method="post" th:object="${imagen}"
+								enctype="multipart/form-data">
+								<div class="modal fade" id="createproject" tabindex="-1"
+									aria-hidden="true">
+									<div
+										class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title  fw-bold" id="createprojectlLabel">
+													Registrar Cliente</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+
+											</div>
+											<div class="modal-body">
+
+												<div class="mb-3">
+													<label for="validationCustom24" class="form-label">Nombres</label>
+													<div class="input-group">
+														<input type="text" class="form-control"
+															placeholder="Ingrese su nombre" required=""
+															th:field="*{nombre}">
+														<div class="invalid-feedback">Por favor ingresar su
+															nombre</div>
+													</div>
+												</div>
+<div class="mb-3">
+								<label for="formFileMultipleoneone" class="form-label">Imagen</label>
+								<div class="input-group">
+									<input class="form-control" type="file" required=""
+										th:field="*{imghabitacion}">
+									<div class="invalid-feedback">Por favor ingresar la
+										imagen</div>
+								</div>
+							</div>
+
+												<div class="deadline-form">
+
+
+													<div class="deadline-form"></div>
+
+
+													<div class="modal-footer">
+														<input type="reset" value="Borrar" class="btn btn-danger">
+
+														<button class="btn btn-secondary  " type="submit">
+															</i> Guardar
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<br>
+								</div>
+							</form>
 
 
 							<!-- dentro tabla -->
@@ -322,9 +308,8 @@
 
 							<!-- editar -->
 							<div class="myForm">
-								<form action="" method="post" th:object="${rol}"
-								class="needs-validation clearfix was-validated" novalidate="" 
-								>
+								<form action="" method="post" th:object="${imagen}" 	enctype="multipart/form-data"
+									class="needs-validation clearfix was-validated" novalidate="">
 									<!-- Edit Department-->
 									<div class="modal fade" id="depedit" tabindex="-1"
 										style="display: none;" aria-hidden="true">
@@ -339,20 +324,28 @@
 												</div>
 												<div class="modal-body">
 
-													<input id="idxd" th:field="*{id_rol}" type="hidden" value=""
-														name="idxd" class="form-control">
+													<input id="id" th:field="*{id}" type="hidden" value=""
+														name="id" class="form-control">
 
 
 													<div class="mb-3">
 														<label for="exampleFormControlInput11111"
 															class="form-label">Nombre</label> <input id="name"
-															placeholder="Ingrese el nombre" required="" 
+															placeholder="Ingrese el nombre" required=""
 															th:field="*{nombre}" type="text" value="" name="name"
 															class="form-control">
-															<div class="invalid-feedback">Por favor ingresar el
-										nombre</div>
+														<div class="invalid-feedback">Por favor ingresar el
+															nombre</div>
 													</div>
 
+															<div class="mb-3">
+									<label for="formFileMultipleoneone" class="form-label">Imagen</label>
+									<div class="input-group">
+										<input class="form-control" type="file"
+											th:field="*{imghabitacion}">
+
+									</div>
+								</div>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"
@@ -375,8 +368,8 @@
 		</div>
 	</div>
 	</div>
-	
-	
+
+
 
 </body>
 </html>
