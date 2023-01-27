@@ -29,9 +29,8 @@
 							class="ms-card card-gradient-success ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6> Roles</h6>
-									<p class="ms-card-change"  th:text=${totalrol}>
-									</p>
+									<h6>Roles</h6>
+									<p class="ms-card-change" th:text=${totalrol}></p>
 									<p class="fs-12">total de roles</p>
 								</div>
 							</div>
@@ -130,253 +129,264 @@
 						</div>
 
 						<!-- Body: Body -->
-						<div class="body d-flex py-lg-3 py-md-2">
 
-							<div class="card border-0 mb-4 no-bg">
-								<div
-									class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
-									<h3 class=" fw-bold flex-fill mb-0">Users</h3>
-									<div class="col-auto d-flex">
 
-										<button type="button" class="btn btn-dark ms-1 "
-											data-bs-toggle="modal" data-bs-target="#createproject">
-											<i class="icofont-plus-circle me-2 fs-6"></i>Usuario
-										</button>
 
-									</div>
+
+
+						<div id="mytask-layout" class="theme-indigo">
+
+
+							<!-- main body area -->
+							<div class="main px-lg-4 px-md-4">
+
+								<!-- Body: Header -->
+								<div class="header">
+									<nav class="navbar py-4">
+										<div class="container-xxl">
+
+
+
+
+											<!-- menu toggler -->
+
+
+											<!-- main menu Search-->
+
+
+										</div>
+									</nav>
 								</div>
 
+								<!-- Body: Body -->
+								<div class="body d-flex py-lg-3 py-md-2">
+
+									<div class="card border-0 mb-4 no-bg">
+										<div
+											class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
+											<h3 class=" fw-bold flex-fill mb-0">ROLES</h3>
+											<div class="col-auto d-flex">
+
+												<button type="button" class="btn btn-dark ms-1 "
+													data-bs-toggle="modal" data-bs-target="#depadd">
+													<i class="icofont-plus-circle me-2 fs-6"></i> Rol
+												</button>
+
+											</div>
+										</div>
 
 
+										<br>
 
-				<div id="mytask-layout" class="theme-indigo">
-
-
-					<!-- main body area -->
-					<div class="main px-lg-4 px-md-4">
-
-						<!-- Body: Header -->
-						<div class="header">
-							<nav class="navbar py-4">
-								<div class="container-xxl">
-
-
-
-
-									<!-- menu toggler -->
-
-
-									<!-- main menu Search-->
-
-
-								</div>
-							</nav>
-						</div>
-
-						<!-- Body: Body -->
-						<div class="body d-flex py-lg-3 py-md-2">
-
-							<div class="card border-0 mb-4 no-bg">
-								<div
-									class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
-									<h3 class=" fw-bold flex-fill mb-0">ROLES</h3>
-									<div class="col-auto d-flex">
-
-										<button type="button" class="btn btn-dark ms-1 "
-											data-bs-toggle="modal" data-bs-target="#depadd">
-											<i class="icofont-plus-circle me-2 fs-6"></i> Rol
-										</button>
-
-									</div>
-								</div>
-
-
-								<br>
-
-								<style>
+										<style>
 .contenedor {
 	width: 100%;
 	display: flex;
 	align-items: center;
 }
 </style>
-								<script type="text/javascript">
-									function clearSearch() {
-										window.location = "[[@{/role}]]";
-									}
-								</script>
-								<form th:action="@{/role}">
-									<div class="contenedor">
-										<label>Buscar: <input type="text"
-											class="form-control form-control-sm" placeholder=""
-											aria-controls="myProjectTable" name="palabra" id="palabra"
-											th:value="${palabra}" required>
-										</label>&nbsp;
-										<button class="btn btn-dark ms-1 " type="button" id="btnClear"
-											onclick="clearSearch()">
-											<i class="flaticon-reuse"></i> Limpiar
-										</button>
-									</div>
-
-
-								</form>
-								<br>
-								<!-- dentro tabla -->
-
-
-								<div class="card-body">
-									<div class="table-responsive">
-									<div class="carroxd">
-									
-									</div>
-										<table class="table table-responsive-md">
-											<thead>
-												<tr>
-													<th style="width: 80px;"><strong>#</strong></th>
-													<th><strong>NOMBRE</strong></th>
-
-													<th class="text-center"><strong> ACCIONES</strong></th>
-													<th></th>
-												</tr>
-											</thead>
-											<tbody>
-
-												<tr th:each="caracteristica : ${roles}">
-													<td><strong></strong></td>
-
-
-													<td th:text="${caracteristica.nombre}">ID</td>
-													<td class="text-center">
-
-														<div class="btn-group" role="group"
-															aria-label="Basic outlined example">
-
-															<a type="button" class="btn btn-outline-secondary eBtn"
-																th:href="@{role/findOne/(id=${caracteristica.id_rol})}"
-																data-bs-toggle="modal" data-bs-target="#depedit"><i
-																class="icofont-edit text-success"></i>Edit</a> <a
-																type="button"
-																th:href="@{role/delete/{id} (id=${caracteristica.id_rol}) }"
-																class="btn btn-outline-secondary deleterow"> <i
-																class="icofont-ui-delete text-danger"></i>Delete
-															</a>
-
-
-															<div class="modal-footer"></div>
-													</td>
-
-												</tr>
-
-											</tbody>
-										</table>
-										</div>
-									</div>
-
-								</div>
-
-								<!-- Add Department-->
-								<div class="modal fade" id="depadd" tabindex="-1"
-									aria-hidden="true" style="display: none;">
-									<div
-										class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title  fw-bold" id="depaddLabel">
-													Rol Nuevo</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
+										<script type="text/javascript">
+											function clearSearch() {
+												window.location = "[[@{/role}]]";
+											}
+										</script>
+										<form th:action="@{/role}">
+											<div class="contenedor">
+												<label>Buscar: <input type="text"
+													class="form-control form-control-sm" placeholder=""
+													aria-controls="myProjectTable" name="palabra" id="palabra"
+													th:value="${palabra}" required>
+												</label>&nbsp;
+												<button class="btn btn-dark ms-1 " type="button"
+													id="btnClear" onclick="clearSearch()">
+													<i class="flaticon-reuse"></i> Limpiar
+												</button>
 											</div>
-											<div class="modal-body">
-												<form action="" method="post" th:object="${rol}"
-													class="needs-validation clearfix was-validated"
-													novalidate="">
 
-													<div class="mb-3">
-														<label for="exampleFormControlInput977" class="form-label">Nombre</label>
-														<div class="input-group">
-															<input type="text" class="form-control"
-																id="exampleFormControlInput877"
-																placeholder="Ingrese el nombre" required=""
-																th:field="*{nombre}">
-															<div class="invalid-feedback">Por favor ingresar el
-																nombre</div>
-														</div>
-													</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Cancelar</button>
-												<button type="submit" class="btn btn-primary">Agregar</button>
+
+										</form>
+										<br>
+										<!-- dentro tabla -->
+
+
+										<div class="card-body">
+											<div class="table-responsive">
+												<div class="carroxdx">
+												<table class="table table-responsive-md">
+													<thead>
+														<tr>
+															<th style="width: 80px;"><strong>#</strong></th>
+															<th><strong>NOMBRE</strong></th>
+															<th><strong>DESCRIPCIÓN</strong></th>
+															<th class="text-center"><strong> ACCIONES</strong></th>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+
+														<tr th:each="rol : ${roles}">
+															<td><strong></strong></td>
+
+
+															<td th:text="${rol.nombre}">ID</td>
+															<td th:text="${rol.descripcion}">ID</td>
+															<td class="text-center">
+
+																<div class="btn-group" role="group"
+																	aria-label="Basic outlined example">
+
+																	<a type="button" class="btn btn-outline-secondary eBtn"
+																		th:href="@{role/findOne/(id=${rol.id_rol})}"
+																		data-bs-toggle="modal" data-bs-target="#depedit"><i
+																		class="icofont-edit text-success"></i>Editar</a> <a
+																		type="button"
+																		th:href="@{role/delete/{id} (id=${rol.id_rol}) }"
+																		class="btn btn-outline-secondary deleterow"> <i
+																		class="icofont-ui-delete text-danger"></i>Eliminar
+																	</a>
+
+
+																	<div class="modal-footer"></div>
+															</td>
+
+														</tr>
+
+													</tbody>
+												</table>
 											</div>
 										</div>
-
+</div>
 									</div>
-									</form>
-								</div>
 
-							</div>
-
-
-							<!-- dentro tabla -->
-
-
-							<!-- editar -->
-							<div class="myForm">
-								<form action="" method="post" th:object="${rol}"
-								class="needs-validation clearfix was-validated" novalidate="" 
-								>
-									<!-- Edit Department-->
-									<div class="modal fade" id="depedit" tabindex="-1"
-										style="display: none;" aria-hidden="true">
+									<!-- Add Department-->
+									<div class="modal fade" id="depadd" tabindex="-1"
+										aria-hidden="true" style="display: none;">
 										<div
 											class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title  fw-bold" id="depeditLabel">
-														Roles Editar</h5>
+													<h5 class="modal-title  fw-bold" id="depaddLabel">Rol
+														Nuevo</h5>
 													<button type="button" class="btn-close"
 														data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
+													<form action="" method="post" th:object="${rol}"
+														class="needs-validation clearfix was-validated"
+														novalidate="">
+														
+														
 
-													<input id="idxd" th:field="*{id_rol}" type="hidden" value=""
-														name="idxd" class="form-control">
-
-
-													<div class="mb-3">
-														<label for="exampleFormControlInput11111"
-															class="form-label">Nombre</label> <input id="name"
-															placeholder="Ingrese el nombre" required="" 
-															th:field="*{nombre}" type="text" value="" name="name"
-															class="form-control">
-															<div class="invalid-feedback">Por favor ingresar el
-										nombre</div>
-													</div>
-
+														<div class="mb-3">
+															<label for="exampleFormControlInput977"
+																class="form-label">Nombre</label>
+															<div class="input-group">
+																<input type="text" class="form-control"
+																	id="exampleFormControlInput877"
+																	placeholder="Ingrese el nombre" required=""
+																	th:field="*{nombre}">
+																<div class="invalid-feedback">Por favor ingresar
+																	el nombre</div>
+															</div>
+														</div>
+														<div class="mb-3">
+															<label for="exampleFormControlInput977"
+																class="form-label">Descripcion</label>
+															<div class="input-group">
+																<textarea type="text" class="form-control"
+																	placeholder="Ingrese sus apellidos" required=""
+																	th:field="*{descripcion}"></textarea>
+																<div class="invalid-feedback">Por favor ingresar
+																	sus descripcion</div>
+															</div>
+														</div>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"
 														data-bs-dismiss="modal">Cancelar</button>
-													<button type="submit" class="btn btn-primary">Guadar</button>
+													<button type="submit" class="btn btn-primary">Agregar</button>
+												</div>
+											</div>
+
+										</div>
+										</form>
+									</div>
+
+								</div>
+
+
+								<!-- dentro tabla -->
+
+
+								<!-- editar -->
+								<div class="myForm">
+									<form action="" method="post" th:object="${rol}"
+										class="needs-validation clearfix was-validated" novalidate="">
+										<!-- Edit Department-->
+										<div class="modal fade" id="depedit" tabindex="-1"
+											style="display: none;" aria-hidden="true">
+											<div
+												class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title  fw-bold" id="depeditLabel">
+															Roles Editar</h5>
+														<button type="button" class="btn-close"
+															data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+
+														<input id="idxd" th:field="*{id_rol}" type="hidden"
+															value="" name="idxd" class="form-control">
+
+
+														<div class="mb-3">
+															<label for="exampleFormControlInput11111"
+																class="form-label">Nombre</label> <input id="name"
+																placeholder="Ingrese el nombre" required=""
+																th:field="*{nombre}" type="text" value="" name="name"
+																class="form-control">
+															<div class="invalid-feedback">Por favor ingresar el
+																nombre</div>
+														</div>
+
+
+														<div class="mb-3">
+															<label for="exampleFormControlInput977"
+																class="form-label">Descripcion</label>
+															<div class="input-group">
+																<textarea type="text" class="form-control" id="descripcion"
+																	placeholder="Ingrese su descripcion" required=""
+																	th:field="*{descripcion}"></textarea>
+																<div class="invalid-feedback">Por favor ingresar
+																	sus descripcion</div>
+															</div>
+														</div>
+
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-bs-dismiss="modal">Cancelar</button>
+														<button type="submit" class="btn btn-primary">Guadar</button>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</form>
+									</form>
+								</div>
+								<!-- editar -->
+
+
+
+
 							</div>
-							<!-- editar -->
-
-
-
-
 						</div>
 					</div>
 				</div>
 		</div>
 	</div>
-	</div>
-	
-	
+
+
 
 </body>
 </html>

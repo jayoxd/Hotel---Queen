@@ -221,7 +221,7 @@
 
 																	<a type="button" class="btn btn-outline-secondary eBtn"
 																		th:href="@{/habitaciones/edit/{id}(id=*{id})}"><i
-																		class="icofont-edit text-success"></i>Edit</a>
+																		class="icofont-edit text-success"></i>Editar</a>
 
 
 
@@ -239,8 +239,7 @@
 																			<div class="modal-content">
 																				<div class="modal-header">
 																					<h5 class="modal-title  fw-bold"
-																						id="deleteprojectLabel">Delete item
-																						Permanently?</h5>
+																						id="deleteprojectLabel">Desabilitar la habitacion?</h5>
 																					<button type="button" class="btn-close"
 																						data-bs-dismiss="modal" aria-label="Close"></button>
 																				</div>
@@ -248,14 +247,13 @@
 																					class="modal-body justify-content-center flex-column d-flex">
 																					<i
 																						class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
-																					<p class="mt-4 fs-5 text-center">You can only
-																						delete this item Permanently</p>
+																					<p class="mt-4 fs-5 text-center">Estas seguro de esabilitar la habitacion?</p>
 																				</div>
 																				<div class="modal-footer">
 																					<button type="button" class="btn btn-secondary"
 																						data-bs-dismiss="modal">Cancel</button>
 																					<td><a class="btn btn-danger"
-																						th:href="@{habitaciones/delete/{id} (id=${habitacion.id}) }">Eliminar</a>
+																						th:href="@{habitaciones/delete/{id} (id=${habitacion.id}) }">Desabilitar</a>
 																					</td>
 
 																				</div>
@@ -279,7 +277,7 @@
 															</div>
 															<div
 																class="d-flex flex-wrap align-items-center ct-btn-set">
-																<a href="profile.html" class="btn btn-dark btn-sm mt-1"><i
+																<a th:href="@{/habitaciones/editver/{id}(id=*{id})}" class="btn btn-dark btn-sm mt-1"><i
 																	class="icofont-invisible me-2 fs-6"></i>Perfil</a>
 															</div>
 														</div>
@@ -384,7 +382,8 @@
 								<form>
 
 									<div class="mb-3">
-										<label for="validationCustom20">Tipo</label> <select
+										<label for="validationCustom20">Tipo</label> 
+										<select
 											class="form-select" id="idTipo" th:field="*{idTipo}">
 											<option selected disabled value="">Seleccione...</option>
 											<option th:each="tipo : ${tipos}" th:value="${tipo.id_tipo}"

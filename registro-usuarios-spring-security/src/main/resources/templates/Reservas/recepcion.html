@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{listax/parche.html}">
+<head>
+<meta charset="utf-8">
+<title>Administrar Películas</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<link rel="stylesheet" href="/datepicker/jquery.datetimepicker.min.css">
+
+
+
+</head>
+<body>
+
+	<div layout:fragment="content" class="container-fluid ">
+		<div id="layoutSidenav_content">
+			<main>
+				<br>
+				<style>
+.efe {
+	color: rgb(33, 97, 140);
+}
+</style>
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="modal-header">
+							<h5 class="modal-title  fw-bold" id="createprojectlLabel">
+								Detalles de la Habitacion</h5>
+
+							<a type="button" class="btn-close" th:href="@{/habitaciones}"></a>
+						</div>
+						<div class="card-body">
+							<th:block th:object="${habitacion}">
+
+
+
+								<div class="row">
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 20px">
+												N⁰ HABITACION: <span
+													class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{nombre}"></span>
+											</p>
+										</div>
+									</div>
+
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 20px">
+												N⁰ INVITADOS: <span class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{invitados}">S101</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 20px">
+												PRECIO: <span class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{precio}">S101</span>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 20px">
+												CARACTERISTICAS: <span
+													class="item card-title card-intro-title"
+													style="font-size: 20px">
+													<td th:each="cara : *{caracteristica}"
+													th:text="${cara.nombre}+','"></td>
+
+												</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 20px">
+												N⁰ Estado: <span class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{estado}">S101</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 20px">
+												TIPO: <span class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{idTipo.nombre}">S101</span>
+											</p>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+
+					<div class="alert alert-warning notification">
+						<p class="notificaiton-title mb-2">
+							<strong><i class="icofont-alarm"></i></strong> Vampires The
+							Romantic Ideology Behind Them
+						</p>
+
+					</div>
+
+
+					</th:block>
+
+
+
+
+					<form class="row g-3 p-3" action="" method="post"
+						th:object="${reserva}">
+
+						<div class="col-6">
+							<label class="text-label">Cliente</label>
+
+							<div class="input-group">
+								<span class="input-group-text"> <i class="fa fa-user"></i>
+								</span> <select class="form-select" id="inputGroupSelect04"
+									th:field="*{idCliente}" name="webmenu" is="ms-dropdown"
+									aria-label="Example select with button addon">
+									<option th:each="tipo : ${clientes}"
+										th:value="${tipo.id_cliente}" th:text="${tipo.dni}"></option>
+								</select>
+								<div class="input-group-append">
+									<button class="btn btn-warning" type="button">+</button>
+								</div>
+							</div>
+
+						</div>
+
+
+						<div class="col-6">
+							<label class="text-label">Tipo de Registro</label>
+
+							<div class="input-group">
+								<span class="input-group-text"> <i class="fa fa-user"></i>
+								</span> <select class="custom-select" id="inputGroupSelect04"
+									th:field="*{estado}"
+									aria-label="Example select with button addon">
+									<option selected disabled value="">Seleccione...</option>
+									<option value="Disponible">Hospedar</option>
+									<option value="Ocupado">Reservar</option>
+								</select>
+
+							</div>
+
+						</div>
+
+
+						<div class="col-md-3">
+							<label for="validationDefault02" class="form-label">Adultos
+							</label> <input class="form-control" th:field="*{adultos}" required="">
+						</div>
+						<div class="col-md-3">
+							<label for="validationDefault02" class="form-label">Niños
+							</label> <input class="form-control" th:field="*{niños}" required="">
+						</div>
+
+
+						<div class="col-md-3">
+							<label for="validationDefault02" class="form-label">Adelanto(Opcional)
+							</label> <input class="form-control" th:field="*{adelanto}">
+						</div>
+
+
+						<div class="col-md-3">
+							<th:block th:object="${habitacion}">
+								<label for="validationDefault02" class="form-label">Total
+									a Pagar </label>
+								<div class="input-group">
+									<input th:value="*{'$/.'+precio}" disabled class="form-control">
+									<div class="invalid-feedback"></div>
+								</div>
+							</th:block>
+						</div>
+
+
+
+
+						<div class="col-md-6">
+							<label for="validationDefault02" class="form-label">Fecha
+								Entrada </label> <input id="timedatePicker" class="form-control"
+								th:field="*{fechaInicio}" required="">
+						</div>
+
+
+						<div class="col-md-6">
+							<label for="validationDefault02" class="form-label">Fecha
+								Salida </label> <input id="timedatePickerxd" th:field="*{fechaFin}"
+								class="form-control" required="">
+						</div>
+
+						<script src="/datepicker/jquery.js"></script>
+						<script src="/datepicker/jquery.datetimepicker.full.min.js"></script>
+					
+					
+<div class="text-end">
+				<button type="submit" class="btn btn-secondary">Guardar</button>
+			</div>
+
+					</form>
+
+
+
+	<script>
+							$("#timedatePickerxd").datetimepicker({
+								step : 15
+							});
+						</script>
+
+						<script>
+							$("#timedatePicker").datetimepicker({
+								step : 15
+							});
+						</script>
+
+
+
+
+
+
+
+				</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

@@ -47,7 +47,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title text-success">Habitaciones Disponibles:</h5>
                                     <center>
-                                    <h1><i class="fal fa-booth-curtain"></i> <strong>10</strong></h1>
+                                    <h1><i class="fal fa-booth-curtain"></i> <strong th:text=${habidispo}></strong></h1>
                                     </center>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title text-warning">Habitaciones Ocupadas:</h5>    
                                     <center>
-                                    <h1><i class="fal fa-booth-curtain"></i> <strong>5</strong></h1>
+                                    <h1><i class="fal fa-booth-curtain"></i> <strong  th:text=${habiocupado}></strong></h1>
                                     </center>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title text-danger">Habitación en Mantenimiento:</h5>   
                                     <center>
-                                    <h1><i class="fal fa-booth-curtain"></i> <strong>5</strong></h1>
+                                    <h1><i class="fal fa-booth-curtain"></i> <strong th:text=${habiomanteni}></strong></h1>
                                     </center>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title text-dark">Total de Habitaciones:</h5> 
                                     <center>
-                                    <h1><i class="fal fa-booth-curtain"></i> <strong>20</strong></h1>
+                                    <h1><i class="fal fa-booth-curtain"></i> <strong th:text=${totalhabi}></strong></h1>
                                     </center>
                                 </div>
                             </div>
@@ -93,9 +93,9 @@
                         <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-12 col-sm-6">
                             <div class="card border-success">
                                 <div class="card-body">
-                                    <h5 class="card-title text-success">Empleados Disponibles:</h5>  
+                                    <h5 class="card-title text-success">Clientes total:</h5>  
                                     <center>
-                                    <h1><i class="fal fa-clipboard-user"></i> <strong>10</strong></h1>
+                                    <h1><i class="fal fa-clipboard-user"></i> <strong  th:text=${clientestotla}></strong></h1>
                                     </center>
                                 </div>
                             </div>
@@ -105,9 +105,9 @@
                         <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-12 col-sm-6">
                             <div class="card border-warning">
                                 <div class="card-body">
-                                    <h5 class="card-title text-warning">Empleados Ocupados:</h5>    
+                                    <h5 class="card-title text-warning">Empleados total:</h5>    
                                     <center>
-                                    <h1><i class="fal fa-clipboard-user"></i> <strong>5</strong></h1>
+                                    <h1><i class="fal fa-clipboard-user"></i> <strong th:text=${usuarr}></strong></h1>
                                     </center>
                                 </div>
                             </div>
@@ -117,9 +117,9 @@
                         <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-12 col-sm-6">
                             <div class="card border-danger">
                                 <div class="card-body">
-                                    <h5 class="card-title text-danger">Empleados en Descanso:</h5>  
+                                    <h5 class="card-title text-danger"> total Roles:</h5>  
                                     <center>
-                                    <h1><i class="fal fa-clipboard-user"></i> <strong>5</strong></h1>
+                                    <h1><i class="fal fa-clipboard-user"></i> <strong th:text=${rolex}></strong></h1>
                                     </center>
                                 </div>
                             </div>
@@ -129,9 +129,9 @@
                         <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-12 col-sm-6">
                             <div class="card border-dark">
                                 <div class="card-body">
-                                    <h5 class="card-title text-dark">Total de Empleados:</h5>    
+                                    <h5 class="card-title text-dark">Habitación Reservadas:</h5>    
                                     <center>
-                                    <h1><i class="fal fa-clipboard-user"></i></i> <strong>20</strong></h1>
+                                    <h1><i class="fal fa-clipboard-user"></i></i> <strong>0</strong></h1>
                                     </center>
                                 </div>
                             </div>
@@ -141,15 +141,18 @@
                     
                     <br>
                     <!--    FIN CARD    -->
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type 
-                        specimen book. It has survived not only five centuries, but also the leap 
-                        into electronic typesetting, remaining essentially unchanged. It was popularised 
-                        in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                        and more recently with desktop publishing software like Aldus PageMaker including 
-                        versions of Lorem Ipsum.
+                    <p  style="font-size: 16px"  >El hotel Queen Lima Santa clara está en el centro del distrito Chosica de Lima,
+                     Perú, a solo 18 km del Mall de Santa clara . Disfrute de las
+                      actividades cercanas al hotel en el área de entretenimiento de Mall, que incluyen tiendas, restaurantes, teatro, museos y parques.
                     </p>
+                    <p style="font-size: 16px" >
+                
+                    Todas las habitaciones del hotel Queen  fueron diseñadas para reflejar la frescura y hospitalidad con un toque de tradición peruana.
+                     El hotel combina elementos arquitectónicos tradicionales peruanos del siglo XVIII con decoración contemporánea para crear el ambiente perfecto, 
+                     ofreciendo al mismo tiempo el servicio impecable para quienes viajan por negocios o placer.
+                    </p>
+                    
+                    
                 </div>
                 
             </div>

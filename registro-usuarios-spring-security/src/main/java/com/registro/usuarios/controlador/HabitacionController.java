@@ -125,6 +125,28 @@ public class HabitacionController {
 				
 	}
 	
+	
+	@GetMapping( value =  "/editver/{id}")
+	public ModelAndView editx(@PathVariable Integer id,Model modelo ) {
+		Habitacion habitacion= habitacionServicio.get(id).get();
+		List<Caracteristica> caracteristicas = caracteristicaServicio.listar();
+		List<Tipo>idtipo=tipoServicio.listar();
+		List<ImgHabitacion>imagenes=imgHabitacionServicio.listar();
+		modelo.addAttribute("habitacion",habitacion);
+		modelo.addAttribute("caracteristicas",caracteristicas);
+		modelo.addAttribute("tipos",idtipo);
+		modelo.addAttribute("imagenes",imagenes);
+		return new
+		ModelAndView("/Habitaciones/habitacionesever");
+				
+	}
+	
+	
+	
+	
+	
+	
+	
 	@PostMapping( value =  "/edit/{id}")
 	public ModelAndView editX(@PathVariable Integer id,Habitacion habitacion ) {
 		Optional<Habitacion> habi=habitacionServicio.get(id);

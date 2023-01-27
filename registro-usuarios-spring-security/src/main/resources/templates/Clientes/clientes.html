@@ -214,7 +214,7 @@
 																		class="icofont-edit text-success"></i>Edit</a> <a
 																		type="button" class="btn btn-outline-secondary delBtn"
 																		data-bs-toggle="modal" data-bs-target="#myModal"
-																		th:href="@{clientes/delete/{id} (id=${cliente.id_cliente}) }">
+																		th:href="@{clientes/delete/{id} (id=${cliente.id_cliente}) }"  sec:authorize="hasRole('ROLE_ADMIN')" >
 																		<i class="icofont-ui-delete text-danger"></i>
 																	</a>
 
@@ -266,8 +266,8 @@
 							class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title  fw-bold" id="deleteprojectLabel">Delete
-										item Permanently?</h5>
+									<h5 class="modal-title  fw-bold" id="deleteprojectLabel">Desabilitar
+										al cliente?</h5>
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
@@ -275,13 +275,13 @@
 									class="modal-body justify-content-center flex-column d-flex">
 									<i
 										class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
-									<p class="mt-4 fs-5 text-center">You can only delete this
-										item Permanently</p>
+									<p class="mt-4 fs-5 text-center">Estas seguro de esabilitar
+										al cliente?</p>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-bs-dismiss="modal">Cancel</button>
-									<td><a class="btn btn-danger" href="" id="delRef">Eliminar</a>
+									<td><a class="btn btn-danger" href="" id="delRef">Desabilitar</a>
 
 									</td>
 
@@ -389,7 +389,7 @@
 										<div class="col">
 											<label for="validationCustom20">Fecha Nacimiento</label>
 											<div class="input-group">
-												<input type="date" class="form-control" 
+												<input type="date" class="form-control"  required=""
 													th:field="*{fechaNacimiento}">
 												<div class="invalid-feedback">Ingresar su Fecha de
 													Nacimiento</div>

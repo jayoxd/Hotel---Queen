@@ -28,6 +28,19 @@ public class Rol {
 	private Integer id_rol;
 	@NotBlank
 	private String nombre;
+	
+	private String descripcion;
+	
+	
+	
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
 	public Integer getId_rol() {
 		return id_rol;
 	}
@@ -52,6 +65,21 @@ public class Rol {
 		super();
 		this.nombre = nombre;
 	}
+	public Rol(Integer id_rol, @NotBlank String nombre, String descripcion) {
+		super();
+		this.id_rol = id_rol;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+	public Rol(@NotBlank String nombre, String descripcion) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+	
+	
+	
+	
 
 	/*@OneToMany(fetch=FetchType.LAZY, mappedBy="ciudad")
 	private List<Usuario> persons=new ArrayList<Usuario>();
