@@ -102,6 +102,8 @@ public class CheckInController {
 	@GetMapping("")
 	public String verPaginaDeInicio(Model modelo, @Param("palabra") String palabra) {
 		;
+		
+
 		List<Habitacion> habitaciones = habitacionServicio.listarpornom(palabra);
 
 		List<Habitacion> habitacidispo = habitacionServicio.listarpornom("");

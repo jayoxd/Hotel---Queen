@@ -70,11 +70,11 @@
 
 
 								<button type="submit" class="btn btn-outline-success btn-lg xd "
-									name="palabra" id="palabra" th:value="ATENDIDO">
+									name="palabra" id="palabra" th:value="reservado">
 									<strong>RESERVADO</strong>
 								</button>
 								<button type="submit" class="btn btn-outline-danger  btn-lg xd"
-									name="palabra" id="palabra" th:value="CANCELADO">
+									name="palabra" id="palabra" th:value="sin_reservar">
 									<strong>SIN RESERVAR</strong>
 								</button>
 								
@@ -230,6 +230,7 @@
                                             	 	<span class="badge badge-danger" >Sin Reservar</span>
                                             	 </div>
                                             	 <div th:case="${rol.reserva}!=null">
+                                            	 	
                                             	 	<span class="badge badge-success" >Reservado</span>
                                             	 </div>
                                             	</div>

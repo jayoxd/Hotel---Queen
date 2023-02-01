@@ -67,6 +67,10 @@ public class CheckIn {
 	@Column(name = "pago")
 	private Double pago;
 	
+	@Column(name = "estado")
+	private String estado;
+	
+	
 	@JoinColumn(name = "id", referencedColumnName = "id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonProperty(access = Access.WRITE_ONLY)
@@ -217,6 +221,16 @@ public class CheckIn {
 
 	public void setFechaFin(LocalDate fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 

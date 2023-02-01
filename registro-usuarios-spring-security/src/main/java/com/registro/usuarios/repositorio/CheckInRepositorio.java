@@ -25,7 +25,7 @@ public interface CheckInRepositorio extends JpaRepository<CheckIn, Integer>{
 	@Query("SELECT p FROM CheckIn p WHERE p.idHabitacion.nombre  LIKE %?1%"
 			+ " OR p.clientes.dni LIKE %?1%"
 			+ " OR p.fechaInicio LIKE %?1%"
-
+			+ " OR p.estado LIKE %?1%"	
 	           )
 		public List<CheckIn> buscarcheckin(String nombre);
 	
