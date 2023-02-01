@@ -2,8 +2,10 @@ package com.registro.usuarios.modelo;
 
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,23 +13,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
 @Entity
+@Table(name = "reserva")
 public class Reserva {
 
 	
@@ -47,17 +48,15 @@ public class Reserva {
 	@Min(0)
 	private Integer niños;
 
-	@NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	private Date fechaReservacion;
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate fechaReservacion;
 	
-	@NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	private Date fechaInicio;
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate fechaInicio;
 	
-	@NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	private Date fechaFin;
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate fechaFin;
+	
 	
 	@Column(name = "estado")
 	private String estado;
@@ -67,20 +66,35 @@ public class Reserva {
 	
 	@JoinColumn(name = "id", referencedColumnName = "id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Usuario idUsuario;
 	
 	
 	@JoinColumn(name = "id_habitacion", referencedColumnName = "id_habitacion")
 	@ManyToOne(fetch = FetchType.LAZY)
-	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Habitacion idHabitacion;
 	
 	
 	@JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
 	@ManyToOne(fetch = FetchType.LAZY)
-	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
-	private Cliente idCliente;
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private Cliente clientes;
+
+
+	
+	
+	@OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL,orphanRemoval = true)
+	private Set<CheckIn> checkins = new HashSet<>();
+	
+	public Set<CheckIn> getCheckins() {
+		return checkins;
+	}
+
+
+	public void setCheckins(Set<CheckIn> checkins) {
+		this.checkins = checkins;
+	}
 
 
 	public Integer getIdReserva() {
@@ -113,35 +127,7 @@ public class Reserva {
 	}
 
 
-	public Date getFechaReservacion() {
-		return fechaReservacion;
-	}
-
-
-	public void setFechaReservacion(Date fechaReservacion) {
-		this.fechaReservacion = fechaReservacion;
-	}
-
-
-	public Date getFechaInicio() {
-		return fechaInicio;
-	}
-
-
-	public void setFechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-
-
-	public Date getFechaFin() {
-		return fechaFin;
-	}
-
-
-	public void setFechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
-	}
-
+	
 
 	public String getEstado() {
 		return estado;
@@ -183,19 +169,15 @@ public class Reserva {
 	}
 
 
-	public Cliente getIdCliente() {
-		return idCliente;
-	}
 
 
-	public void setIdCliente(Cliente idCliente) {
-		this.idCliente = idCliente;
-	}
+	
 
+	
 
-	public Reserva(Integer idReserva, @Min(0) Integer adultos, @Min(0) Integer niños, @NotNull Date fechaReservacion,
-			@NotNull Date fechaInicio, @NotNull Date fechaFin, String estado, Double adelanto, Usuario idUsuario,
-			Habitacion idHabitacion, Cliente idCliente) {
+	public Reserva(Integer idReserva, @Min(0) Integer adultos, @Min(0) Integer niños, LocalDate fechaReservacion,
+			LocalDate fechaInicio, LocalDate fechaFin, String estado, Double adelanto, Usuario idUsuario,
+			Habitacion idHabitacion, Cliente clientes, Set<CheckIn> checkins) {
 		super();
 		this.idReserva = idReserva;
 		this.adultos = adultos;
@@ -207,24 +189,48 @@ public class Reserva {
 		this.adelanto = adelanto;
 		this.idUsuario = idUsuario;
 		this.idHabitacion = idHabitacion;
-		this.idCliente = idCliente;
+		this.clientes = clientes;
+		this.checkins = checkins;
 	}
 
 
-	public Reserva(@Min(0) Integer adultos, @Min(0) Integer niños, @NotNull Date fechaReservacion,
-			@NotNull Date fechaInicio, @NotNull Date fechaFin, String estado, Double adelanto, Usuario idUsuario,
-			Habitacion idHabitacion, Cliente idCliente) {
-		super();
-		this.adultos = adultos;
-		this.niños = niños;
+	public LocalDate getFechaReservacion() {
+		return fechaReservacion;
+	}
+
+
+	public void setFechaReservacion(LocalDate fechaReservacion) {
 		this.fechaReservacion = fechaReservacion;
+	}
+
+
+	public LocalDate getFechaInicio() {
+		return fechaInicio;
+	}
+
+
+	public void setFechaInicio(LocalDate fechaInicio) {
 		this.fechaInicio = fechaInicio;
+	}
+
+
+	public LocalDate getFechaFin() {
+		return fechaFin;
+	}
+
+
+	public void setFechaFin(LocalDate fechaFin) {
 		this.fechaFin = fechaFin;
-		this.estado = estado;
-		this.adelanto = adelanto;
-		this.idUsuario = idUsuario;
-		this.idHabitacion = idHabitacion;
-		this.idCliente = idCliente;
+	}
+
+
+	public Cliente getClientes() {
+		return clientes;
+	}
+
+
+	public void setClientes(Cliente clientes) {
+		this.clientes = clientes;
 	}
 
 

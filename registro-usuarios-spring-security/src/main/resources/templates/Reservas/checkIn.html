@@ -33,7 +33,7 @@
 					<div class="card">
 						<div class="modal-header">
 							<h5 class="modal-title  fw-bold" id="createprojectlLabel">
-								Detalles de la Habitacion Reservar</h5>
+								Detalles de la Habitacion Check In</h5>
 
 							<a type="button" class="btn-close" th:href="@{/reservas}"></a>
 						</div>
@@ -124,7 +124,7 @@
 
 
 					<form class="row g-3 p-3" action="" method="post"
-						th:object="${reserva}">
+						th:object="${checkIn}">
 
 						<div class="col-6">
 							<label class="text-label">Cliente</label>
@@ -188,18 +188,19 @@
 
 						<div class="col-md-6">
 							<label for="validationDefault02" class="form-label">Fecha
-								Entrada </label> <input  class="form-control" type="date"
+								Entrada </label> <input id="timedatePicker" class="form-control"
 								th:field="*{fechaInicio}" required="">
 						</div>
 
 
 						<div class="col-md-6">
 							<label for="validationDefault02" class="form-label">Fecha
-								Salida </label> <input type="date" th:field="*{fechaFin}"
+								Salida </label> <input id="timedatePickerxd" th:field="*{fechaFin}"
 								class="form-control" required="">
 						</div>
 
-					
+						<script src="/datepicker/jquery.js"></script>
+						<script src="/datepicker/jquery.datetimepicker.full.min.js"></script>
 					
 					
 	<div class="col-md-12">
@@ -211,6 +212,17 @@
 
 
 
+	<script>
+							$("#timedatePickerxd").datetimepicker({
+								step : 15
+							});
+						</script>
+
+						<script>
+							$("#timedatePicker").datetimepicker({
+								step : 15
+							});
+						</script>
 
 
 	<!-- Create Client-->

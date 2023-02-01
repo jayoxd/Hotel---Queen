@@ -17,7 +17,7 @@ import com.registro.usuarios.repositorio.ReservaRepositorio;
 
 
 @Service
-public class ReservaServicioImpl implements ReservaServicio {
+public class ReservServicioImpl implements ReservaServicio {
 
 	@Autowired
 	private ReservaRepositorio reservaRepositorio;
@@ -49,9 +49,18 @@ public class ReservaServicioImpl implements ReservaServicio {
 	}
 
 	@Override
-	public List<Reserva> listarpornom(String nombre) {
+	public List<Reserva> listarpornom(Integer nombre) {
 		if(nombre!=null) {
 			 return	reservaRepositorio.buscarcar(nombre);
+			}
+			return reservaRepositorio.findAll();
+	}
+
+	@Override
+	public List<Reserva> listarreserva(String dato) {
+
+		if(dato!=null) {
+			 return	reservaRepositorio.buscarreserva(dato);
 			}
 			return reservaRepositorio.findAll();
 	}

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layout/Template}">
+<head>
+<meta charset="UTF-8">
+
+<title>Home</title>
+
+</head>
+<body>
+
+
+	<!--<div th:include="Layout/Template.html::header></div>"  -->
+
+
+	<!-- Page Content -->
+	<div class="container-fluid" layout:fragment="page-content">
+
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4"></div>
+
+				<br>
+				<style>
+.xd {
+	padding: 15px 25px;
+	text-decoration: none;
+	cursor: pointer;
+	height: 65px;
+	width: 394px;	
+}
+
+.xf {
+	padding: 15px 25px;
+	cursor: pointer;
+	height: 65px;
+	width: 394px;
+	font-size: 40px;
+	
+}
+
+
+
+</style>
+				<script type="text/javascript">
+					function clearSearch() {
+						window.location = "[[@{/checkout}]]";
+					}
+				</script>
+
+
+
+
+
+
+
+
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-header d-block">
+							<h1 class="card-title" style="font-size: 35px">REPORTE DE CHECKOUT</h1>
+							<p class="mb-0 subtitle">recepcion de habitaciones segun
+								estado</p>
+						</div>
+						<div class="card-body">
+							<form th:action="@{/checkout}">
+
+
+
+
+								<button type="submit" class="btn btn-outline-success btn-lg xd "
+									name="palabra" id="palabra" th:value="ATENDIDO">
+									<strong>RESERVADO</strong>
+								</button>
+								<button type="submit" class="btn btn-outline-danger  btn-lg xd"
+									name="palabra" id="palabra" th:value="CANCELADO">
+									<strong>SIN RESERVAR</strong>
+								</button>
+								
+							
+								<button type="submit" class="btn btn-outline-info btn-lg xd"
+									onclick="clearSearch()"  >
+									<strong>TODO</strong>
+								</button>
+								<button type="submit" class="btn btn-outline-dark btn-lg xd"
+									name="palabra" id="palabra"  th:value="${datetime}" >
+									<strong >HOY</strong>
+								</button>
+								<button type="submit" class="btn btn-outline-dark btn-lg xf " disabled 
+									name="palabra" id="palabra"  > 
+									<strong  th:text="*{atendido}" style="font-size: 35px"></strong>
+								</button>
+								<button type="submit" class="btn btn-outline-dark  btn-lg xf" disabled 
+									name="palabra" id="palabra" th:value="CANCELADO"> 
+									<strong th:text="*{cancelado}"style="font-size: 35px" >CANCELADO</strong>
+								</button>
+								
+								<button type="submit" class="btn btn-outline-dark btn-lg xf" disabled 
+									name="palabra" id="palabra" th:value="TODO">
+									<strong th:text="*{todo}" style="font-size: 35px">EN PROCESO</strong>									
+								</button>
+								<button type="submit" class="btn btn-outline-dark btn-lg xf" disabled 
+									onclick="clearSearch()">
+									<strong th:text="*{todo}" style="font-size: 35px">EN PROCESO</strong>									
+								</button>
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+
+				<i class=""></i>
+
+
+
+				<div id="mytask-layout" class="theme-indigo">
+
+
+					<!-- main body area -->
+					<div class="main px-lg-4 px-md-4">
+
+						<!-- Body: Header -->
+						<div class="header">
+							<nav class="navbar py-4">
+								<div class="container-xxl">
+
+
+
+
+								</div>
+							</nav>
+						</div>
+
+						<!-- Body: Body -->
+						<div class="body d-flex py-lg-3 py-md-2">
+
+							<div class="card border-0 mb-4 no-bg">
+								<div
+									class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
+									<div class="col-auto d-flex">
+
+										
+
+									</div>
+								</div>
+
+
+							
+
+								<style>
+.contenedor {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+</style>
+								<script type="text/javascript">
+									function clearSearch() {
+										window.location = "[[@{/checkout}]]";
+									}
+								</script>
+								<form th:action="@{/checkout}">
+									<div class="contenedor">
+										<label>Buscar: <input type="text"
+											class="form-control form-control-sm" placeholder=""
+											aria-controls="myProjectTable" name="palabra" id="palabra"
+											th:value="${palabra}" required>
+										</label>&nbsp;
+										<button class="btn btn-dark ms-1 " type="button" id="btnClear"
+											onclick="clearSearch()">
+											<i class="flaticon-reuse"></i> Limpiar
+										</button>
+									</div>
+
+
+								</form>
+								<br>
+								<!-- dentro tabla -->
+
+
+						
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-responsive-md">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:50px;">
+													<div class="form-check custom-checkbox checkbox-success check-lg me-3">
+														<input type="checkbox" class="form-check-input" id="checkAll" required="">
+														<label class="form-check-label" for="checkAll"></label>
+													</div>
+												</th>
+                                                <th><strong>CLIENTE</strong></th>
+                                                <th><strong>Reservado por</strong></th>
+                                                <th><strong>HABITACION</strong></th>
+                                                <th><strong>Fecha Reservacion</strong></th>
+                                                <th><strong>Fecha entrada</strong></th>
+                                                 <th><strong>Fecha salida</strong></th>
+                                          
+                                                <th><strong>Estado</strong></th>
+                                                <th><strong>Ver</strong></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        	<tr th:each="rol : ${reservas}">
+                                      
+                                                <td>
+													<div class="form-check custom-checkbox checkbox-success check-lg me-3">
+														<input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+														<label class="form-check-label" for="customCheckBox2"></label>
+													</div>
+												</td>
+                                                <td><strong th:text="${rol.clientes.dni}"></strong></td>
+                                                <td><div class="d-flex align-items-center"><img 
+                                                th:src="@{/assets/{filename}(filename=*{rol.idUsuario.rutaimagenhabi})}"
+                                                 class="rounded-lg me-2" width="24" alt=""> <span class="w-space-no" th:text="${rol.idUsuario.nombre}"></span></div></td>
+                                                <td  th:text="${rol.idHabitacion.nombre}"></td>
+                                                
+                                                <td th:text="${rol.fechaReservacion}">01 August 2020</td>
+                                                  <td th:text="${rol.fechaInicio}">01 August 2020</td>             
+                                                  <td th:text="${rol.fechaFin}">01 August 2020</td>
+                                                
+                                                <td >
+
+												<div th:switch="true"> 
+												
+                                            	 <div th:case="${rol.reserva}==null">
+                                            	 	<span class="badge badge-danger" >Sin Reservar</span>
+                                            	 </div>
+                                            	 <div th:case="${rol.reserva}!=null">
+                                            	 	<span class="badge badge-success" >Reservado</span>
+                                            	 </div>
+                                            	</div>
+                                            	
+                                            	</td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="icofont-paper"></i></a>
+													</div>
+												</td>
+                                            </tr>
+											
+											
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                   
+							</div>
+
+							
+							
+
+						</div>
+
+
+						
+					
+
+
+
+
+					</div>
+				</div>
+		</div>
+
+	</div>
+</body>
+</html>

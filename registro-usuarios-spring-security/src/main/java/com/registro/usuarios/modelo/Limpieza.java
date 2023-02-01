@@ -36,9 +36,7 @@ public class Limpieza {
 	private Integer id_limpieza;
 
 	
-	private Date fechaCreacion;
-	
-	private Date fechaRecibida;
+
 	
 	@NotBlank
 	private String obeservacion;
@@ -49,58 +47,52 @@ public class Limpieza {
 	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
 	private Usuario idUsuario;
 	
-	@JoinColumn(name = "id_habitacion", referencedColumnName = "id_habitacion")
-	@ManyToOne(fetch = FetchType.LAZY)
-	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
-	private Habitacion habitacion;
 
 	
+
 	
+
+
+
+	public Integer getId_limpieza() {
+		return id_limpieza;
+	}
+
+
+
+
+
+
+
+
+
+	public void setId_limpieza(Integer id_limpieza) {
+		this.id_limpieza = id_limpieza;
+	}
+
+
+
+
+
+
+
+
+
 	
-	public Limpieza(Date fechaCreacion, Date fechaRecibida, @NotBlank String obeservacion, Usuario idUsuario,
-			Habitacion habitacion) {
-		super();
-		this.fechaCreacion = fechaCreacion;
-		this.fechaRecibida = fechaRecibida;
-		this.obeservacion = obeservacion;
-		this.idUsuario = idUsuario;
-		this.habitacion = habitacion;
-	}
 
 
 
 
-	public Limpieza() {
-		super();
-	}
 
 
 
 
-	public Date getFechaCreacion() {
-		return fechaCreacion;
-	}
 
 
 
 
-	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
 
 
-
-
-	public Date getFechaRecibida() {
-		return fechaRecibida;
-	}
-
-
-
-
-	public void setFechaRecibida(Date fechaRecibida) {
-		this.fechaRecibida = fechaRecibida;
-	}
 
 
 
@@ -133,17 +125,37 @@ public class Limpieza {
 
 
 
-	public Habitacion getHabitacion() {
-		return habitacion;
+
+
+
+
+
+	public Limpieza() {
+		super();
 	}
 
 
 
 
-	public void setHabitacion(Habitacion habitacion) {
-		this.habitacion = habitacion;
+
+
+
+
+
+	public Limpieza(Integer id_limpieza, @NotBlank String obeservacion, Usuario idUsuario) {
+		super();
+		this.id_limpieza = id_limpieza;
+		this.obeservacion = obeservacion;
+		this.idUsuario = idUsuario;
 	}
-	
-	
+
+
+
+
+
+
+
+
+
 	
 }

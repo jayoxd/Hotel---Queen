@@ -52,7 +52,7 @@
 								estado</p>
 						</div>
 						<div class="card-body">
-							<form th:action="@{/reservas}">
+							<form th:action="@{/CheckIn}">
 
 
 
@@ -63,8 +63,7 @@
 									name="palabra" id="palabra" th:value="OCUPADO"><strong>OCUPADO</strong></button>
 								<button type="submit" class="btn btn-outline-warning btn-lg xd"
 									name="palabra" id="palabra" th:value="LIMPIEZA"><strong>LIMPIEZA</strong></button>
-								<button type="submit" class="btn btn-outline-info btn-lg xd"
-									name="palabra" id="palabra" th:value="RESERVADO"><strong>RESERVADO</strong></button>
+								
 								<button type="submit" class="btn btn-outline-dark btn-lg xd"
 									onclick="clearSearch()"><strong>TODO</strong></button>
 
@@ -223,7 +222,7 @@ font-weight:  bolder;
 															</div>
 															<div
 																class="d-flex flex-wrap align-items-center ct-btn-set">
-																<a th:href="@{/reservas/editver/{id}(id=*{id})}"
+																<a th:href="@{/CheckIn/editver/{id}(id=*{id})}"
 																class="btn btn-dark btn-lg btn-block cdf"
 																	th:text="${habitacion.estado}"><i
 																	class="icofont-invisible me-2 fs-6"></i> </a>

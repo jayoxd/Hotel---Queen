@@ -25,6 +25,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 
 @Entity
 public class CheckIn {
@@ -46,93 +50,79 @@ public class CheckIn {
 	@Min(0)
 	private Integer niños;
 
-	@NotNull
+
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date fechaReservacion;
+	private LocalDate fechaReservacion;
 	
-	@NotNull
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date fechaInicio;
+	private LocalDate fechaInicio;
 	
-	@NotNull
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date fechaFin;
+	private LocalDate fechaFin;
 	
-	private Boolean estado;
+	
+	@Column(name = "adelanto")
+	private Double adelanto;
+	
+	@Column(name = "pago")
+	private Double pago;
 	
 	@JoinColumn(name = "id", referencedColumnName = "id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Usuario idUsuario;
 	
 	
 	@JoinColumn(name = "id_habitacion", referencedColumnName = "id_habitacion")
 	@ManyToOne(fetch = FetchType.LAZY)
-	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Habitacion idHabitacion;
 	
 	
 	@JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
 	@ManyToOne(fetch = FetchType.LAZY)
-	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
-	private Cliente idCliente;
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private Cliente clientes;
 	
 	
-	@Null
+	
 	@JoinColumn(name = "idReserva", referencedColumnName = "idReserva")
 	@ManyToOne(fetch = FetchType.LAZY)
-	// PONER EL EAGER ACA SI HEMOS PUESTO EN EL OTRO
-	private Reserva idReserva;
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private Reserva reserva;
 	
 	
 	
 	
 	
 
-	public CheckIn(@Min(0) Integer adultos, @Min(0) Integer niños, @NotNull Date fechaReservacion,
-			@NotNull Date fechaInicio, @NotNull Date fechaFin, Boolean estado, Usuario idUsuario,
-			Habitacion idHabitacion, Cliente idCliente, @Null Reserva idReserva) {
-		super();
-		this.adultos = adultos;
-		this.niños = niños;
-		this.fechaReservacion = fechaReservacion;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.estado = estado;
-		this.idUsuario = idUsuario;
-		this.idHabitacion = idHabitacion;
-		this.idCliente = idCliente;
-		this.idReserva = idReserva;
-	}
-
-
-
+	
+	
+	
+	
+	
 	public CheckIn() {
 		super();
 	}
 
-
-
-	public CheckIn(Integer idCheckIn, @Min(0) Integer adultos, @Min(0) Integer niños, @NotNull Date fechaReservacion,
-			@NotNull Date fechaInicio, @NotNull Date fechaFin, Boolean estado, Usuario idUsuario,
-			Habitacion idHabitacion, Cliente idCliente, @Null Reserva idReserva) {
-		super();
-		this.idCheckIn = idCheckIn;
-		this.adultos = adultos;
-		this.niños = niños;
-		this.fechaReservacion = fechaReservacion;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.estado = estado;
-		this.idUsuario = idUsuario;
-		this.idHabitacion = idHabitacion;
-		this.idCliente = idCliente;
-		this.idReserva = idReserva;
+	
+	public Double getAdelanto() {
+		return adelanto;
 	}
-	
-	
-	
-	
+
+	public void setAdelanto(Double adelanto) {
+		this.adelanto = adelanto;
+	}
+
+	public Double getPago() {
+		return pago;
+	}
+
+	public void setPago(Double pago) {
+		this.pago = pago;
+	}
+
+
 	public Integer getIdCheckIn() {
 		return idCheckIn;
 	}
@@ -161,38 +151,8 @@ public class CheckIn {
 		this.niños = niños;
 	}
 
-	public Date getFechaReservacion() {
-		return fechaReservacion;
-	}
 
-	public void setFechaReservacion(Date fechaReservacion) {
-		this.fechaReservacion = fechaReservacion;
-	}
-
-	public Date getFechaInicio() {
-		return fechaInicio;
-	}
-
-	public void setFechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-
-	public Date getFechaFin() {
-		return fechaFin;
-	}
-
-	public void setFechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
-	}
-
-	public Boolean getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
-
+	
 	public Usuario getIdUsuario() {
 		return idUsuario;
 	}
@@ -209,14 +169,58 @@ public class CheckIn {
 		this.idHabitacion = idHabitacion;
 	}
 
-	public Cliente getIdCliente() {
-		return idCliente;
+
+	public Cliente getClientes() {
+		return clientes;
 	}
 
-	public void setIdCliente(Cliente idCliente) {
-		this.idCliente = idCliente;
+
+	public void setClientes(Cliente clientes) {
+		this.clientes = clientes;
 	}
 
+
+	public Reserva getReserva() {
+		return reserva;
+	}
+
+
+	public void setReserva(Reserva reserva) {
+		this.reserva = reserva;
+	}
+
+
+	public LocalDate getFechaReservacion() {
+		return fechaReservacion;
+	}
+
+
+	public void setFechaReservacion(LocalDate fechaReservacion) {
+		this.fechaReservacion = fechaReservacion;
+	}
+
+
+	public LocalDate getFechaInicio() {
+		return fechaInicio;
+	}
+
+
+	public void setFechaInicio(LocalDate fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+
+	public LocalDate getFechaFin() {
+		return fechaFin;
+	}
+
+
+	public void setFechaFin(LocalDate fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+
+	
 
 	
 	

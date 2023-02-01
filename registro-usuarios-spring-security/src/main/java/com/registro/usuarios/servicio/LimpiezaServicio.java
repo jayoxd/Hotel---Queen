@@ -5,6 +5,7 @@ import java.util.Optional;
 
 
 import com.registro.usuarios.modelo.Caracteristica;
+import com.registro.usuarios.modelo.Cliente;
 import com.registro.usuarios.modelo.Limpieza;
 
 
@@ -15,5 +16,6 @@ public interface LimpiezaServicio  {
 	public void update(Limpieza limpieza);
 	public void delete(Integer id);
 	public List<Limpieza> listar();
-	
+	public List<Limpieza>listarpornom(Integer nombre);
+
 }

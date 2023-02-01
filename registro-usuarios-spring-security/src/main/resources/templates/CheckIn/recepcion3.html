@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{listax/parche.html}">
+<head>
+<meta charset="utf-8">
+<title>Administrar Películas</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<link rel="stylesheet" href="/datepicker/jquery.datetimepicker.min.css">
+
+
+
+</head>
+<body>
+
+	<div layout:fragment="content" class="container-fluid ">
+		<div id="layoutSidenav_content">
+			<main>
+				<br>
+				<style>
+.efe {
+	color: rgb(33, 97, 140);
+}
+</style>
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="modal-header">
+							<h5 class="modal-title  fw-bold" id="createprojectlLabel">
+								Detalles de la Habitacion</h5>
+
+							<a type="button" class="btn-close" th:href="@{/CheckIn}"></a>
+						</div>
+						<div class="card-body">
+							<th:block th:object="${habitacion}">
+
+
+
+								<div class="row">
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+												N⁰ HABITACION &nbsp; &nbsp; &nbsp; : <span
+													class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{nombre}"></span>
+											</p>
+										</div>
+									</div>
+
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+												N⁰ INVITADOS: <span class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{invitados}">S101</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+												PRECIO: <span class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{'$/.'+precio}">S101</span>
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+												CARACTERISTICAS: <span
+													class="item card-title card-intro-title"
+													style="font-size: 20px">
+													<td th:each="cara : *{caracteristica}"
+													th:text="${cara.nombre}+','"></td>
+
+												</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+												N⁰ Estado &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : <span
+													class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{estado}">S101</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-xl-4 mb-3">
+										<div class="example">
+											<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+												TIPO &nbsp; &nbsp; : <span
+													class="item card-title card-intro-title"
+													style="font-size: 20px" th:text="*{idTipo.nombre}">S101</span>
+											</p>
+										</div>
+									</div>
+								</div>
+								</th:block>
+						</div>
+						<div class="card">
+							<div class="modal-header">
+								<h5 class="modal-title  fw-bold" id="createprojectlLabel">
+									Detalles del Registro</h5>
+
+
+							</div>
+							<div class="card-body">
+								<th:block th:object="${checkindicado}">
+
+
+
+									<div class="row">
+										<div class="col-xl-4 mb-3">
+											<div class="example">
+												<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+													FECHA DE ENTRADA: <span
+														class="item card-title card-intro-title"
+														style="font-size: 20px" th:text="*{fechaInicio}"></span>
+												</p>
+											</div>
+										</div>
+
+										<div class="col-xl-4 mb-3">
+											<div class="example">
+												<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+													idsacado &nbsp; &nbsp; : <span
+														class="item card-title card-intro-title"
+														style="font-size: 20px"  th:text="${idsacado}">  >S101</span>
+												</p>
+											</div>
+										</div>
+										<div class="col-xl-4 mb-3">
+											<div class="example">
+												<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+													DNI &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+													&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; : <span
+														class="item card-title card-intro-title"
+														style="font-size: 20px" >S101</span>
+												</p>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xl-4 mb-3">
+											<div class="example">
+												<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+													FECHA DE SALIDA &nbsp; &nbsp;&nbsp;: <span
+														class="item card-title card-intro-title"
+														style="font-size: 20px" th:text="*{fechaFin}">S101</span>
+												</p>
+											</div>
+										</div>
+										<div class="col-xl-4 mb-3">
+											<div class="example">
+												<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+													ADELANTO: <span class="item card-title card-intro-title"
+														style="font-size: 20px" th:text="*{adelanto}">S101</span>
+												</p>
+											</div>
+										</div>
+										<div class="col-xl-4 mb-3">
+											<div class="example">
+												<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+													TOTAL A PAGAR: <span
+														class="item card-title card-intro-title"
+														style="font-size: 20px"
+														th:text="*{'$/.'+idHabitacion.precio}">S101</span>
+												</p>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="col-xl-4 mb-3">
+											<div class="example">
+												<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
+													FECHA DE RESERVA: <span
+														class="item card-title card-intro-title"
+														style="font-size: 20px" th:text="*{fechaReservacion}">S101</span>
+												</p>
+											</div>
+										</div>
+
+
+									</div>
+									</th:block>
+							</div>
+						</div>
+					</div>
+
+					<style>
+.hrLinea {
+	vertical-align: middle;
+	width: 43%;
+	display: inline-block;
+	border: 2px solid #2980B9;
+	margin-bottom: 12px;
+}
+</style>
+
+
+					<hr class="hrLinea">
+					<strong>ELIGE UNA OPCION</strong>
+					<hr class="hrLinea">
+
+
+					<form class="row g-3 p-3" action="" method="post" th:object="${checkindicado}">
+<input type="hidden" class="form-control"  required=""   th:name="finalizar"  id="finalizar"  th:value="finalizar"
+													placeholder="74399560"  maxlength="8"
+													oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+													>
+						<div class="col-6">
+							<label for="validationDefault02" class="form-label">Monto:
+							</label> <input
+							th:field="*{pago}"
+							 class="form-control"  required="">
+						</div>
+
+						<div class="col-6">
+							<label class="text-label">Tipo de Pago:</label>
+
+							<div class="input-group">
+								<span class="input-group-text"> <i class="fa fa-user"></i>
+								</span> <select class="custom-select" id="inputGroupSelect04"
+									
+									aria-label="Example select with button addon">
+									<option selected disabled value="">Seleccione...</option>
+									<option value="Disponible">Yape</option>
+									<option value="Ocupado">Efectivo</option>
+								</select>
+
+							</div>
+
+						</div>
+							<input type="submit" class="btn btn-secondary" value="CLIENTE SE RETIRA" />
+					</form>
+
+
+				</div>
+		</div>
+
+	</div>
+
+
+
+</body>
+</html>

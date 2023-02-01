@@ -3,6 +3,8 @@ package com.registro.usuarios.modelo;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -64,6 +67,31 @@ public class Cliente {
 	
 	
 	
+	@OneToMany(mappedBy = "clientes", cascade = CascadeType.ALL,orphanRemoval = true)
+	private Set<Reserva> reservas = new HashSet<>();
+
+    
+	@OneToMany(mappedBy = "clientes", cascade = CascadeType.ALL,orphanRemoval = true)
+	private Set<CheckIn> checkins = new HashSet<>();
+    
+    
+    
+	public Set<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(Set<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
+	public Set<CheckIn> getCheckins() {
+		return checkins;
+	}
+
+	public void setCheckins(Set<CheckIn> checkins) {
+		this.checkins = checkins;
+	}
+
 	public String getDni() {
 		return dni;
 	}

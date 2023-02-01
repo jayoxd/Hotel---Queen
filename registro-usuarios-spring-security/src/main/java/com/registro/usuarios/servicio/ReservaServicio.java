@@ -14,5 +14,6 @@ public interface ReservaServicio  {
 	public void update(Reserva reserva);
 	public void delete(Integer id);
 	public List<Reserva> listar();
-	public List<Reserva>listarpornom(String nombre);
+	public List<Reserva>listarpornom(Integer nombre);
+	public List<Reserva>listarreserva(String dato);
 }

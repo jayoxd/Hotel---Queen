@@ -47,6 +47,15 @@ public class LimipiezaServicioImpl implements LimpiezaServicio {
 		return limpiezaRepositorio.findAll();
 	}
 
+	@Override
+	public List<Limpieza> listarpornom(Integer nombre) {
+		if(nombre!=null) {
+			 return	limpiezaRepositorio.buscarcar(nombre);
+			}
+			return limpiezaRepositorio.findAll();
+	}
+
+	
 
 
 

@@ -7,25 +7,28 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.registro.usuarios.modelo.CheckIn;
 import com.registro.usuarios.modelo.Reserva;
 
 @Repository
-public interface ReservaRepositorio extends JpaRepository<Reserva, Integer>{
+public interface CheckInRepositorio extends JpaRepository<CheckIn, Integer>{
 
-	@Query("SELECT p FROM Reserva p WHERE p.idHabitacion.id =?1"
+	
+
+	
+	@Query("SELECT p FROM CheckIn p WHERE p.idHabitacion.id =?1"
 
            )
-	public List<Reserva> buscarcar(Integer nombre);
+	public List<CheckIn> buscarcar(Integer nombre);
 	
 	
-	
-	
-	@Query("SELECT p FROM Reserva p WHERE p.idHabitacion.nombre  LIKE %?1%"
-			+ " OR p.estado LIKE %?1%"
+	@Query("SELECT p FROM CheckIn p WHERE p.idHabitacion.nombre  LIKE %?1%"
 			+ " OR p.clientes.dni LIKE %?1%"
-			+ " OR p.fechaReservacion LIKE %?1%"
+			+ " OR p.fechaInicio LIKE %?1%"
+
 	           )
-		public List<Reserva> buscarreserva(String nombre);
+		public List<CheckIn> buscarcheckin(String nombre);
 	
 	
+
 }

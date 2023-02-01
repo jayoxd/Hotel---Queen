@@ -17,6 +17,7 @@ public interface HabitacionRepositorio extends JpaRepository<Habitacion, Integer
 			+ " OR p.precio LIKE %?1%"
 			+ " OR p.descripcion LIKE %?1%"
 			+ " OR p.estado LIKE %?1%"
+			+ " OR p.idTipo.nombre LIKE %?1%"
 			)
 	public List<Habitacion> buscarabita(String keyword);
 

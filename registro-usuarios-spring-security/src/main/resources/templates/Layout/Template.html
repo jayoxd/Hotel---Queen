@@ -92,7 +92,7 @@
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="index.html">Hotel Queen</a>
+		<a class="navbar-brand ps-3" th:href="@{/}">Hotel Queen</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -162,43 +162,22 @@
 
 
 
-						<a class="nav-link" href="charts.html">
+						<a class="nav-link"  th:href="@{/reservas}">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> Reserva
 						</a>
 
-
+							<a class="nav-link"  th:href="@{/CheckIn}">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-chart-area"></i>
+							</div> Hospedar
+						</a>
+						
 						<!-- prubbaa -->
 
 
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapsePages" aria-expanded="false"
-							aria-controls="collapsePages">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> Estadia
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapsePages"
-							aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-
-							<nav class="sb-sidenav-menu-nested nav accordion"
-								id="sidenavAccordionPages">
-
-								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-									data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-									aria-controls="pagesCollapseAuth"> CheckIn </a> <a
-									class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-									data-bs-target="#pagesCollapseError" aria-expanded="false"
-									aria-controls="pagesCollapseAuth"> CheckOut </a>
-
-
-
-							</nav>
-						</div>
+						
 
 
 						<!-- prubbaa -->
@@ -258,7 +237,17 @@
 
 						<!-- ca -->
 
+							<div class="sb-sidenav-menu-heading">Reportes</div>
 
+						<a class="nav-link" th:href="@{/reportes}">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-chart-area"></i>
+							</div> Reservas
+						</a> <a class="nav-link" href="tables.html">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-table"></i>
+							</div> CheckOut
+						</a>
 						
 						<!-- aca para arriba pegas hasta donde dice el ca -->
 					</div>
