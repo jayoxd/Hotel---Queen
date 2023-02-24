@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Reporte de Ventas</title>
+</head>
+<body>
+	<h1>Generar Reporte de Ventas</h1>
+	<form action="#" th:action="@{/report/ventas/download}" th:object="${params}" method="post">
+		<label>Tipo de reporte:</label>
+		<select th:field="*{tipo}" required>
+			<option th:each="tipoReporte : ${tiposReporte}" th:value="${tipoReporte.name()}"
+				th:text="${tipoReporte.toString()}"></option>
+		</select><br>
+		<!-- Otros parámetros que se quieran enviar en el reporte -->
+		<button type="submit">Descargar</button>
+	</form>
+</body>
+</html>

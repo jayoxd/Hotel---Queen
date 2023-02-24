@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 
 
+<link rel="stylesheet" href="agran/css/lightbox.min.css" />
 
 <title>Home</title>
 
@@ -13,6 +14,7 @@
 <body>
 
 
+	<script type="text/javascript" src="agran/js/lightbox.min.js"></script>
 
 
 	<!-- Page Content -->
@@ -23,15 +25,14 @@
 				<div class="container-fluid px-4"></div>
 
 				<br>
-					<div class="row row-cols-1 row-cols-md-3 g-4">
+				<div class="row row-cols-1 row-cols-md-3 g-4">
 					<div class="col-xl-3 col-md-6">
 						<div
 							class="ms-card card-gradient-success ms-widget ms-infographics-widget">
 							<div class="ms-card-body media">
 								<div class="media-body">
-									<h6> Imagenes</h6>
-									<p class="ms-card-change"  th:text=${imagentotal}>
-									</p>
+									<h6>Imagenes</h6>
+									<p class="ms-card-change" th:text=${imagentotal}></p>
 									<p class="fs-12">total de imagenes</p>
 								</div>
 							</div>
@@ -144,12 +145,35 @@
 	display: flex;
 	align-items: center;
 }
+
+.modal-dialog {
+	border: none;
+}
+
+.imgca {
+	width: 32.85%;
+	float: left;
+}
+
+.modal-img {
+	height: 600px;
+	height: auto;
+	max-height: 100%;
+	object-fit: contain;
+}
+.fixed-size {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
 </style>
-								<script type="text/javascript">
-									function clearSearch() {
-										window.location = "[[@{/role}]]";
-									}
+								<script>
+									lightbox.option({
+										'resizeDuration' : 200,
+										'wrapAround' : true
+									});
 								</script>
+
 								<form th:action="@{/imgHabitacion}">
 									<div class="contenedor">
 										<label>Buscar: <input type="text"
@@ -174,13 +198,15 @@
 										th:object="${imagen}">
 										<div class="imgca">
 											<div class="card">
-
 												<div class="card-body">
 													<div class="new-arrival-product">
 														<div class="new-arrivals-img-contnent">
-															<img class="img-fluid"
+															<a href="#" data-toggle="modal"
+																data-target="#modalImagen"> <img class="img-fluid fixed-size"
 																th:src="@{/assets/{filename}(filename=*{rutaimagenhabi})}"
 																alt="">
+															</a>
+
 														</div>
 														<div class="new-arrival-content text-center mt-3">
 															<h4>
@@ -195,175 +221,193 @@
 																class="btn btn-outline-secondary deleterow"> <i
 																class="icofont-ui-delete text-danger"></i>Eliminar
 															</a>
-
-
-
-
-
-															<div class="modal fade" id="deleteproject" tabindex="-1"
-																aria-hidden="true">
-																<div
-																	class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h5 class="modal-title  fw-bold"
-																				id="deleteprojectLabel">Desabilitar la imagen?</h5>
-																			<button type="button" class="btn-close"
-																				data-bs-dismiss="modal" aria-label="Close"></button>
-																		</div>
-																		<div
-																			class="modal-body justify-content-center flex-column d-flex">
-																			<i
-																				class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
-																			<p class="mt-4 fs-5 text-center">Estas seguro de desabilitar la imagen</p>
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-secondary"
-																				data-bs-dismiss="modal">Cancel</button>
-																			<td><a class="btn btn-danger"
-																				th:href="@{imgHabitacion/delete/{id} (id=${imagen.id}) }">Eliminar</a>
-																			</td>
-
-																		</div>
-																	</div>
-																</div>
-															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-
 										</div>
-								</div>
-								</th:block>
+										<div class="modal fade" id="deleteproject" tabindex="-1"
+											aria-hidden="true">
+											<div
+												class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title  fw-bold" id="deleteprojectLabel">Desabilitar
+															la imagen?</h5>
+														<button type="button" class="btn-close"
+															data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div
+														class="modal-body justify-content-center flex-column d-flex">
+														<i
+															class="icofont-ui-delete text-danger display-2 text-center mt-2"></i>
+														<p class="mt-4 fs-5 text-center">Estas seguro de
+															desabilitar la imagen</p>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-bs-dismiss="modal">Cancel</button>
+														<td><a class="btn btn-danger"
+															th:href="@{imgHabitacion/delete/{id} (id=${imagen.id}) }">Eliminar</a>
+														</td>
 
-								<!-- dentro tabla -->
-
-							</div>
-
-							<!-- Add Department-->
-							<form class="needs-validation clearfix was-validated"
-								novalidate="" action="" method="post" th:object="${imagen}"
-								enctype="multipart/form-data">
-								<div class="modal fade" id="createproject" tabindex="-1"
-									aria-hidden="true">
-									<div
-										class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title  fw-bold" id="createprojectlLabel">
-													Registrar Imagen</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-
-											</div>
-											<div class="modal-body">
-
-												<div class="mb-3">
-													<label for="validationCustom24" class="form-label">Nombres</label>
-													<div class="input-group">
-														<input type="text" class="form-control"
-															placeholder="Ingrese su nombre" required=""
-															th:field="*{nombre}">
-														<div class="invalid-feedback">Por favor ingresar su
-															nombre</div>
 													</div>
 												</div>
-<div class="mb-3">
-								<label for="formFileMultipleoneone" class="form-label">Imagen</label>
-								<div class="input-group">
-									<input class="form-control" type="file" required=""
-										th:field="*{imghabitacion}">
-									<div class="invalid-feedback">Por favor ingresar la
-										imagen</div>
-								</div>
-							</div>
+											</div>
+										</div>
+										<div class="modal fade" id="modalImagen" tabindex="-1"
+											role="dialog" aria-labelledby="modalImagenLabel"
+											aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered modal-lg"
+												role="document">
+												<div class="modal-content">
+													<div class="modal-header">
 
-												<div class="deadline-form">
-
-
-													<div class="deadline-form"></div>
-
-
-													<div class="modal-footer">
-														<input type="reset" value="Borrar" class="btn btn-danger">
-
-														<button class="btn btn-secondary  " type="submit">
-															</i> Guardar
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
 														</button>
 													</div>
+													<div class="modal-body">
+														<img class="img-fluid"
+															th:src="@{/assets/{filename}(filename=*{rutaimagenhabi})}"
+															alt="">
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<br>
 								</div>
-							</form>
-
+							</div>
+							</th:block>
 
 							<!-- dentro tabla -->
 
+						</div>
 
-							<!-- editar -->
-							<div class="myForm">
-								<form action="" method="post" th:object="${imagen}" 	enctype="multipart/form-data"
-									class="needs-validation clearfix was-validated" novalidate="">
-									<!-- Edit Department-->
-									<div class="modal fade" id="depedit" tabindex="-1"
-										style="display: none;" aria-hidden="true">
-										<div
-											class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title  fw-bold" id="depeditLabel">
-														Roles Editar</h5>
-													<button type="button" class="btn-close"
-														data-bs-dismiss="modal" aria-label="Close"></button>
+						<!-- Add Department-->
+						<form class="needs-validation clearfix was-validated"
+							novalidate="" action="" method="post" th:object="${imagen}"
+							enctype="multipart/form-data">
+							<div class="modal fade" id="createproject" tabindex="-1"
+								aria-hidden="true">
+								<div
+									class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title  fw-bold" id="createprojectlLabel">
+												Registrar Imagen</h5>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+
+										</div>
+										<div class="modal-body">
+
+											<div class="mb-3">
+												<label for="validationCustom24" class="form-label">Nombres</label>
+												<div class="input-group">
+													<input type="text" class="form-control"
+														placeholder="Ingrese su nombre" required=""
+														th:field="*{nombre}">
+													<div class="invalid-feedback">Por favor ingresar su
+														nombre</div>
 												</div>
-												<div class="modal-body">
-
-													<input id="id" th:field="*{id}" type="hidden" value=""
-														name="id" class="form-control">
-
-
-													<div class="mb-3">
-														<label for="exampleFormControlInput11111"
-															class="form-label">Nombre</label> <input id="name"
-															placeholder="Ingrese el nombre" required=""
-															th:field="*{nombre}" type="text" value="" name="name"
-															class="form-control">
-														<div class="invalid-feedback">Por favor ingresar el
-															nombre</div>
-													</div>
-
-															<div class="mb-3">
-									<label for="formFileMultipleoneone" class="form-label">Imagen</label>
-									<div class="input-group">
-										<input class="form-control" type="file"
-											th:field="*{imghabitacion}">
-
-									</div>
-								</div>
+											</div>
+											<div class="mb-3">
+												<label for="formFileMultipleoneone" class="form-label">Imagen</label>
+												<div class="input-group">
+													<input class="form-control" type="file" required=""
+														th:field="*{imghabitacion}">
+													<div class="invalid-feedback">Por favor ingresar la
+														imagen</div>
 												</div>
+											</div>
+
+											<div class="deadline-form">
+
+
+												<div class="deadline-form"></div>
+
+
 												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">Cancelar</button>
-													<button type="submit" class="btn btn-primary">Guadar</button>
+													<input type="reset" value="Borrar" class="btn btn-danger">
+
+													<button class="btn btn-secondary  " type="submit">
+														</i> Guardar
+													</button>
 												</div>
 											</div>
 										</div>
 									</div>
-								</form>
+								</div>
+								<br>
 							</div>
-							<!-- editar -->
+						</form>
 
 
+						<!-- dentro tabla -->
 
 
+						<!-- editar -->
+						<div class="myForm">
+							<form action="" method="post" th:object="${imagen}"
+								enctype="multipart/form-data"
+								class="needs-validation clearfix was-validated" novalidate="">
+								<!-- Edit Department-->
+								<div class="modal fade" id="depedit" tabindex="-1"
+									style="display: none;" aria-hidden="true">
+									<div
+										class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title  fw-bold" id="depeditLabel">
+													Roles Editar</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+
+												<input id="id" th:field="*{id}" type="hidden" value=""
+													name="id" class="form-control">
+
+
+												<div class="mb-3">
+													<label for="exampleFormControlInput11111"
+														class="form-label">Nombre</label> <input id="name"
+														placeholder="Ingrese el nombre" required=""
+														th:field="*{nombre}" type="text" value="" name="name"
+														class="form-control">
+													<div class="invalid-feedback">Por favor ingresar el
+														nombre</div>
+												</div>
+
+												<div class="mb-3">
+													<label for="formFileMultipleoneone" class="form-label">Imagen</label>
+													<div class="input-group">
+														<input class="form-control" type="file"
+															th:field="*{imghabitacion}">
+
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Cancelar</button>
+												<button type="submit" class="btn btn-primary">Guadar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
+						<!-- editar -->
+
+
+
+
 					</div>
 				</div>
 		</div>
+	</div>
 	</div>
 	</div>
 

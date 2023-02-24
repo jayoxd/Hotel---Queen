@@ -1,4 +1,5 @@
-	<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{listax/parche.html}">
@@ -130,7 +131,9 @@
 										<div class="col-xl-4 mb-3">
 											<div class="example">
 												<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
-													CLIENTE &nbsp; &nbsp; : <span
+													CLIENTE &nbsp; &nbsp; :
+													
+													 <span
 														class="item card-title card-intro-title"
 														style="font-size: 20px" th:text="*{clientes.nombre}">S101</span>
 												</p>
@@ -194,8 +197,8 @@
 							</div>
 						</div>
 					</div>
-					
-					  <style>
+
+					<style>
 .hrLinea {
 	vertical-align: middle;
 	width: 43%;
@@ -205,46 +208,45 @@
 }
 </style>
 
-   
-        <hr class="hrLinea"><strong>ELIGE UNA OPCION</strong> <hr class="hrLinea">
-    
+
+					<hr class="hrLinea">
+					<strong>ELIGE UNA OPCION</strong>
+					<hr class="hrLinea">
+
 					<div class="row">
-					<form action="" method="post">
-					<div class="input-group">
-												<input type="hidden" class="form-control"  required=""   th:name="Ocupado"  id="Ocupado"  th:value="Ocupado"
-													placeholder="74399560"  maxlength="8"
-													oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-													>
-											
-											</div>
-					
-					
-						<div class="col">
-					
-							<button type="submit"
-							
-							 class="btn btn-success btn-lg" style=" BACKGROUND-COLOR: rgb(46, 204, 113) ; FONT-SIZE: 8pt; FONT-FAMILY: Verdana" 
-							>REGISTRAR HUESPED
-								</button>
-							<p id="pMensaje"></p>
-						</div>
+						<form action="" method="post">
+							<input type="hidden" th:name="Ocupado" id="Ocupado"
+								th:value="Ocupado">
+
+
+							<div class="col">
+
+								<button type="submit" class="btn btn-success btn-lg"
+									style="BACKGROUND-COLOR: rgb(46, 204, 113); FONT-SIZE: 8pt; FONT-FAMILY: Verdana">REGISTRAR
+									HUESPED</button>
+							</div>
 						</form>
-						<form>
-						
-						<div id="div_imprimir" class="col">
-						
-								<button type="button" class="btn btn-info btn-lg" style=" BACKGROUND-COLOR: rgb(93, 173, 226); FONT-SIZE: 8pt; FONT-FAMILY: Verdana"
-								>CAMBIAR FECHA
-								</button>
-						</div>
+						<form action="" method="post">
+
+							<input type="hidden" th:name="editar" id="editarfat"
+								th:value="editar">
+							<div class="col">
+
+								<button type="submit" class="btn btn-info btn-lg"
+									style="BACKGROUND-COLOR: rgb(93, 173, 226); FONT-SIZE: 8pt; FONT-FAMILY: Verdana">CAMBIAR
+									FECHA</button>
+							</div>
 						</form>
-						<form>
-						<div class="col">
-								<button type="button" class="btn btn-danger btn-lg" style=" BACKGROUND-COLOR: rgb(248, 53, 13); FONT-SIZE: 8pt; FONT-FAMILY: Verdana"
-								>CANCELAR RESERVA
-								</button>
-						</div>
-					</form>
+						<form  action="" method="post">
+						<input type="hidden" th:name="cancelar" id="cancelar"
+								th:value="cancelar">
+						
+							<div class="col">
+								<button type="submit" class="btn btn-danger btn-lg"
+									style="BACKGROUND-COLOR: rgb(248, 53, 13); FONT-SIZE: 8pt; FONT-FAMILY: Verdana">CANCELAR
+									RESERVA</button>
+							</div>
+						</form>
 					</div>
 
 

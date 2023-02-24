@@ -5,7 +5,7 @@ $(document).ready(function () {
         var href = $(this).attr('href');
         var text = $(this).text(); //return New or Edit
 
-        if (text === 'Edit') {
+        if (text === 'Editar') {
             $.get(href, function (tipo) {
                 $('.myForm #idti').val(tipo.id_tipo);
                 $('.myForm #name').val(tipo.nombre);

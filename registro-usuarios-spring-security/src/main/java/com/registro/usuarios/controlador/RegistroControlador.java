@@ -76,9 +76,11 @@ public class RegistroControlador {
 		List<Habitacion>habitacionesx=habitacionServicio.listarpornom("Ocupado");
 		Integer habiocupado=habitacionesx.size();
 		
-		List<Habitacion>habitacionesmante=habitacionServicio.listarpornom("Mantenimiento");
+		List<Habitacion>habitacionesmante=habitacionServicio.listarpornom("Limpieza");
 		Integer habiomanteni=habitacionesmante.size();
 		
+		List<Habitacion>habitacionreser=habitacionServicio.listarpornom("Reservado");
+		Integer habioreser=habitacionreser.size();
 		
 		
 		List<Habitacion>habitacionesxd=habitacionServicio.listar();
@@ -87,6 +89,7 @@ public class RegistroControlador {
 		modelo.addAttribute("rolex",rolex );
 		modelo.addAttribute("usuarr",usua );
 		modelo.addAttribute("habiomanteni",habiomanteni );
+		modelo.addAttribute("habioreser",habioreser );
 		modelo.addAttribute("totalhabi",habi );
 		modelo.addAttribute("habidispo",habidispo );
 		modelo.addAttribute("habiocupado",habiocupado );

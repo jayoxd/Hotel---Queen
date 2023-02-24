@@ -47,7 +47,7 @@
 				<div class="col-lg-12">
 					<div class="card">
 						<div class="card-header d-block">
-							<h1 class="card-title" style="font-size: 35px">RECEPCION</h1>
+							<h1 class="card-title" style="font-size: 35px">RESERVACIÓN</h1>
 							<p class="mb-0 subtitle">recepcion de habitaciones segun
 								estado</p>
 						</div>
@@ -58,15 +58,25 @@
 
 
 								<button type="submit" class="btn btn-outline-success btn-lg xd "
-									name="palabra" id="palabra" th:value="Disponible"><strong>DISPONIBLE</strong></button>
+									name="palabra" id="palabra" th:value="Disponible">
+									<strong>DISPONIBLE</strong>
+								</button>
 								<button type="submit" class="btn btn-outline-danger  btn-lg xd"
-									name="palabra" id="palabra" th:value="OCUPADO"><strong>OCUPADO</strong></button>
+									name="palabra" id="palabra" th:value="OCUPADO">
+									<strong>OCUPADO</strong>
+								</button>
 								<button type="submit" class="btn btn-outline-warning btn-lg xd"
-									name="palabra" id="palabra" th:value="LIMPIEZA"><strong>LIMPIEZA</strong></button>
+									name="palabra" id="palabra" th:value="LIMPIEZA">
+									<strong>LIMPIEZA</strong>
+								</button>
 								<button type="submit" class="btn btn-outline-info btn-lg xd"
-									name="palabra" id="palabra" th:value="RESERVADO"><strong>RESERVADO</strong></button>
+									name="palabra" id="palabra" th:value="RESERVADO">
+									<strong>RESERVADO</strong>
+								</button>
 								<button type="submit" class="btn btn-outline-dark btn-lg xd"
-									onclick="clearSearch()"><strong>TODO</strong></button>
+									onclick="clearSearch()">
+									<strong>TODO</strong>
+								</button>
 
 
 
@@ -125,23 +135,86 @@
 
 								<style>
 .cdf {
-font-weight:  bolder;
-
-
-	
+	font-weight: bolder;
 }
 </style>
 
-								<br>
+								<style>
+.card-ocupada {
+	background-color: #E74C3C;
+		border-radius: 15px;
+		
+
+}
+.tablahabitacion {
+font-size: 1px;
+font-weight: bold;
+}
+
+
+.tablahabitacion * {
+  color: #fff !important;
+}
+
+.card-disponible {
+	background-color: #27AE60;
+		border-radius: 15px;
+	
+}
+
+.card-reservada {
+	background-color:  #3498DB;
+			border-radius: 15px;
+	
+}
+
+.card-limpieza {
+	background-color: #F39C12;
+			border-radius: 15px;
+	
+}
+
+.btn-transparent {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  
+}
+
+.btn-transparent:hover {
+  background-color: transparent;
+  color: black;
+}
+
+.btn-transparent:active {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+</style>
+
+
 								<!-- Row End -->
 
 								<div
-									class="row g-3 row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-3 row-deck py-1 pb-4">
+									 class="row g-3 row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-4 row-deck py-1 pb-4">
+
 									<th:block th:each="habitacion:${habitaciones}"
 										th:object="${habitacion}">
 										<div class="tablahabitacion">
 											<div class="col">
-												<div class="card teacher-card">
+												
+													  
+												<div class="card teacher-card"
+												 th:class="${habitacion.estado == 'Ocupado' ?
+												 'card-ocupada' : (habitacion.estado == 'Disponible' ? 'card-disponible' 
+												 : (habitacion.estado == 'Reservado' ? 'card-reservada' : 'card-limpieza'))}">
+													  
+													  
+													  
+													  
+													  
 													<div class="card-body  d-flex">
 
 														<div
@@ -166,9 +239,9 @@ font-weight:  bolder;
 
 
 
-																	<a type="button" class="btn btn-outline-secondary eBtn"
-																		th:href="@{/habitaciones/edit/{id}(id=*{id})}"><i
-																		class="icofont-edit text-success"></i>Estado</a>
+																	<a type="button" class="btn btn-tansparent eBtn"
+																		th:href="@{/habitaciones/editver/{id}(id=*{id})}" ><i
+																		class="icofont-edit text-success"></i>Ver</a>
 
 
 
@@ -224,7 +297,7 @@ font-weight:  bolder;
 															<div
 																class="d-flex flex-wrap align-items-center ct-btn-set">
 																<a th:href="@{/reservas/editver/{id}(id=*{id})}"
-																class="btn btn-dark btn-lg btn-block cdf"
+																	class="btn btn-transparent btn-block  cdf"
 																	th:text="${habitacion.estado}"><i
 																	class="icofont-invisible me-2 fs-6"></i> </a>
 															</div>

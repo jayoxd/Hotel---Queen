@@ -22,4 +22,9 @@ public interface HabitacionRepositorio extends JpaRepository<Habitacion, Integer
 	public List<Habitacion> buscarabita(String keyword);
 
 	
+	@Query("SELECT p FROM Habitacion p WHERE p.estado = ?1 OR p.estado =?2   OR p.estado =?3")
+	public List<Habitacion> buscarahabiCheckin(String disponible,String ocupado,String limpieza);
+	
+	
+	
 }

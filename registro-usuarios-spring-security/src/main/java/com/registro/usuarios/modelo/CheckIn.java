@@ -1,6 +1,7 @@
 package com.registro.usuarios.modelo;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -60,6 +61,12 @@ public class CheckIn {
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate fechaFin;
 	
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalTime horainicio;
+
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalTime horafin;
+	
 	
 	@Column(name = "adelanto")
 	private Double adelanto;
@@ -70,7 +77,29 @@ public class CheckIn {
 	@Column(name = "estado")
 	private String estado;
 	
+	@Column(name = "nrrecibo")
+	private String nrrecibo;
 	
+	public LocalTime getHorainicio() {
+		return horainicio;
+	}
+
+
+	public void setHorainicio(LocalTime horainicio) {
+		this.horainicio = horainicio;
+	}
+
+
+	public LocalTime getHorafin() {
+		return horafin;
+	}
+
+
+	public void setHorafin(LocalTime horafin) {
+		this.horafin = horafin;
+	}
+
+
 	@JoinColumn(name = "id", referencedColumnName = "id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonProperty(access = Access.WRITE_ONLY)

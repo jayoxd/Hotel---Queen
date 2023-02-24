@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layout/Template}">
+<head th:replace="Layout/Template :: head">
+<meta charset="UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<link rel="stylesheet" href="/datepicker/jquery.datetimepicker.min.css">
+
+
+<title>Home</title>
+
+</head>
+<body>
+
+
+	<p th:text=${mensaje}></p>
+
+
+	<!-- Page Content -->
+	<div class="container-fluid" layout:fragment="page-content">
+
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4"></div>
+
+				<br>
+
+
+
+				<h1>Calendario de reservas</h1>
+
+				<!-- Muestra el formulario para hacer la reserva -->
+				<form id="formulario" th:object="${reserva}" method="post">
+					<label>Fecha de inicio:</label> <input type="date"
+						th:field="*{fechaInicio}"> <br> <label>Fechade
+						fin:</label> <input type="date" th:field="*{fechaFin}">
+
+					<div class="col-6">
+						<label class="text-label">Habitacion</label> <select
+							class="form-select" id=idHabitacion required th:field="*{idHabitacion}">
+							<option th:each="img : ${habitaciones}" th:value="${img.id}"
+								th:text="${img.nombre}"></option>
+						</select>
+
+					</div>
+
+					<br> <br>
+					<button type="submit">Reservar</button>
+				</form>
+
+				<!-- Define un modal para mostrar el mensaje de error -->
+				<div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+					aria-labelledby="errorModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="errorModalLabel">Error al
+									reservar</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Cerrar">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p id="errorMessage"></p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Agrega el siguiente código Javascript para mostrar el modal en caso de error -->
+				<script>
+					$(document)
+							.ready(
+									function() {
+										$('#formulario')
+												.submit(
+														function(event) {
+															event
+																	.preventDefault();
+															$
+																	.ajax({
+																		type : 'POST',
+																		url : '/calendario',
+																		data : $(
+																				this)
+																				.serialize(),
+																		success : function(
+																				response) {
+																			// Si la reserva se hizo correctamente, no hacemos nada
+																		},
+																		error : function(
+																				xhr) {
+																			var errorMessage = xhr.responseJSON.message;
+																			$(
+																					'#errorMessage')
+																					.text(
+																							errorMessage);
+																			$(
+																					'#errorModal')
+																					.modal(
+																							'show');
+																		}
+																	});
+														});
+									});
+				</script>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

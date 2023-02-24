@@ -57,6 +57,14 @@ public class HabitacionServicioImpl implements HabitacionServicio {
 			return habitacionRepositorio.findAll();
 	}
 
+	@Override
+	public List<Habitacion> listarhabiCheckin(String disponible, String ocupado, String limpieza) {
+		if(disponible!=null) {
+			 return	habitacionRepositorio.buscarabita(disponible);
+			}
+			return habitacionRepositorio.buscarahabiCheckin("Disponible","Ocupado", "Limpieza");
+	}
+
 
 
 

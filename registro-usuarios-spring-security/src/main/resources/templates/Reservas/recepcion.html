@@ -111,8 +111,9 @@
 
 					<div class="alert alert-warning notification">
 						<p class="notificaiton-title mb-2">
-							<strong><i class="icofont-alarm"></i></strong>
-							Recordar en caso que cancele  la reserva  el pago adelantado no se reembolsara.Gracias
+							<strong><i class="icofont-alarm"></i></strong> Recordar en caso
+							que cancele la reserva el pago adelantado no se
+							reembolsara.Gracias
 						</p>
 
 					</div>
@@ -139,22 +140,11 @@
 								</select>
 								<div class="input-group-append">
 									<button class="btn btn-warning" type="button"
-										data-bs-toggle="modal" data-bs-target="#createproject"
-									>+</button>
+										data-bs-toggle="modal" data-bs-target="#createproject">+</button>
 								</div>
 							</div>
 
 						</div>
-
-
-					
-					
-					
-					
-					
-					
-					
-
 
 						<div class="col-md-3">
 							<label for="validationDefault02" class="form-label">Adultos
@@ -166,163 +156,248 @@
 						</div>
 
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<label for="validationDefault02" class="form-label">Adelanto(Opcional)
 							</label> <input class="form-control" th:field="*{adelanto}">
 						</div>
 
 
-						<div class="col-md-3">
+							<div class="col-md-3">
 							<th:block th:object="${habitacion}">
-								<label for="validationDefault02" class="form-label">Total
-									a Pagar </label>
+								<label for="validationDefault02" class="form-label">Precio
+									x 24 horas </label>
 								<div class="input-group">
-									<input th:value="*{'$/.'+precio}" disabled class="form-control">
+									<input th:value="*{'$/.'+precio}"  disabled class="form-control">
 									<div class="invalid-feedback"></div>
 								</div>
 							</th:block>
 						</div>
 
+						
+									<input   id="result"   hidden th:field="*{precio_total}"  
+									
+									class="form-control">
+								
+	<div class="col-md-3">
+								<label for="validationDefault02" class="form-label">Total 
+									a Pagar </label>
+								<div class="input-group">
+									<input   id="resultpre"     
+									disabled
+									class="form-control">
+									<div class="invalid-feedback"></div>
+								</div>
+						</div>
 
 
-
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<label for="validationDefault02" class="form-label">Fecha
-								Entrada </label> <input  class="form-control" type="date"
+								Entrada </label> <input class="form-control" type="date" id="start_date"
 								th:field="*{fechaInicio}" required="">
 						</div>
 
 
-						<div class="col-md-6">
+						<div class="col-md-3">
+							<label for="validationDefault02" class="form-label">Hora
+								Entrada </label> <input type="time" th:field="*{horainicio}"
+								class="form-control" required="">
+						</div>
+						<div class="col-md-3">
 							<label for="validationDefault02" class="form-label">Fecha
-								Salida </label> <input type="date" th:field="*{fechaFin}"
+								Salida </label> <input class="form-control" type="date" id="end_date"
+								th:field="*{fechaFin}" required="">
+						</div>
+
+
+						<div class="col-md-3">
+							<label for="validationDefault02" class="form-label">Hora
+								Salida </label> <input type="time" th:field="*{horafin}"
 								class="form-control" required="">
 						</div>
 
-					
-					
-					
-	<div class="col-md-12">
+
+
+
+						<div class="col-md-12">
 
 							<button type="submit" class="btn btn-secondary">Reservar</button>
 						</div>
 
 					</form>
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
 
-
-
-
-
-	<!-- Create Client-->
-
-		<form class="needs-validation clearfix was-validated" novalidate=""
-			action="" method="post" th:object="${cliente}"
-			enctype="multipart/form-data">
-			<div class="modal fade" id="createproject" tabindex="-1"
-				aria-hidden="true">
-				<div
-					class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title  fw-bold" id="createprojectlLabel">
-								Registrar Cliente</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-
-							<div class="mb-3">
-								<label for="validationCustom24" class="form-label">Nombres</label>
-								<div class="input-group">
-									<input type="text" class="form-control" 
-										placeholder="Ingrese su nombre" required=""
-										th:field="*{nombre}">
-									
 								</div>
-							</div>
-							
-							
-							<div class="mb-3">
-								<label for="exampleFormControlInput977" class="form-label">Apellidos</label>
-								<div class="input-group">
-									<input type="text" class="form-control"
-										placeholder="Ingrese sus apellidos" 
-										th:field="*{apellido}">
-									
-								</div>
-							</div>
-							<div class="mb-3">
-										<label for="validationCustom20">Dni</label>
-										<div class="input-group">
-												<input type="number" class="form-control"  required=""   th:name="dni"  id="dni" 
-													placeholder="74399560"  maxlength="8"
-													oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-													th:field="*{dni}">
-											
-											</div>
-									</div>
-							
-							
-							<div class="deadline-form">
-								<form>
-
-									<div class="mb-3">
-										<label for="validationCustom20">Email Address</label>
-										<div class="input-group">
-											<input type="email" class="form-control"
-												placeholder="example@gmail.com" 
-												th:field="*{email}">
-										
-										</div>
-									</div>
-								</form>
-								
-
-								<div class="deadline-form">
-
-
-									<div class="row g-3 mb-3">
-										<div class="col">
-											<label for="validationCustom20">Telefono</label>
-											<div class="input-group">
-												<input type="number" class="form-control"
-													placeholder="987654321"  maxlength="9"
-													oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-													th:field="*{telefono}">
-												
-											</div>
-										</div>
-
-
-
-
-										<div class="col">
-											<label for="validationCustom20">Fecha Nacimiento</label>
-											<div class="input-group">
-												<input type="date" class="form-control"  
-													th:field="*{fechaNacimiento}">
-												
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-								<div class="modal-footer">
-									<input type="reset" value="Borrar" class="btn btn-danger">
-
-									
-									<input type="submit" class="btn btn-secondary" value="agregar" />
-									
-								</div>
+								<div class="modal-body">Fechas incorrectas</div>
+								<div class="modal-footer"></div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<br>
-			</div>
-		</form>
-		<!-- crear cliente -->
+
+
+<th:block th:object="${habitacion}">
+					<input type="hidden" id="price" th:value="*{precio}">
+</th:block>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+	  document.getElementById("start_date").addEventListener("input", function() {
+	    let start = new Date(this.value);
+	    let end = new Date(document.getElementById("end_date").value);
+	    let diff = (end - start) / 1000 / 60 / 60 / 24;
+	    let price = document.getElementById("price").value;
+	    if (isNaN(diff) || isNaN(price)) {
+	      document.getElementById("result").value = 0;
+	      document.getElementById("resultpre").value = "$/" + (0);
+
+	    } else if (diff < 0) {
+	      document.getElementById("result").value = 0;
+	      document.getElementById("resultpre").value = "$/" + (0);
+
+	      $("#myModal").modal("show");
+	    } else {
+	      document.getElementById("result").value = diff * price;
+	      document.getElementById("resultpre").value = "$/" + (diff * price);
+
+	    }
+	  });
+	  document.getElementById("end_date").addEventListener("input", function() {
+	    let start = new Date(document.getElementById("start_date").value);
+	    let end = new Date(this.value);
+	    let diff = (end - start) / 1000 / 60 / 60 / 24;
+	    let price = document.getElementById("price").value;
+	    if (isNaN(diff) || isNaN(price)) {
+	      document.getElementById("result").value = 0;
+	      document.getElementById("resultpre").value = "$/" + (0);
+
+	    } else if (diff < 0) {
+	      document.getElementById("result").value = 0;
+	      document.getElementById("resultpre").value = "$/" + (0);
+	      $("#myModal").modal("show");
+	    } else {
+	      document.getElementById("result").value = diff * price;
+	      document.getElementById("resultpre").value = "$/" + (diff * price);
+
+	    }
+	  });
+	});
+</script>
+
+					<!-- Create Client-->
+
+					<form class="needs-validation clearfix was-validated" novalidate=""
+						action="" method="post" th:object="${cliente}"
+						enctype="multipart/form-data">
+						<div class="modal fade" id="createproject" tabindex="-1"
+							aria-hidden="true">
+							<div
+								class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title  fw-bold" id="createprojectlLabel">
+											Registrar Cliente</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+
+										<div class="mb-3">
+											<label for="validationCustom24" class="form-label">Nombres</label>
+											<div class="input-group">
+												<input type="text" class="form-control"
+													placeholder="Ingrese su nombre" required=""
+													th:field="*{nombre}">
+
+											</div>
+										</div>
+
+
+										<div class="mb-3">
+											<label for="exampleFormControlInput977" class="form-label">Apellidos</label>
+											<div class="input-group">
+												<input type="text" class="form-control"
+													placeholder="Ingrese sus apellidos" th:field="*{apellido}">
+
+											</div>
+										</div>
+										<div class="mb-3">
+											<label for="validationCustom20">Dni</label>
+											<div class="input-group">
+												<input type="number" class="form-control" required=""
+													th:name="dni" id="dni" placeholder="74399560" maxlength="8"
+													oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+													th:field="*{dni}">
+
+											</div>
+										</div>
+
+
+										<div class="deadline-form">
+											<form>
+
+												<div class="mb-3">
+													<label for="validationCustom20">Email Address</label>
+													<div class="input-group">
+														<input type="email" class="form-control"
+															placeholder="example@gmail.com" th:field="*{email}">
+
+													</div>
+												</div>
+											</form>
+
+
+											<div class="deadline-form">
+
+
+												<div class="row g-3 mb-3">
+													<div class="col">
+														<label for="validationCustom20">Telefono</label>
+														<div class="input-group">
+															<input type="number" class="form-control"
+																placeholder="987654321" maxlength="9"
+																oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+																th:field="*{telefono}">
+
+														</div>
+													</div>
+
+
+
+
+													<div class="col">
+														<label for="validationCustom20">Fecha Nacimiento</label>
+														<div class="input-group">
+															<input type="date" class="form-control"
+																th:field="*{fechaNacimiento}">
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+											<div class="modal-footer">
+												<input type="reset" value="Borrar" class="btn btn-danger">
+
+
+												<input type="submit" class="btn btn-secondary"
+													value="agregar" />
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<br>
+						</div>
+					</form>
+					<!-- crear cliente -->
 
 
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte de Ventas</title>
+</head>
+<body>
+  <h2>Reporte de Ventas</h2>
+ <form action="#" th:action="@{/report/ventas/download}" th:object="${parametros}">
+    <select id="fileName" name="fileName" th:field="*{fileName}">
+        <option th:each="tipo : ${T(com.registro.usuarios.enumeraciones.TipoReporteEnum).values()}" 
+                th:value="${tipo}" th:text="${tipo.name()}"
+                th:selected="${tipoReporte == tipo.name()}"></option>
+    </select>
+    <input type="submit" value="Descargar Reporte">
+</form>
+</body>
+</html>

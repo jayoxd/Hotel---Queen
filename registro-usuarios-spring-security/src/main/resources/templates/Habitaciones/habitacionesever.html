@@ -76,20 +76,25 @@
 
 								<div class="deadline-form">
 									<form>
-
-										<div class="mb-3">
-											<label for="validationCustom20">Tipo</label> <select disabled
+									
+									<div class="row g-3 mb-3">
+										<div class="col">
+											<label for="validationCustom20">Tipo</label>
+											<div class="input-group">
+												 <select disabled
 												class="form-select" id="idTipo" th:field="*{idTipo}">
 												<option selected disabled value="">Seleccione...</option>
 												<option th:each="tipo : ${tipos}" th:value="${tipo.id_tipo}"
 													th:text="${tipo.nombre}"></option>
 											</select>
-
-
+											</div>
 										</div>
 
-										<div class="mb-3">
-											<label for="validationCustom20">Estado</label> <select
+
+										<div class="col">
+											<label for="validationCustom20">Estado</label>
+											<div class="input-group">
+												<select
 												disabled class="form-select" id="estado"
 												th:field="*{estado}" required>
 												<option selected disabled value="">Seleccione...</option>
@@ -97,10 +102,13 @@
 												<option value="Ocupado">Ocupado</option>
 												<option value="Mantenimiento">Mantenimiento</option>
 											</select>
-											<div class="invalid-feedback"></div>
-
+												<div class="invalid-feedback"></div>
+											</div>
 										</div>
+									</div>
+									
 
+										
 
 
 

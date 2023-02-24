@@ -5,7 +5,7 @@ $(document).ready(function () {
         var href = $(this).attr('href');
         var text = $(this).text(); //return New or Edit
 
-        if (text === 'Edit') {
+        if (text === 'Editar') {
             $.get(href, function (caracteristica) {
                 $('.myForm #idxd').val(caracteristica.id);
                 $('.myForm #name').val(caracteristica.nombre);

@@ -122,7 +122,7 @@
 							<div class="card border-0 mb-4 no-bg">
 								<div
 									class="card-header py-3 px-0 d-flex align-items-center  justify-content-between border-bottom">
-									<h3 class=" fw-bold flex-fill mb-0">CARACTERISTICAS DE LAS HABITACIONES</h3>
+									<h3 class=" fw-bold flex-fill mb-0">CARACTERISTICAS</h3>
 									<div class="col-auto d-flex">
 
 										<button type="button" class="btn btn-dark ms-1 "
@@ -150,17 +150,16 @@
 								</script>
 								<form th:action="@{/caracteristica}">
 									<div class="contenedor">
-										<label>Buscar: <input type="text"
+										<label>Search: <input type="text"
 											class="form-control form-control-sm" placeholder=""
 											aria-controls="myProjectTable" name="palabra" id="palabra"
 											th:value="${palabra}" required>
 										</label>&nbsp;
 										<button class="btn btn-dark ms-1 " type="button" id="btnClear"
 											onclick="clearSearch()">
-											<i class="flaticon-reuse"></i> Limpiar
+											<i class="flaticon-reuse"></i> Clear
 										</button>
 									</div>
-
 
 								</form>
 								<br>
@@ -173,6 +172,7 @@
 											<thead>
 												<tr>
 													<th style="width: 80px;"><strong>#</strong></th>
+													<th><strong>ID</strong></th>
 													<th><strong>NOMBRE</strong></th>
 
 													<th class="text-center"><strong> ACCIONES</strong></th>
@@ -184,6 +184,7 @@
 												<tr th:each="caracteristica : ${caracteristicas}">
 													<td><strong></strong></td>
 
+													<td th:text="${caracteristica.id}">ID</td>
 
 													<td th:text="${caracteristica.nombre}">ID</td>
 													<td class="text-center">
@@ -198,7 +199,7 @@
 																type="button"
 																th:href="@{caracteristica/delete/{id} (id=${caracteristica.id}) }"
 																class="btn btn-outline-secondary deleterow"> <i
-																class="icofont-ui-delete text-danger"></i>Eliminar
+																class="icofont-ui-delete text-danger"></i>Delete
 															</a>
 
 

@@ -97,6 +97,13 @@ public class ReservaController {
 	@Autowired
 	private ClienteServicio clienteServicio;
 
+	  @GetMapping("/actuali")
+	  public void actualizarCodigoAutogenerado() {
+			reservaServicio.actualizarCodigoAutogenerado();
+	  }
+	
+	
+	
 	@GetMapping("")
 	public String verPaginaDeInicio(Model modelo, @Param("palabra") String palabra) {
 		;
@@ -104,12 +111,11 @@ public class ReservaController {
 
 		List<Habitacion> habitacidispo = habitacionServicio.listarpornom("");
 		Integer habidispo = habitacidispo.size();
-
 		List<Habitacion> habitacionesx = habitacionServicio.listarpornom("");
 		Integer habiocupado = habitacionesx.size();
-
 		List<Habitacion> habitacionesxd = habitacionServicio.listar();
 		Integer habi = habitacionesxd.size();
+		reservaServicio.actualizarCodigoAutogenerado();
 
 		modelo.addAttribute("totalhabi", habi);
 		modelo.addAttribute("habidispo", habidispo);
@@ -134,8 +140,9 @@ public class ReservaController {
 	@GetMapping(value = "/editver/{id}")
 	public ModelAndView editx(@PathVariable Integer id, Model modelo, HttpSession session
 			,@RequestParam(value = "dni", defaultValue = "1") int dni,
-			 @RequestParam(value = "dispo", defaultValue = "1") String dispo
-
+			 @RequestParam(value = "dispo", defaultValue = "1") String dispo,
+			 @RequestParam(value = "editar", defaultValue = "1") String editar
+	
 			) {
 		Habitacion habitacion = habitacionServicio.get(id).get();
 		List<Caracteristica> caracteristicas = caracteristicaServicio.listar();
@@ -152,10 +159,16 @@ public class ReservaController {
 
 	        List<Reserva> reverse = reverseList(list);
 
-	        Reserva reservado=reverse.get(0);
+	        List<CheckIn> listx = checkInServicio.listarpornom(id);
+			  
+	        List<CheckIn> reversex = reverseList(listx);
+	        
+	        
 		 
-		 if(habitacion.getEstado().equalsIgnoreCase("Reservado") && dni==1)
+		 if(habitacion.getEstado().equalsIgnoreCase("Reservado") && dni==1	)
 		 {
+
+		        Reserva reservado=reverse.get(0);
 
 			 modelo.addAttribute("clientes", clientes);
 				modelo.addAttribute("usuario", usuario);
@@ -172,14 +185,38 @@ public class ReservaController {
 
 						.addObject("reserva", new Reserva());
 		 }
+		 
+		 
+		 if( editar.equals("editar"))
+		 {
+
+		        Reserva reservado=reverse.get(0);
+
+			 modelo.addAttribute("clientes", clientes);
+				modelo.addAttribute("usuario", usuario);
+				modelo.addAttribute("reservadoF", reservado);
+
+				modelo.addAttribute("habitacion", habitacion);
+				modelo.addAttribute("caracteristicas", caracteristicas);
+				modelo.addAttribute("tipos", idtipo);
+				modelo.addAttribute("imagenes", imagenes);
+
+				return new
+
+				ModelAndView("/Reservas/recepcionedit").addObject("cliente", new Cliente())
+
+						.addObject("reserva", new Reserva());
+		 }
+		 
+		 
 
 		 
 		 if(habitacion.getEstado().equalsIgnoreCase("Reservado") && dni!=1)
 		 {
 
+
 			 modelo.addAttribute("clientes", clientes);
 				modelo.addAttribute("usuario", usuario);
-				modelo.addAttribute("reservado", reservado);
 
 				modelo.addAttribute("habitacion", habitacion);
 				modelo.addAttribute("caracteristicas", caracteristicas);
@@ -197,10 +234,13 @@ public class ReservaController {
 		 
 		 if(habitacion.getEstado().equalsIgnoreCase("Limpieza"))
 		 {
+		        Reserva reservado=reverse.get(0);
+		        CheckIn checkindicado=reversex.get(0);
 
 			 modelo.addAttribute("clientes", clientes);
 				modelo.addAttribute("usuario", usuario);
 				modelo.addAttribute("reservado", reservado);
+				modelo.addAttribute("checkindicado", checkindicado);
 
 				modelo.addAttribute("habitacion", habitacion);
 				modelo.addAttribute("caracteristicas", caracteristicas);
@@ -215,6 +255,8 @@ public class ReservaController {
 		 }
 		 if(habitacion.getEstado().equalsIgnoreCase("Ocupado"))
 		 {
+		        Reserva reservado=reverse.get(0);
+		        CheckIn checkindicado=reversex.get(0);
 
 			 modelo.addAttribute("clientes", clientes);
 				modelo.addAttribute("usuario", usuario);
@@ -224,6 +266,8 @@ public class ReservaController {
 				modelo.addAttribute("caracteristicas", caracteristicas);
 				modelo.addAttribute("tipos", idtipo);
 				modelo.addAttribute("imagenes", imagenes);
+				modelo.addAttribute("checkindicado", checkindicado);
+
 
 				return new
 
@@ -251,44 +295,113 @@ public class ReservaController {
 	}
 
 	@PostMapping(value = "/editver/{id}")
-	public ModelAndView editX(Model modelo, @PathVariable Integer id, Cliente cliente, Habitacion habitacion, @RequestParam(value = "dni", defaultValue = "1") int dni
+	public ModelAndView editX(Model modelo,CheckIn checkindicado, @PathVariable Integer id, Cliente cliente, Habitacion habitacion, @RequestParam(value = "dni", defaultValue = "1") int dni
 			, @RequestParam(value = "Ocupado", defaultValue = "1") String Ocupado,CheckIn checkIn,
 			 @RequestParam(value = "finalizar", defaultValue = "1") String finalizar,
 			 @RequestParam(value = "limpiezater", defaultValue = "1") String limpiezater,
-		
+			 @RequestParam(value = "editar", defaultValue = "1") String editar,
+			 @RequestParam(value = "reservaedit", defaultValue = "1") String reservaedit,
+			 @RequestParam(value = "cancelar", defaultValue = "1") String cancelar,
+
+			 Reserva reservadoF,
+
 			 Limpieza limpieza,
 			Reserva reserva, HttpSession session) {
 		Optional<Habitacion> habi = habitacionServicio.get(id);
 		
-		 Reserva reservadox =(Reserva) reservaServicio.listarpornom(id).get(0);
 		habi.get().setEstado("Reservado");
 		LocalDate datetime = LocalDate.now();
 
 		Usuario usuario = usuarioServicio.buscarid(Integer.parseInt(session.getAttribute("idusuario").toString()))
 				.get();
 
+		if(reservaedit.equals("reservaedit")) {
+			 List<Reserva> list = reservaServicio.listarpornom(id);
+
+		        List<Reserva> reverse = reverseList(list);
+		        Reserva reservado=reverse.get(0);
+		        reservado.setAdultos(reservadoF.getAdultos());
+		        reservado.setNiños(reservadoF.getNiños());
+		        reservado.setFechaInicio(reservadoF.getFechaInicio());
+		        reservado.setFechaFin(reservadoF.getFechaFin());
+		        reservado.setFechaReservacion(reservadoF.getFechaReservacion());
+		        reservado.setEstado("editado");
+		        reservado.setAdelanto(reservadoF.getAdelanto());
+		        reservaServicio.save(reservado);
+				return new ModelAndView("redirect:/reservas");
+
+		}
+		if(cancelar.equals("cancelar")) {
+			 List<Reserva> list = reservaServicio.listarpornom(id);
+
+		        List<Reserva> reverse = reverseList(list);
+		        Reserva reservado=reverse.get(0);
+		        reservado.setEstado("cancelado");
+				habi.get().setEstado("Disponible");
+				habitacionServicio.save(habi.get());
+
+		        reservaServicio.save(reservado);
+
+				return new ModelAndView("redirect:/reservas");
+
+		}
+		
+		
 		 if(Ocupado.equals("Ocupado")) {	
 				habi.get().setEstado("Ocupado");
-				habitacionServicio.save(habi.get());
-				return editx(id, modelo, session,1,null);
+				
+				
+				 List<Reserva> list = reservaServicio.listarpornom(id);
 
+			        List<Reserva> reverse = reverseList(list);
+			        Reserva reservadox=reverse.get(0);
+				
+				
+				
+				// Reserva reservadox =(Reserva) reservaServicio.listarpornom(id).get(0);
+				 	
+				 	reservadox.setEstado("Atendido");
+					checkIn.setIdHabitacion(habitacion);
+					checkIn.setIdUsuario(usuario);
+					checkIn.setAdelanto(reservadox.getAdelanto());
+					checkIn.setAdultos(reservadox.getAdultos());
+					checkIn.setNiños(reservadox.getNiños());
+					checkIn.setFechaInicio(reservadox.getFechaInicio());
+					checkIn.setFechaFin(reservadox.getFechaFin());
+					checkIn.setFechaReservacion(reservadox.getFechaReservacion());
+					checkIn.setClientes(reservadox.getClientes());
+					checkIn.setReserva(reservadox);
+					checkIn.setEstado("reservado");
+					checkIn.setPago(reservadox.getPrecio_total());
+					checkInServicio.save(checkIn);
+					reservaServicio.save(reservadox);
+					habitacionServicio.save(habi.get());
+				return editx(id, modelo, session,1,null,"efe");
+
+				
 				 				
 		 }
 		
+		 
+		 if(editar.equals("editar")) {
+				return editx(id, modelo, session,5,null,"editar");
+
+		 }
+		 
+		 
+		 
 		 if(finalizar.equals("finalizar")) {	
 				habi.get().setEstado("Limpieza");
-				
-				checkIn.setIdHabitacion(habitacion);
-				checkIn.setIdUsuario(usuario);
-				checkIn.setAdelanto(reservadox.getAdelanto());
-				checkIn.setAdultos(reservadox.getAdultos());
-				checkIn.setNiños(reservadox.getNiños());
-				checkIn.setFechaInicio(reservadox.getFechaInicio());
-				checkIn.setFechaFin(reservadox.getFechaFin());
-				checkIn.setFechaReservacion(reservadox.getFechaReservacion());
-				checkIn.setClientes(reservadox.getClientes());
-				checkIn.setReserva(reservadox);
-				checkInServicio.save(checkIn);
+				  List<CheckIn> list = checkInServicio.listarpornom(id);
+				  
+			        List<CheckIn> reverse = reverseList(list);
+			     
+			        
+			        CheckIn checkindicadox=reverse.get(0);
+			        
+			        checkindicadox.setPago(checkindicado.getPago());
+			        
+				checkInServicio.save(checkindicadox);
 				habitacionServicio.save(habi.get());
 				return new ModelAndView("redirect:/reservas");
 
@@ -332,12 +445,12 @@ public class ReservaController {
 			modelo.addAttribute("tipos", idtipo);
 			modelo.addAttribute("imagenes", imagenes);
 			
-			return editx(id, modelo, session,dni,null);
+			return editx(id, modelo, session,dni,null,null);
 
 		}
 		
 		
-	
+		reserva.setEstado("Proceso");
 		habitacionServicio.save(habi.get());
 		reserva.setFechaReservacion(datetime);
 		reserva.setIdHabitacion(habitacion);

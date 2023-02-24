@@ -104,7 +104,7 @@ public class CheckInController {
 		;
 		
 
-		List<Habitacion> habitaciones = habitacionServicio.listarpornom(palabra);
+		List<Habitacion> habitaciones = habitacionServicio.listarhabiCheckin(palabra,"","");
 
 		List<Habitacion> habitacidispo = habitacionServicio.listarpornom("");
 		Integer habidispo = habitacidispo.size();
@@ -140,7 +140,7 @@ public class CheckInController {
 	
 	@GetMapping(value = "/editver/{id}")
 	public ModelAndView editx(@PathVariable Integer id, Model modelo, HttpSession session
-			,@RequestParam(value = "dni", defaultValue = "1") int dni
+			,@RequestParam(value = "dni", defaultValue = "0") int dni
 			) {
 		Habitacion habitacion = habitacionServicio.get(id).get();
 		List<Caracteristica> caracteristicas = caracteristicaServicio.listar();
@@ -158,30 +158,32 @@ public class CheckInController {
 		  
 	        List<CheckIn> reverse = reverseList(list);
 	        
-	        CheckIn checkindicado=reverse.get(0);
-	        Integer idsacado=checkindicado.getIdCheckIn();
+	      
 		 
 		
-		 if(habitacion.getEstado().equalsIgnoreCase("Reservado") && dni==1)
-		 {
+		 if(habitacion.getEstado().equalsIgnoreCase("Ocupado") &&  dni==0)
+		 {  CheckIn checkindicado=reverse.get(0);
+	        Integer idsacado=checkindicado.getIdCheckIn();
 			 modelo.addAttribute("clientes", clientes);
 				modelo.addAttribute("usuario", usuario);
-				modelo.addAttribute("checkindicado", checkindicado);
 
 				modelo.addAttribute("habitacion", habitacion);
 				modelo.addAttribute("caracteristicas", caracteristicas);
 				modelo.addAttribute("tipos", idtipo);
 				modelo.addAttribute("imagenes", imagenes);
+				modelo.addAttribute("checkindicado", checkindicado);
+		        modelo.addAttribute("idsacado",idsacado);
 
 				return new
 
-				ModelAndView("/CheckIn/recepcion2").addObject("cliente", new Cliente())
-
+				ModelAndView("/CheckIn/recepcion3").addObject("cliente", new Cliente())
+				.addObject("checkin", new CheckIn())
 						.addObject("reserva", new Reserva());
 		 }
-		 
-		 if(habitacion.getEstado().equalsIgnoreCase("Reservado") && dni!=1)
-		 {
+		 /*aca esla falla en este if */
+		 if(habitacion.getEstado().equalsIgnoreCase("Ocupado") &&  dni!=0)
+		 {  CheckIn checkindicado=reverse.get(0);
+	        Integer idsacado=checkindicado.getIdCheckIn();
 			 modelo.addAttribute("clientes", clientes);
 				modelo.addAttribute("usuario", usuario);
 				modelo.addAttribute("checkindicado", checkindicado);
@@ -193,7 +195,7 @@ public class CheckInController {
 
 				return new
 
-				ModelAndView("/CheckIn/checkIn").addObject("cliente", new Cliente())
+				ModelAndView("/CheckIn/recepcion").addObject("cliente", new Cliente())
 						.addObject("checkin", new CheckIn())
 						.addObject("checkin", new CheckIn());
 		 }
@@ -201,7 +203,8 @@ public class CheckInController {
 		 
 		 																																										
 		 if(habitacion.getEstado().equalsIgnoreCase("Limpieza"))
-		 {
+		 {  CheckIn checkindicado=reverse.get(0);
+	        Integer idsacado=checkindicado.getIdCheckIn();
 			 modelo.addAttribute("clientes", clientes);
 				modelo.addAttribute("usuario", usuario);
 				modelo.addAttribute("checkindicado", checkindicado);
@@ -218,7 +221,10 @@ public class CheckInController {
 						addObject("reserva", new Reserva());
 		 }
 		 if(habitacion.getEstado().equalsIgnoreCase("Ocupado"))
-		 {
+		 {  CheckIn checkindicado=reverse.get(0);
+		// checkindicado.setPago(habitacion.getPrecio()- checkindicado.getAdelanto());
+		
+	        Integer idsacado=checkindicado.getIdCheckIn();
 			 modelo.addAttribute("clientes", clientes);
 				modelo.addAttribute("usuario", usuario);
 
@@ -238,7 +244,6 @@ public class CheckInController {
 		 
 		modelo.addAttribute("clientes", clientes);
 		modelo.addAttribute("usuario", usuario);
-		modelo.addAttribute("checkindicado", checkindicado);
 
 		modelo.addAttribute("habitacion", habitacion);
 		modelo.addAttribute("caracteristicas", caracteristicas);
@@ -255,7 +260,7 @@ public class CheckInController {
 	}
 
 	@PostMapping(value = "/editver/{id}")
-	public ModelAndView editX(Model modelo, @PathVariable Integer id, Cliente cliente, Habitacion habitacion, @RequestParam(value = "dni", defaultValue = "1") int dni
+	public ModelAndView editX(Model modelo, @PathVariable Integer id, Cliente cliente, Habitacion habitacion, @RequestParam(value = "dni", defaultValue = "0") int dni
 			, @RequestParam(value = "Ocupado", defaultValue = "1") String Ocupado,CheckIn checkIn,CheckIn checkindicado,
 			 @RequestParam(value = "finalizar", defaultValue = "1") String finalizar,
 			 @RequestParam(value = "limpiezater", defaultValue = "1") String limpiezater,
@@ -290,8 +295,8 @@ public class CheckInController {
 			     
 			        
 			        CheckIn checkindicadox=reverse.get(0);
-			        
 			        checkindicadox.setPago(checkindicado.getPago());
+			        
 				checkInServicio.save(checkindicadox);
 				habitacionServicio.save(habi.get());
 				return new ModelAndView("redirect:/CheckIn");
@@ -314,7 +319,7 @@ public class CheckInController {
 		 
 		 
 
-		if (dni!=1) {
+		if (dni!=0) {
 			
 			
 			Habitacion habitacionx = habitacionServicio.get(id).get();
@@ -344,6 +349,7 @@ public class CheckInController {
 		checkIn.setFechaReservacion(datetime);
 		checkIn.setIdHabitacion(habitacion);
 		checkIn.setIdUsuario(usuario);
+		checkIn.setEstado("sin_reservar");
 		checkInServicio.save(checkIn);
 
 		return new ModelAndView("redirect:/CheckIn");

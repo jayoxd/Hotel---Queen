@@ -3,6 +3,7 @@ package com.registro.usuarios.modelo;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -75,6 +77,14 @@ public class Habitacion {
 	, inverseJoinColumns = @JoinColumn(name = "id_caracteristica"))
 	private List<Caracteristica> caracteristica;
 
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_habitacion", referencedColumnName = "id_habitacion")
+	private List<CheckIn> checkIn;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_habitacion", referencedColumnName = "id_habitacion")
+	private List<Reserva> reserva;
+	
 //	@Transient
 //	private MultipartFile imghabitacion;
 

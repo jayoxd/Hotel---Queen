@@ -103,7 +103,7 @@
 										</div>
 									</div>
 								</div>
-								</th:block>
+							</th:block>
 						</div>
 						<div class="card">
 							<div class="modal-header">
@@ -133,7 +133,8 @@
 												<p class="mb-1 efe fw-bold mb-0 " style="font-size: 18px">
 													idsacado &nbsp; &nbsp; : <span
 														class="item card-title card-intro-title"
-														style="font-size: 20px"  th:text="${idsacado}">  >S101</span>
+														style="font-size: 20px" th:text="${idsacado}">
+														>S101</span>
 												</p>
 											</div>
 										</div>
@@ -143,7 +144,7 @@
 													DNI &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
 													&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; : <span
 														class="item card-title card-intro-title"
-														style="font-size: 20px" >S101</span>
+														style="font-size: 20px">S101</span>
 												</p>
 											</div>
 										</div>
@@ -192,7 +193,7 @@
 
 
 									</div>
-									</th:block>
+								</th:block>
 							</div>
 						</div>
 					</div>
@@ -213,43 +214,124 @@
 					<hr class="hrLinea">
 
 
-					<form class="row g-3 p-3" action="" method="post" th:object="${checkindicado}">
-<input type="hidden" class="form-control"  required=""   th:name="finalizar"  id="finalizar"  th:value="finalizar"
-													placeholder="74399560"  maxlength="8"
-													oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-													>
-						<div class="col-6">
-							<label for="validationDefault02" class="form-label">Monto:
-							</label> <input
-							th:field="*{pago}"
-							 class="form-control"  required="">
-						</div>
+					<form class="row g-3 p-3" action="" method="post"
+						th:object="${checkindicado}">
+						<input type="hidden" class="form-control" required=""
+							th:name="finalizar" id="finalizar" th:value="finalizar"
+							placeholder="74399560" maxlength="8"
+							oninput="if(this.value                                             .length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+
+
+
 
 						<div class="col-6">
 							<label class="text-label">Tipo de Pago:</label>
 
 							<div class="input-group">
 								<span class="input-group-text"> <i class="fa fa-user"></i>
-								</span> <select class="custom-select" id="inputGroupSelect04"
-									
+								</span> <select class="custom-select" id="mySelect"
+									onchange="showElement()"
 									aria-label="Example select with button addon">
 									<option selected disabled value="">Seleccione...</option>
-									<option value="Disponible">Yape</option>
-									<option value="Ocupado">Efectivo</option>
+									<option value="option1">Yape</option>
+									<option value="option2">Efectivo</option>
 								</select>
-
 							</div>
 
 						</div>
-							<input type="submit" class="btn btn-secondary" value="CLIENTE SE RETIRA" />
+
+
+
+						<div class="col-6">
+							<label for="validationDefault02" class="form-label">Total
+								a Pagar: </label>
+							<div class="input-group mb-3  input-info">
+								<span class="input-group-text" id="dine">$</span> <input
+									type="text" class="form-control"
+									th:value="*{new java.text.DecimalFormat('#').format(pago)}" 
+									disabled> <span class="input-group-text" id="ro">.00</span>
+							</div>
+						</div>
+
+						<input type="text" id="value1" th:value="*{pago}"hidden> 
+						<input type="text" id="value2" th:value="*{adelanto}" hidden>
+
+
+
+
+						<div class="col-6">
+
+						</div>
+
+
+
+
+						<div class="col-6">
+
+							<img id="image" th:src="@{/css/qryape.jpg}" width="400"
+								style="display: none"> <label for="validationDefault02"
+								class="form-label" style="display: none" id="pag">Pago:
+							</label> <span class="input-group-text" style="display: none" id="dine">$</span>
+							<input type="text" id="inputxd" style="display: none"   disabled
+								class="form-control"> <span class="input-group-text"
+								style="display: none" id="ro">.00</span>
+							<input  id="inputf" hidden th:field="*{pago}"
+								class="form-control">
+						
+
+						</div>
+
+
+
+						<input type="submit" class="btn btn-secondary"
+							value="CLIENTE SE RETIRA" />
 					</form>
+
+					
 
 
 				</div>
 		</div>
 
 	</div>
+	<script>
+								const select = document
+										.querySelector("#mySelect");
+								const image = document.querySelector("#image");
+								const input = document
+										.querySelector("#inputxd");
+								const dine = document.querySelector("#dine");
+								const ro = document.querySelector("#ro");
+								const pag = document.querySelector("#pag");
 
+								select.addEventListener("change", function() {
+									if (this.value === "option1") {
+										image.style.display = "block";
+										input.style.display = "none";
+										pag.style.display = "none";
+									} else if (this.value === "option2") {
+										image.style.display = "none";
+										input.style.display = "block";
+										pag.style.display = "block";
+										dine.style.display = "block";
+
+									}
+								});
+							</script>
+
+
+							<script>
+								function calculate() {
+									var value1 = parseFloat(document
+											.getElementById("value1").value);
+									var value2 = parseFloat(document
+											.getElementById("value2").value);
+									var result = value1 - value2;
+									document.getElementById("inputxd").value = result;
+									document.getElementById("inputf").value = result;
+								}
+								calculate();
+							</script>
 
 
 </body>

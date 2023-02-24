@@ -97,7 +97,7 @@
 								<button type="submit" class="btn btn-outline-dark  btn-lg xf" disabled 
 									name="palabra" id="palabra" th:value="CANCELADO"> 
 									<strong th:text="*{cancelado}"style="font-size: 35px" >CANCELADO</strong>
-								</button>
+								</button>	
 								<button type="submit" class="btn btn-outline-dark btn-lg xf" disabled 
 									name="palabra" id="palabra" th:value="Encurso">
 									<strong th:text="*{proceso}" style="font-size: 35px">EN PROCESO</strong>
@@ -108,7 +108,7 @@
 								</button>
 								<button type="submit" class="btn btn-outline-dark btn-lg xf" disabled 
 									onclick="clearSearch()">
-									<strong th:text="*{todo}" style="font-size: 35px">EN PROCESO</strong>									
+									<strong th:text="*{hoy}" style="font-size: 35px">EN PROCESO</strong>									
 								</button>
 							</form>
 
@@ -183,6 +183,9 @@
 
 								</form>
 								<br>
+								
+	<a href="/report/ventas/download?estado&amp;fecha=31-01-2023&amp;tipo=PDF" class="btn btn-primary" target="_blank">PDF REPORTES</a>
+							
 								<!-- dentro tabla -->
 
 
@@ -231,7 +234,7 @@
                                                 <td >
 
 												<div th:switch="true"> 
-												 <div th:case="${rol.estado}=='Cancelado'">
+												 <div th:case="${rol.estado}=='cancelado'">
                                                 <span class="badge  badge-danger" th:text="${rol.estado}">Canceled</span>
                                                 
                                             	</div>
